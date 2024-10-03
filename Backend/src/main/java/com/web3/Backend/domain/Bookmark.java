@@ -8,15 +8,12 @@ public class Bookmark {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tableId;
 
-    private int id; // user ID
-    private int postId; // post ID
-
     @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "postId", insertable = false, updatable = false)
+    @JoinColumn(name = "postId", referencedColumnName = "postId")
     private Post post;
 
     // Getters and Setters
