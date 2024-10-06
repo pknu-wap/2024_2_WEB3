@@ -20,5 +20,4 @@ public class Post {
     private String type;
     private String area;
 
-    // Getters and Setters
 }
