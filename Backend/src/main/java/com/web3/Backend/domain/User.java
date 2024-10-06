@@ -1,8 +1,12 @@
 package com.web3.Backend.domain;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Getter
+@Setter
 @Table(name = "user")
 public class User {
     @Id
@@ -15,5 +19,4 @@ public class User {
     private Double preferenceLevel;
     private String profileImageUrl;
 
-    // Getters and Setters
 }
