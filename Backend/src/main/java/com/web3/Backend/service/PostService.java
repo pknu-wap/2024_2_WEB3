@@ -4,6 +4,8 @@ import com.web3.Backend.domain.Bookmark;
 import com.web3.Backend.domain.Post;
 import com.web3.Backend.domain.User;
 import com.web3.Backend.dto.PostDto;
+import com.web3.Backend.exception.CustomException;
+import com.web3.Backend.exception.ErrorCode;
 import com.web3.Backend.repository.BookmarkRepository;
 import com.web3.Backend.repository.UserRepository;
 import com.web3.Backend.security.UserPrincipal;
@@ -27,32 +29,39 @@ public class PostService {
     private BookmarkRepository bookmarkRepository;
 
     public PostDto getPostById(int postId) {
-        Optional<Post> postOptional = postRepository.findById(postId);
+        try {
+            Optional<Post> postOptional = postRepository.findById(postId);
 
-        if (postOptional.isPresent()) {
-            Post post = postOptional.get();
-            PostDto postDto = new PostDto();
-            postDto.setDrinkName(post.getDrinkName());
-            postDto.setPreferenceLevel(post.getPreferenceLevel());
-            postDto.setPostImage(post.getPostImage());
-            postDto.setType(post.getType());
-            postDto.setArea(post.getArea());
+            if (postOptional.isPresent()) {
+                Post post = postOptional.get();
+                PostDto postDto = new PostDto();
+                postDto.setDrinkName(post.getDrinkName());
+                postDto.setPreferenceLevel(post.getPreferenceLevel());
+                postDto.setPostImage(post.getPostImage());
+                postDto.setType(post.getType());
+                postDto.setArea(post.getArea());
 
-            return postDto;
-        } else {
-            throw new IllegalArgumentException("Post not found for id: " + postId);
+                return postDto;
+            } else {
+                throw new CustomException(ErrorCode.POST_NOT_FOUND);
+            }
+
+        } catch (NumberFormatException e) {
+            throw new CustomException(ErrorCode.INVALID_POST_ID);
+        } catch (Exception e) {
+            throw new CustomException(ErrorCode.DATABASE_ERROR);
         }
     }
 
 
-    public String clickBookmark(UserPrincipal userPrincipal, int postId) throws RuntimeException {
-
+    public String clickBookmark(UserPrincipal userPrincipal, int postId) throws CustomException {
 
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new RuntimeException("존재하지 않는 게시물입니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
 
         User user = userRepository.findById(Math.toIntExact(userPrincipal.getId()))
-                .orElseThrow(() -> new RuntimeException("해당 사용자를 찾을 수 없습니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
 
         Bookmark bookmarkEntry = bookmarkRepository.findByUserAndPost(user, post);
 
@@ -63,8 +72,12 @@ public class PostService {
             Bookmark newBookmark = new Bookmark();
             newBookmark.setUser(user);
             newBookmark.setPost(post);
-            bookmarkRepository.save(newBookmark);
-            return "북마크가 추가되었습니다.";
+            try {
+                bookmarkRepository.save(newBookmark);
+                return "북마크가 추가되었습니다.";
+            } catch (Exception e) {
+                throw new CustomException(ErrorCode.DATABASE_ERROR);
+            }
         }
     }
 }
