@@ -5,10 +5,10 @@ function Navigation() {
   return (
     <nav>
       <div>
-        <Link to="/detail1">청탁주</Link>
+        <Link to="/cheongtakju">청주/탁주</Link>
       </div>
       <div>
-        <Link to="/detail2">과실주</Link>
+        <Link to="/fruitWine">과실주</Link>
       </div>
     </nav>
   );
