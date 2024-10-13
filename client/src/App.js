@@ -1,6 +1,8 @@
 import "./App.css";
-import { BrowserRouter, Router, Route, Routes, Link } from "react-router-dom";
 import MainPage from "./pages/MainPage";
+import CheongtakjuPage from "./pages/CheongtakjuPage";
+import FruitWinePage from "./pages/fruitWinePage";
+import { BrowserRouter, Router, Route, Routes, Link } from "react-router-dom";
 
 function App() {
   return (
@@ -8,8 +10,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/detail1" element={""} />
-          <Route path="/detail2" element={""} />
+          <Route path="/cheongtakju" element={<CheongtakjuPage />} />{" "}
+          {/* 청탁주 리스트 페이지 */}
+          <Route path="/fruitWine" element={<FruitWinePage />} />{" "}
+          {/* 과실주 리스트 페이지 */}
         </Routes>
       </BrowserRouter>
     </>
