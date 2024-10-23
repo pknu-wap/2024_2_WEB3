@@ -1,13 +1,23 @@
 import "./Header.css";
 import { Link } from "react-router-dom";
+import Navigation from "../navSearchBar/Navigation";
+import SearchBar from "../navSearchBar/SearchBar";
 
 const Header = ({}) => {
   return (
     <header className="Header">
       <div className="logo-section">
         <Link to="/">
-          <img src="/Holjjak_logo.png" alt="Logo" />
+          <img src="/images/Holjjak-logo.png" alt="Logo" className="logo-img" />
         </Link>
+      </div>
+
+      <div className="nav-section">
+        <Navigation />
+      </div>
+
+      <div className="search-section">
+        <SearchBar />
       </div>
 
       <div className="login-button-section">

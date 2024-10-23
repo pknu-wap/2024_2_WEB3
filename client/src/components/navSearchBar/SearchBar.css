@@ -1,0 +1,25 @@
+input {
+  border-radius: 3px;
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: none;
+  color: white;
+}
+
+input::placeholder {
+  color: rgb(255, 255, 255);
+  opacity: 0.8;
+  font-size: 13px;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.search-icon {
+  width: 3%;
+  cursor: pointer;
+  margin-left: auto;
+  opacity: 0.85;
+}
