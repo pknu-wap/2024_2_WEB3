@@ -1,14 +1,14 @@
-import Header from "../components/common/Header";
-import Navigation from "../components/navSearchBar/Navigation";
 import "./MainPage.css";
+import Header from "../components/common/Header";
+import Footer from "../components/common/Footer";
+import MainContents from "../components/mainContents/MainContents";
 
 const MainPage = () => {
   return (
-    <div className="main-page">
+    <div className="MainPage">
       <Header />
-      <img className="background-img" src="" alt="" />
-      <Navigation />
-      <div>가나다</div>
+      <MainContents />
+      <Footer />
     </div>
   );
 };
