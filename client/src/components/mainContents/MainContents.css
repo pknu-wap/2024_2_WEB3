@@ -6,6 +6,24 @@
   background: linear-gradient(45deg, #c6c0b8, #b2a89f, #7f6f66, #574f4b);
 }
 
+.background-img {
+  position: absolute;
+  width: 100%;
+  height: 80vh;
+  z-index: 0;
+}
+
+.banner-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(128, 124, 116, 0.5); /* 검정색 반투명 오버레이 */
+  opacity: 0.7; /* 불투명도 조정 */
+}
+
 .banner-img {
   position: absolute;
   width: 37%;
@@ -37,12 +55,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: right;
+  align-items: center;
   border-bottom: 0.5px solid rgb(159, 155, 148);
 }
 
 .category-title {
-  margin: 20px 30px; /* = category-imgbox 좌우 margin */
+  margin: 30px 30px 60px 30px; /* = category-imgbox 좌우 margin */
   font-size: 24px;
   font-weight: bold;
   color: #555;
@@ -51,7 +69,7 @@
 .category-container {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 90%;
   margin-bottom: 60px;
 }
 
@@ -59,8 +77,8 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 30%; /* 각 이미지 박스의 너비 설정 */
-  margin: 0 30px; /* 이미지 박스 간 간격 */
+  width: 27%; /* 각 이미지 박스의 너비 설정 */
+  margin: 0 40px; /* 이미지 박스 간 간격 */
 }
 
 .liquor-image {
@@ -91,12 +109,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   border-bottom: 0.5px solid rgb(159, 155, 148);
 }
 
 .bookmark-title {
-  margin: 20px 30px; /* = image-box 좌우 margin */
+  margin: 30px 30px 60px 30px;
   font-size: 24px;
   font-weight: bold;
   color: #555;
@@ -105,29 +123,36 @@
 .bookmark-container {
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  padding: 0 2%;
-}
-
-.bookmark-imgbox {
-  margin: 0;
-  border: 5px solid red;
 }
 
 .bookmark-image {
-  width: 40%;
+  width: 25%;
   height: auto;
   background-color: rgba(85, 85, 85, 0.5);
   border-radius: 20px;
+  margin-right: 70px;
+  left: 0;
 }
 
 .bookmark-desc {
-  font-size: 16px;
+  font-size: 16px; /* 본문 폰트 사이즈 */
   color: #555;
   text-align: left;
-  margin: 30px;
-  max-width: 60%;
+  /* margin: 30px; */
+  /* max-width: 100%; */
+}
+
+.bookmark-desc h4 {
+  margin: 5px 0;
+  font-size: 20px; /* 타이틀 폰트 사이트 */
+}
+
+.bm-desc1,
+.bm-desc2 {
+  margin-bottom: 30px;
+  line-height: 2;
 }
 
 /* Pairing Description Section */

@@ -15,6 +15,7 @@ const MainContents = () => {
             나만의 리스트를 만들어 보세요. 다양한 전통주를 탐색하고.
           </p>
         </div>
+        <img src="/images/background-img2.jpg" className="background-img" />
       </div>
 
       <div className="category-section">
@@ -29,10 +30,11 @@ const MainContents = () => {
                 className="liquor-image liquor-image1"
               />
             </Link>
-            <p className="caption">
-              caption: SojuEat <br />
-              막걸리. 땡긴다.
-            </p>
+            <div className="caption">
+              청주
+              <br />
+              쌀로 빚어 맑게 걸러낸 깔끔한 전통주
+            </div>
           </div>
 
           <div className="category-imgbox category-imgbox2">
@@ -42,10 +44,9 @@ const MainContents = () => {
                 className="liquor-image liquor-image2"
               />
             </Link>
-            <p className="caption">
-              caption: sefasdfasefads <br />
-              닭발 피자 마라탕 안심 돈까스
-            </p>
+            <div className="caption">
+              탁주 <br />쌀 발효로 만든 걸쭉한 전통주
+            </div>
           </div>
 
           <div className="category-imgbox category-imgbox3">
@@ -55,10 +56,10 @@ const MainContents = () => {
                 className="liquor-image liquor-image3"
               />
             </Link>
-            <p className="caption">
-              caption: sefasdfasefads <br />
-              대방어 먹고싶어. 회쏘.
-            </p>
+            <div className="caption">
+              과실주 <br />
+              감, 오미자 등 과일로 빚어 달콤한 향을 담은 술
+            </div>
           </div>
         </div>
       </div>
@@ -68,17 +69,35 @@ const MainContents = () => {
           좋아하는 술을 북마크하고 나만의 전통주 컬렉션을 완성하세요.
         </div>
         <div className="bookmark-container">
-          <div className="bookmark-imgbox">
-            {/* <img src="/images/sample1.png" className="bookmark-image" /> */}
-            <img src="" className="" />
-          </div>
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJ
+            bSJIAAAABlBMVEViY2diY2je0hv5AAAATklEQVR4nO3OMQEAAAwCINe/9Ar4+0ACEg
+            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKhuHQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+            IC9Byp4AAJDg6SjAAAAAElFTkSuQmCC"
+            className="bookmark-image"
+          />
+
           <div className="bookmark-desc">
-            <h4>북마크 하기</h4>
-            나만의 전통주를 저장하고 확인하세요! <br />
-            선호 도수 설정 후 저장하기
-            <h4>도수 설정하기</h4>
-            나만의 전통주를 저장하고 확인하세요! <br />
-            선호 도수 설정 후 저장하기
+            <div className="bm-desc1">
+              <h4>북마크 하기</h4>
+              나만의 전통주를 저장하고 확인하세요! 선호 도수 설정 후 저장하기
+              <br />
+              기장저 후 설정 수도 호선! 확인고 저장을 주통전 의만나
+              <br />
+              전통주 확인 저장 도수 설정 후 선호 나만의 저장하고세요!
+              <br />
+            </div>
+            <div className="bm-desc2">
+              <h4>도수 설정하기</h4>
+              확인하세요! 선호 도수 나만의 전통주를 저장하고설정 후 저장하기
+              <br />
+              나만의 전통주를 저장하고 확인하세요! 선호 도수 설정 후 저장하기
+              <br />
+              기장저 후 설정 수도 호선! 확인고 저장을 주통전 의만나
+              <br />
+              전통주 확인 저장 도수 설정 후 선호 나만의 저장하고세요!
+              <br />
+            </div>
           </div>
         </div>
       </div>
