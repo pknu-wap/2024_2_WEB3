@@ -34,14 +34,14 @@
   border: none;
   margin: auto 20px;
   padding: 0;
-  color: #ffffff;
+  color: rgb(236, 232, 228);
 }
 
 .sign-up-button {
   background: none;
   border: none;
   padding: 0;
-  color: #ffffff;
+  color: rgb(236, 232, 228);
 }
 
 .sign-in-button:hover,

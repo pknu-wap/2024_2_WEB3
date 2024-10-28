@@ -20,8 +20,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(128, 124, 116, 0.5); /* 검정색 반투명 오버레이 */
-  opacity: 0.7; /* 불투명도 조정 */
+  background-color: rgba(114, 109, 105, 0.5); /* 검정색 반투명 오버레이 */
+  opacity: 0.6; /* 불투명도 조정 */
 }
 
 .banner-img {
@@ -34,15 +34,31 @@
   z-index: 2;
 }
 
-.banner-text {
+.banner-wrap {
   position: absolute;
+  width: 70%;
   top: 50%;
   left: 45%;
   transform: translate(-50%, -50%);
-  color: white;
+  color: rgb(236, 232, 228);
   text-align: left;
-  font-size: 20px;
   z-index: 2;
+  opacity: 0.9;
+  display: inline-block;
+}
+
+.banner-title {
+  white-space: nowrap;
+  padding: 2% 0;
+  font-weight: 600;
+  font-size: 45px;
+}
+
+.banner-text {
+  white-space: nowrap;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.5;
 }
 
 /* Category Description Section */
@@ -64,6 +80,7 @@
   font-size: 24px;
   font-weight: bold;
   color: #555;
+  white-space: nowrap;
 }
 
 .category-container {
@@ -94,16 +111,26 @@
 }
 
 .caption {
-  margin-top: 10px;
   font-size: 14px;
   color: #555;
-  text-align: center;
+  text-align: left;
+  margin: 10px 10px;
+  line-height: 1.5;
+  /* white-space: nowrap; 반응형?? */
+}
+
+.caption span {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 6px 0;
+  /* border: 3px solid red; */
 }
 
 /* Bookmark Description Section */
 .bookmark-section {
   padding: 5% 10%;
-  height: 110vh;
+  height: 100vh;
   background-color: rgb(222, 216, 207);
 
   display: flex;
@@ -118,6 +145,7 @@
   font-size: 24px;
   font-weight: bold;
   color: #555;
+  white-space: nowrap;
 }
 
 .bookmark-container {
@@ -128,9 +156,10 @@
 }
 
 .bookmark-image {
-  width: 25%;
+  width: 20%;
   height: auto;
-  background-color: rgba(85, 85, 85, 0.5);
+  opacity: 0.4;
+  /* background-color: rgba(85, 85, 85, 0.5); */
   border-radius: 20px;
   margin-right: 70px;
   left: 0;
@@ -142,6 +171,7 @@
   text-align: left;
   /* margin: 30px; */
   /* max-width: 100%; */
+  white-space: nowrap;
 }
 
 .bookmark-desc h4 {
@@ -158,6 +188,50 @@
 /* Pairing Description Section */
 .pairing-section {
   padding: 5% 10%;
-  height: 110vh;
+  height: 100vh;
   background-color: rgb(222, 216, 207);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.5px solid rgb(159, 155, 148);
+}
+
+.pairing-title {
+  margin: 30px 30px 60px 30px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #555;
+  white-space: nowrap;
+}
+
+.pairing-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pairing-image {
+  width: 20%;
+  height: auto;
+  /* background-color: rgba(85, 85, 85, 0.5); */
+  border-radius: 20px;
+  margin-right: 70px;
+  left: 0;
+  opacity: 0.4;
+}
+
+.pairing-desc {
+  font-size: 16px; /* 본문 폰트 사이즈 */
+  color: #555;
+  text-align: left;
+  line-height: 2.5;
+  white-space: nowrap;
+}
+
+.pairing-desc h4 {
+  margin: 5px 0;
+  font-size: 20px; /* 타이틀 폰트 사이트 */
 }
