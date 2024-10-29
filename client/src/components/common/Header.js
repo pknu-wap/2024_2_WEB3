@@ -21,10 +21,10 @@ const Header = ({}) => {
       </div>
 
       <div className="login-button-section">
-        <Link to="/sign-in">
+        <Link to="/signIn">
           <button className="sign-in-button">로그인</button>
         </Link>
-        <Link to="/sign-up">
+        <Link to="/signUp">
           <button className="sign-up-button">회원가입</button>
         </Link>
       </div>
