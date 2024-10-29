@@ -3,6 +3,7 @@ import MainPage from "./pages/MainPage";
 import CheongtakjuPage from "./pages/CheongtakjuPage";
 import FruitWinePage from "./pages/fruitWinePage";
 import { BrowserRouter, Router, Route, Routes, Link } from "react-router-dom";
+import SignInPage from "./pages/SignInPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           {/* 청탁주 리스트 페이지 */}
           <Route path="/fruitWine" element={<FruitWinePage />} />{" "}
           {/* 과실주 리스트 페이지 */}
+          <Route path="/signIn" element={<SignInPage />} />
         </Routes>
       </BrowserRouter>
     </>
