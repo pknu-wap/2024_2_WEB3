@@ -1,0 +1,237 @@
+.banner-section {
+  position: relative;
+  overflow: visible;
+  /* margin-top: 57px; */
+  height: 80vh;
+  background: linear-gradient(45deg, #c6c0b8, #b2a89f, #7f6f66, #574f4b);
+}
+
+.background-img {
+  position: absolute;
+  width: 100%;
+  height: 80vh;
+  z-index: 0;
+}
+
+.banner-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(114, 109, 105, 0.5); /* 검정색 반투명 오버레이 */
+  opacity: 0.6; /* 불투명도 조정 */
+}
+
+.banner-img {
+  position: absolute;
+  width: 37%;
+  height: 100vh;
+  top: 8%;
+  right: 0;
+  object-fit: cover;
+  z-index: 2;
+}
+
+.banner-wrap {
+  position: absolute;
+  width: 70%;
+  top: 50%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  color: rgb(236, 232, 228);
+  text-align: left;
+  z-index: 2;
+  opacity: 0.9;
+  display: inline-block;
+}
+
+.banner-title {
+  white-space: nowrap;
+  padding: 2% 0;
+  font-weight: 600;
+  font-size: 45px;
+}
+
+.banner-text {
+  white-space: nowrap;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* Category Description Section */
+.category-section {
+  padding: 5% 10%;
+  height: 100vh;
+  background-color: rgb(222, 216, 207);
+  /* background: linear-gradient(270deg, #d1bb9e, #e1cac5); */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.5px solid rgb(159, 155, 148);
+}
+
+.category-title {
+  margin: 30px 30px 60px 30px; /* = category-imgbox 좌우 margin */
+  font-size: 24px;
+  font-weight: bold;
+  color: #555;
+  white-space: nowrap;
+}
+
+.category-container {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin-bottom: 60px;
+}
+
+.category-imgbox {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 27%; /* 각 이미지 박스의 너비 설정 */
+  margin: 0 40px; /* 이미지 박스 간 간격 */
+}
+
+.liquor-image {
+  width: 100%; /* 이미지가 부모 요소의 너비를 꽉 채우도록 설정 */
+  height: auto; /* 이미지 비율을 유지한 채 크기를 조정 */
+  border-radius: 20px;
+  transition: transform 0.3s ease; /* 부드러운 애니메이션 효과 */
+}
+
+.liquor-image:hover {
+  transform: scale(1.015); /* hover 시 크기 확대 */
+  cursor: pointer;
+}
+
+.caption {
+  font-size: 14px;
+  color: #555;
+  text-align: left;
+  margin: 10px 10px;
+  line-height: 1.5;
+  /* white-space: nowrap; 반응형?? */
+}
+
+.caption span {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 6px 0;
+  /* border: 3px solid red; */
+}
+
+/* Bookmark Description Section */
+.bookmark-section {
+  padding: 5% 10%;
+  height: 100vh;
+  background-color: rgb(222, 216, 207);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.5px solid rgb(159, 155, 148);
+}
+
+.bookmark-title {
+  margin: 30px 30px 60px 30px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #555;
+  white-space: nowrap;
+}
+
+.bookmark-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookmark-image {
+  width: 20%;
+  height: auto;
+  opacity: 0.4;
+  /* background-color: rgba(85, 85, 85, 0.5); */
+  border-radius: 20px;
+  margin-right: 70px;
+  left: 0;
+}
+
+.bookmark-desc {
+  font-size: 16px; /* 본문 폰트 사이즈 */
+  color: #555;
+  text-align: left;
+  /* margin: 30px; */
+  /* max-width: 100%; */
+  white-space: nowrap;
+}
+
+.bookmark-desc h4 {
+  margin: 5px 0;
+  font-size: 20px; /* 타이틀 폰트 사이트 */
+}
+
+.bm-desc1,
+.bm-desc2 {
+  margin-bottom: 30px;
+  line-height: 2;
+}
+
+/* Pairing Description Section */
+.pairing-section {
+  padding: 5% 10%;
+  height: 100vh;
+  background-color: rgb(222, 216, 207);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.5px solid rgb(159, 155, 148);
+}
+
+.pairing-title {
+  margin: 30px 30px 60px 30px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #555;
+  white-space: nowrap;
+}
+
+.pairing-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pairing-image {
+  width: 20%;
+  height: auto;
+  /* background-color: rgba(85, 85, 85, 0.5); */
+  border-radius: 20px;
+  margin-right: 70px;
+  left: 0;
+  opacity: 0.4;
+}
+
+.pairing-desc {
+  font-size: 16px; /* 본문 폰트 사이즈 */
+  color: #555;
+  text-align: left;
+  line-height: 2.5;
+  white-space: nowrap;
+}
+
+.pairing-desc h4 {
+  margin: 5px 0;
+  font-size: 20px; /* 타이틀 폰트 사이트 */
+}

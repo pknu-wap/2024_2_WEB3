@@ -1,0 +1,62 @@
+.Header {
+  display: flex;
+  justify-content: space-between; /* 좌우로 요소를 분배 */
+  align-items: center; /* 세로 가운데 정렬 */
+  position: absolute;
+  overflow: hidden;
+  flex-wrap: nowrap; /* 요소들이 줄바꿈 없이 수평으로 배치 */
+  box-sizing: border-box; /* 패딩 포함 너비 조정 */
+
+  top: 0;
+  left: 0;
+
+  padding: 1px 10%; /* 상하, 좌우 여백 */
+  background-color: none;
+  z-index: 100;
+  width: 100%;
+  box-sizing: border-box; /* 패딩과 보더를 포함하여 너비 계산 */
+  /* background-color: rgba(255, 255, 255, 0.1); */
+}
+
+.logo-img {
+  height: 55px;
+}
+
+.login-button-section {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.sign-in-button {
+  background: none;
+  border: none;
+  margin: auto 20px;
+  padding: 0;
+  color: rgb(236, 232, 228);
+}
+
+.sign-up-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgb(236, 232, 228);
+}
+
+.sign-in-button:hover,
+.sign-up-button:hover {
+  cursor: pointer;
+}
+
+.nav-section {
+  display: flex;
+  flex: auto;
+  white-space: nowrap;
+}
+
+.search-section {
+  display: flex;
+  flex: auto;
+  justify-content: center;
+}

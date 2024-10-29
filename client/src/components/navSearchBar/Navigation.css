@@ -1,0 +1,17 @@
+nav {
+  display: flex; /* Flexbox로 가로 배치 */
+  justify-content: space-around; /* 간격을 균등하게 배치 */
+  align-items: center; /* 세로 중앙 정렬 */
+}
+
+nav div {
+  margin: 0 10px; /* 좌우에 여유 공간 */
+}
+
+nav .link {
+  text-decoration: none;
+  color: rgb(236, 232, 228);
+  font-weight: 500;
+  font-size: 14px;
+  margin: auto 8px;
+}

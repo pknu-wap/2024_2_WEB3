@@ -1,7 +1,23 @@
 import "./App.css";
+import MainPage from "./pages/MainPage";
+import CheongtakjuPage from "./pages/CheongtakjuPage";
+import FruitWinePage from "./pages/fruitWinePage";
+import { BrowserRouter, Router, Route, Routes, Link } from "react-router-dom";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/cheongtakju" element={<CheongtakjuPage />} />{" "}
+          {/* 청탁주 리스트 페이지 */}
+          <Route path="/fruitWine" element={<FruitWinePage />} />{" "}
+          {/* 과실주 리스트 페이지 */}
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;
