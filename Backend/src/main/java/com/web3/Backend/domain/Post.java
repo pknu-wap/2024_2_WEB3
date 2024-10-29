@@ -19,5 +19,6 @@ public class Post {
     private String postImage;
     private String type;
     private String area;
+    private String food;
 
 }

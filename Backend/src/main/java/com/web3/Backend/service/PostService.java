@@ -10,6 +10,8 @@ import com.web3.Backend.repository.BookmarkRepository;
 import com.web3.Backend.repository.UserRepository;
 import com.web3.Backend.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.web3.Backend.repository.PostRepository;
 
@@ -78,6 +80,20 @@ public class PostService {
             } catch (Exception e) {
                 throw new CustomException(ErrorCode.DATABASE_ERROR);
             }
+
+            }
+        }
+        //청탁주, 과일주 페이지에 필요한 데이터 페이징 처리
+        public Page<PostDto> getPostByType(String type,int page,int size){
+            PageRequest pageRequest = PageRequest.of(page, size);
+            Page<Post> postPage =postRepository.findByType(type,pageRequest);
+
+            return postPage.map(post->new PostDto(post.getPostId(),post.getDrinkName(),post.getPostImage()));
+        }
+        //검색 기능을 페이징 처리
+        public Page<PostDto> searchPostByName(String drinkName,int page,int size){
+            PageRequest pageRequest = PageRequest.of(page,size);
+            return postRepository.findByDrinkNameContainingIgnoreCase(drinkName,pageRequest)
+                    .map(post-> new PostDto(post.getPostId(),post.getDrinkName(),post.getPostImage()));
         }
     }
-}
