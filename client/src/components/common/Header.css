@@ -60,3 +60,11 @@
   flex: auto;
   justify-content: center;
 }
+
+.mypage-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgb(236, 232, 228);
+  cursor: pointer;
+}

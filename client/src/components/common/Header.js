@@ -2,6 +2,7 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 import Navigation from "../navSearchBar/Navigation";
 import SearchBar from "../navSearchBar/SearchBar";
+import Mypage from "../../pages/mypage";
 
 const Header = ({}) => {
   return (
@@ -17,7 +18,11 @@ const Header = ({}) => {
       </div>
 
       <div className="search-section">
-        <SearchBar />
+        {/* <SearchBar /> */}
+
+        <Link to="/mypage">
+          <button className="mypage-button">마이페이지</button>{" "}
+        </Link>
       </div>
 
       <div className="login-button-section">
