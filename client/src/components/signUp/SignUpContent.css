@@ -1,4 +1,4 @@
-.signin-background {
+.signup-background {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,7 +7,7 @@
   margin-top: 61px;
 }
 
-.signin-container {
+.signup-container {
   display: flex;
   width: 80%;
   max-width: 800px;
@@ -18,28 +18,29 @@
   overflow: hidden;
 }
 
-.signin-left {
+.signup-left {
   width: 40%;
   background-color: #ffffff;
 }
 
-.signin-right {
+.signup-right {
   width: 60%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.signin-form {
+.signup-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   width: 80%;
+  min-height: 300px;
 }
 
-.signin-input {
-  padding: 12px;
+.signup-input {
+  padding: 8px;
   border-radius: 25px;
   font-size: 16px;
   color: black;
@@ -49,11 +50,19 @@
   border: none;
 }
 
-.signin-input::placeholder {
+.signup-input::placeholder {
   color: black;
 }
 
-.signin-button {
+.error-text {
+  color: red;
+  font-size: 8px;
+  margin-top: -18px;
+  align-self: flex-start;
+}
+
+.signup-button {
+  margin-top: 15px;
   width: 150px;
   padding: 5px;
   background-color: #fff;
@@ -66,19 +75,6 @@
   font-weight: 700;
 }
 
-.signin-button:hover {
+.signup-button:hover {
   background-color: #bbb;
-}
-
-.signin-signup-button {
-  width: 100%;
-  display: inline-flex;
-  justify-content: flex-end;
-  font-size: 10px;
-  color: gray;
-}
-
-.signin-signup-button a {
-  color: inherit;
-  text-decoration: none;
 }

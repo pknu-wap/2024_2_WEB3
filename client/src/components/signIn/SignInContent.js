@@ -1,5 +1,6 @@
 import React from "react";
 import "./SignInContent.css";
+import { Link } from "react-router-dom";
 
 const SignInContent = () => {
   return (
@@ -14,6 +15,11 @@ const SignInContent = () => {
               placeholder="비밀번호"
               className="signin-input"
             />
+
+            <div className="signin-signup-button">
+              <Link to="/signUp">회원가입 </Link>
+            </div>
+
             <div className="signin-button">로그인</div>
           </div>
         </div>
