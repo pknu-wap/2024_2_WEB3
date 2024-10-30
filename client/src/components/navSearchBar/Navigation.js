@@ -1,19 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { styled } from "styled-components";
 import "./Navigation.css";
 
-function Navigation() {
+const StyledLink = styled(Link)`
+  color: ${({ textColor }) => textColor || "inherit"};
+  text-decoration: none;
+`;
+
+function Navigation({ textColor }) {
   return (
     <nav>
       <div>
-        <Link to="/cheongtakju" className="link">
+        <StyledLink to="/cheongtakju" className="link" textColor={textColor}>
           청주/탁주
-        </Link>
+        </StyledLink>
       </div>
       <div>
-        <Link to="/fruitWine" className="link">
+        <StyledLink to="/fruitWine" className="link" textColor={textColor}>
           과실주
-        </Link>
+        </StyledLink>
       </div>
     </nav>
   );

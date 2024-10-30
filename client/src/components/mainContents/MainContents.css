@@ -6,6 +6,12 @@
   background: linear-gradient(45deg, #c6c0b8, #b2a89f, #7f6f66, #574f4b);
 }
 
+.banner-img,
+.banner-title,
+.banner-text {
+  transition: transform 0.1s ease-out; /* transform 변화에 부드러운 전환 추가 */
+}
+
 .background-img {
   position: absolute;
   width: 100%;
@@ -36,7 +42,7 @@
 
 .banner-wrap {
   position: absolute;
-  width: 70%;
+  width: 50%;
   top: 50%;
   left: 45%;
   transform: translate(-50%, -50%);
@@ -63,7 +69,7 @@
 
 /* Category Description Section */
 .category-section {
-  padding: 5% 10%;
+  padding: 10% 10%;
   height: 100vh;
   background-color: rgb(222, 216, 207);
   /* background: linear-gradient(270deg, #d1bb9e, #e1cac5); */
