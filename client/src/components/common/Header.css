@@ -34,14 +34,12 @@
   border: none;
   margin: auto 20px;
   padding: 0;
-  color: rgb(236, 232, 228);
 }
 
 .sign-up-button {
   background: none;
   border: none;
   padding: 0;
-  color: rgb(236, 232, 228);
 }
 
 .sign-in-button:hover,
@@ -58,13 +56,14 @@
 .search-section {
   display: flex;
   flex: auto;
-  justify-content: center;
+  justify-content: right;
 }
 
 .mypage-button {
   background: none;
   border: none;
   padding: 0;
-  color: rgb(236, 232, 228);
+  color: rgb(255, 255, 255);
   cursor: pointer;
+  opacity: 0.8;
 }

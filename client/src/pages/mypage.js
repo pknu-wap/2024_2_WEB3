@@ -47,7 +47,7 @@ function Mypage() {
 
   return (
     <div className="profile-page">
-      {/* <Header className="mypage-header" /> */}
+      <Header textColor="#574f4b" />
       <div className="profile-left">
         <div className="profile-picture">
           <img src={profileImage} alt="" className="profile-img" />

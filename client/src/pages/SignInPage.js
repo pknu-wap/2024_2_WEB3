@@ -5,7 +5,7 @@ import SignInContent from "../components/signIn/SignInContent";
 const SignInPage = () => {
   return (
     <div>
-      <Header />
+      <Header textColor="#574f4b" />
       <SignInContent />
       <Footer />
     </div>

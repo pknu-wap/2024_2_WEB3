@@ -1,14 +1,52 @@
 import "./MainContents.css";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import useScrollFadeIn from "../../hooks/useScrollFadeIn";
+import { motion, useInView } from "framer-motion";
 
 const MainContents = () => {
+  const [offsetImg, setOffsetImg] = useState(0); // 배경 이미지의 offset
+  const [offsetText, setOffsetText] = useState(0); // 텍스트의 offset
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+
+      // 배경 이미지의 패럴랙스 효과 (더 빠르게)
+      const maxOffsetImg = 500;
+      setOffsetImg(Math.min(scrollPosition * 1.02, maxOffsetImg));
+
+      // 텍스트의 패럴랙스 효과 (더 느리게)
+      const maxOffsetText = 500;
+      setOffsetText(Math.min(scrollPosition * 0.15, maxOffsetText));
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // 각 애니메이션 요소에 커스텀 훅 사용
+  const [refCategoryTitle, categoryTitleProps] = useScrollFadeIn();
+
   return (
     <div className="MainContents">
       <div className="banner-section">
-        <img src="/images/banner-img.png" className="banner-img" />
+        <img
+          src="/images/banner-img.png"
+          className="banner-img"
+          style={{ transform: `translateY(-${offsetImg}px)` }}
+        />
         <div className="banner-wrap">
-          <div className="banner-title">홀짝, 우리 술과 함께하는 공간</div>
-          <div className="banner-text">
+          <div
+            className="banner-title"
+            style={{ transform: `translateY(-${offsetText}px)` }}
+          >
+            홀짝, 우리 술과 함께하는 공간
+          </div>
+          <div
+            className="banner-text"
+            style={{ transform: `translateY(-${offsetText}px)` }}
+          >
             우리 술에 담긴 이야기를 알고 계시나요? 전통주는 각 지역의 풍토와
             시간이 빚어낸 특별한 술입니다. <br />
             다채로운 우리 술 속에서 나만의 취향을 찾고 홀짝에서 나를 위한 특별한
@@ -20,9 +58,14 @@ const MainContents = () => {
       </div>
 
       <div className="category-section">
-        <div className="category-title">
+        <motion.div
+          className="category-title"
+          ref={refCategoryTitle}
+          {...categoryTitleProps} // 애니메이션 속성 적용
+        >
           다채로운 전통주 한 잔, 홀짝 맛보는 즐거움
-        </div>
+        </motion.div>
+
         <div className="category-container">
           <div className="category-imgbox category-imgbox1">
             <Link to="/cheongtakju">
@@ -71,9 +114,15 @@ const MainContents = () => {
       </div>
 
       <div className="bookmark-section">
-        <div className="bookmark-title">
-          내가 기억하고 싶은 한 잔, 나만의 리스트 저장
-        </div>
+        <motion.div
+          className="category-title"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          기억하고 싶은 한 잔, 나만의 리스트 저장
+        </motion.div>
         <div className="bookmark-container">
           <img
             src="https://cdn-icons-png.freepik.com/256/1753/1753035.png?uid=R169101181&ga=GA1.1.2009468932.1727855191&semt=ais_hybrid"
@@ -105,9 +154,15 @@ const MainContents = () => {
       </div>
 
       <div className="pairing-section">
-        <div className="pairing-title">
+        <motion.div
+          className="category-title"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
           전통주와 어울리는 완벽한 안주를 만나보세요.
-        </div>
+        </motion.div>
         <div className="pairing-container">
           <img
             src="https://cdn-icons-png.freepik.com/256/2960/2960456.png?uid=R169101181&ga=GA1.1.2009468932.1727855191&semt=ais_hybrid"

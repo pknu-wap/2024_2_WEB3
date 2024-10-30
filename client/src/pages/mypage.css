@@ -3,6 +3,8 @@
   display: flex;
   justify-content: space-between;
   font-family: "Arial", sans-serif;
+
+  margin-top: 4%;
 }
 
 /* 좌측 프로필 섹션 */
@@ -162,9 +164,4 @@
 
 .profile-info h2 {
   margin: 0; /* 기본 마진 제거 */
-}
-
-.mypage-header {
-  color: rgb(101, 84, 69);
-  border: 2px solid red;
 }
