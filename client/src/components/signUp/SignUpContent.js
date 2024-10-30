@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SignUpContent.css";
+import Header from "../common/Header";
 
 const SignUpContent = () => {
   const [id, setId] = useState("");
@@ -55,6 +56,7 @@ const SignUpContent = () => {
 
   return (
     <div className="signup-background">
+      <Header textColor="#574f4b" />
       <div className="signup-container">
         <div className="signup-left"></div>
         <div className="signup-right">
