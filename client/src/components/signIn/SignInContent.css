@@ -46,6 +46,7 @@
   background-color: #fff;
   font-weight: 700;
   width: 100%;
+  border: none;
 }
 
 .signin-input::placeholder {
