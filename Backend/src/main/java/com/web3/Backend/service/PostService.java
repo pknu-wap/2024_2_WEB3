@@ -10,6 +10,8 @@ import com.web3.Backend.repository.BookmarkRepository;
 import com.web3.Backend.repository.UserRepository;
 import com.web3.Backend.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.web3.Backend.repository.PostRepository;
 
@@ -79,5 +81,47 @@ public class PostService {
                 throw new CustomException(ErrorCode.DATABASE_ERROR);
             }
         }
+    }
+    //청탁주, 과일주 페이지에 필요한 데이터 페이징 처리
+    public Page<PostDto> getCheongTakjuPage(int page, int size){
+        PageRequest pageRequest = PageRequest.of(page, size);
+
+
+        return postRepository.findByTypeIn(List.of("청주","탁주"),pageRequest)
+                .map(post -> PostDto.builder()
+                        .postId(post.getPostId())
+                        .drinkName(post.getDrinkName())
+                        .preferenceLevel(post.getPreferenceLevel())
+                        .postImage(post.getPostImage())
+                        .type(post.getType())
+                        .area(post.getArea())
+                        .build());
+    }
+
+    public Page<PostDto> getFruitWinePage(int page, int size){
+        PageRequest pageRequest = PageRequest.of(page,size);
+
+        return postRepository.findByType("과실주",pageRequest)
+                .map(post -> PostDto.builder()
+                        .postId(post.getPostId())
+                        .drinkName(post.getDrinkName())
+                        .preferenceLevel(post.getPreferenceLevel())
+                        .postImage(post.getPostImage())
+                        .type(post.getType())
+                        .area(post.getArea())
+                        .build());
+    }
+    //검색 기능을 페이징 처리
+    public Page<PostDto> searchPostByName(String drinkName,int page,int size){
+        PageRequest pageRequest = PageRequest.of(page,size);
+        return postRepository.findByDrinkNameContainingIgnoreCase(drinkName,pageRequest)
+                .map(post-> PostDto.builder()
+                        .postId(post.getPostId())
+                        .drinkName(post.getDrinkName())
+                        .preferenceLevel(post.getPreferenceLevel())
+                        .postImage(post.getPostImage())
+                        .type(post.getType())
+                        .area(post.getArea())
+                        .build());
     }
 }
