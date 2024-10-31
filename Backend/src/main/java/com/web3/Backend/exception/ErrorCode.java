@@ -12,8 +12,8 @@ public enum ErrorCode {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "404-1", "해당 사용자를 찾을 수 없습니다."),
     USER_ALREADY_EXISTS(HttpStatus.CONFLICT, "409", "사용자가 이미 존재합니다."),
     DATABASE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "500", "데이터베이스 처리 중 오류가 발생했습니다."),
-    INVALID_PREFERENCE_LEVEL(HttpStatus.BAD_REQUEST, "400-3", "유효하지 않은 도수 값입니다.");// 음수거나 범위에서 벗어난 경우
-
+    INVALID_PREFERENCE_LEVEL(HttpStatus.BAD_REQUEST, "400-3", "유효하지 않은 도수 값입니다."),// 음수거나 범위에서 벗어난 경우
+    INVALID_IMAGE_FORMAT(HttpStatus.BAD_REQUEST, "400-4", "유효하지 않은 이미지 형식입니다.");
 
 
     private final HttpStatus httpStatus;
