@@ -41,9 +41,6 @@
   font-weight: bold;
   color: rgb(78, 75, 69);
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   min-width: 100px;
   max-width: 100px; /* 부모 요소 너비 제한 */
 }
