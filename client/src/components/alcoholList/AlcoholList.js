@@ -27,7 +27,7 @@ const AlcoholList = ({ fetchApi }) => {
     const fetchData = async () => {
       try {
         const data = await fetchApi(page);
-        setAlcoholList(data.postDtos); // 데이터 설정
+        setAlcoholList(data.postDto); // 데이터 설정
       } catch (error) {
         console.log("API 호출 중 에러 발생:", error.message);
       }
