@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 
 @RestController
@@ -41,7 +42,6 @@ public class PostController {
         Response response = new Response("200", result);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
     //청탁주 페이지
     @GetMapping("/post/cheongtakju/{page}")
     public ResponseEntity<Response> getCheongTakjuPage(
@@ -49,6 +49,9 @@ public class PostController {
             @RequestParam(defaultValue="10") int size){
 
         Page<PostDto> postPage = postService.getCheongTakjuPage(page,size);
+        postPage.getContent().forEach(post->
+                post.setPostImage("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app/images/fruitWine/" + post.getPostImage())
+        );
 
         Map<String, Object> data = new HashMap<>();
         data.put("content",postPage.getContent());
@@ -66,6 +69,10 @@ public class PostController {
             @RequestParam(defaultValue="10") int size){
 
         Page<PostDto> postPage = postService.getFruitWinePage(page,size);
+        postPage.getContent().forEach(post ->
+                post.setPostImage("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app/images/fruitWine/" + post.getPostImage())
+        );
+
 
         Map<String, Object> data = new HashMap<>();
         data.put("content",postPage.getContent());
