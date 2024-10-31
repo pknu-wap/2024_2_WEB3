@@ -1,48 +1,40 @@
-/* AlcoholList.css */
-
-.alcohol-list-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.alcohol-card {
-  background-color: #efefef;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  text-align: center;
+/* 전체 리스트 컨테이너 - 페이지 중앙에 배치 */
+.AlcoholList {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  margin: 5%;
+}
+
+/* 그리드 컨테이너 */
+.alcohol-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5열 */
+  gap: 3%; /* 아이템 간격 */
+  width: 75%;
+}
+
+/* 그리드 아이템 */
+.alcohol-item-wrap {
+  display: flex;
+  flex-direction: column; /* 이미지와 텍스트 수직 정렬 */
   align-items: center;
-  justify-content: flex-start;
-  height: 250px;
-}
-
-.alcohol-image {
-  width: 80px;
-  height: 80px;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  object-fit: cover;
-}
-
-.alcohol-info {
-  margin-top: auto; /* 텍스트를 카드 하단으로 위치시키기 위해 추가 */
   text-align: center;
+  padding: 10px;
 }
 
+/* 세로형 비율 이미지 */
+.alcohol-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5; /* 세로형 카드 비율 설정 */
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* 술 이름 스타일 */
 .alcohol-name {
-  font-size: 1.1rem;
+  margin-top: 8px;
+  font-size: 15px;
   font-weight: bold;
-  margin: 8px 0 4px;
-}
-
-.alcohol-description {
-  font-size: 0.9rem;
-  color: #555;
-  margin: 0;
+  color: rgb(78, 75, 69);
 }
