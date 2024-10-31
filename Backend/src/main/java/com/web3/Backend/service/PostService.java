@@ -86,13 +86,12 @@ public class PostService {
     public Page<PostDto> getCheongTakjuPage(int page, int size){
         PageRequest pageRequest = PageRequest.of(page, size);
 
-
         return postRepository.findByTypeIn(List.of("청주","탁주"),pageRequest)
                 .map(post -> PostDto.builder()
                         .postId(post.getPostId())
                         .drinkName(post.getDrinkName())
                         .preferenceLevel(post.getPreferenceLevel())
-                        .postImage(post.getPostImage())
+                        .postImage("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + post.getPostImage())
                         .type(post.getType())
                         .area(post.getArea())
                         .build());
@@ -106,7 +105,7 @@ public class PostService {
                         .postId(post.getPostId())
                         .drinkName(post.getDrinkName())
                         .preferenceLevel(post.getPreferenceLevel())
-                        .postImage(post.getPostImage())
+                        .postImage("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + post.getPostImage())
                         .type(post.getType())
                         .area(post.getArea())
                         .build());
