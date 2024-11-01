@@ -51,7 +51,7 @@ const AlcoholList = ({ fetchApi }) => {
               <img
                 //이미지 못 받아옴 프론트에서 경로설정 -> src={`${process.env.REACT_APP_API_ROUTE}/${item.postImage}`}
                 // 백엔드에서 경로 설정하면 -> src={item.postImage}
-                src=""
+                src={item.postImage}
                 className="alcohol-image"
               />
             </Link>
