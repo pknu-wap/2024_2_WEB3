@@ -23,6 +23,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/post/cheongtakju/**").permitAll()
                         .requestMatchers("/api/post/fruitWine/**").permitAll()
                         .requestMatchers("/api/post/search").permitAll()
+                        .requestMatchers("/api/post/search").permitAll()
+                        .requestMatchers("/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable());//테스트용임 최종발표 전에 csrf 보호 활성화 하기
