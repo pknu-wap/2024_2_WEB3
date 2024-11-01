@@ -23,7 +23,6 @@ public class SecurityConfig {
                         .requestMatchers("/api/post/cheongtakju/**").permitAll()
                         .requestMatchers("/api/post/fruitWine/**").permitAll()
                         .requestMatchers("/api/post/search").permitAll()
-                        .requestMatchers("/api/post/search").permitAll()
                         .requestMatchers("/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
