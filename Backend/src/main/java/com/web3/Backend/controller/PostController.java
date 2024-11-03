@@ -28,7 +28,7 @@ public class PostController {
         PostDto postDto = postService.getPostById(postId);
 
         Map<String, Object> data = new HashMap<>();
-        data.put("post", postDto);
+        data.put("postDto", postDto);
 
         Response response = new Response("200", "게시물 정보 조회 성공", data);
         return new ResponseEntity<>(response, HttpStatus.OK);

@@ -1,4 +1,5 @@
 package com.web3.Backend.security;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -7,20 +8,17 @@ import java.util.Objects;
 
 public class UserPrincipal implements UserDetails {
 
-    private Long id;
+    @Getter
+    private int id;
     private String username;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(int id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     @Override
