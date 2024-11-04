@@ -12,4 +12,5 @@ import java.util.List;
 public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
     // 사용자와 게시물에 해당하는 북마크를 찾는 메서드
     Bookmark findByUserAndPost(User user, Post post);
+    List<Bookmark> findByUserId(int userId);
 }

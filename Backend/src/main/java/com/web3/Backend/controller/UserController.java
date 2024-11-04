@@ -1,5 +1,6 @@
 package com.web3.Backend.controller;
 
+import com.web3.Backend.dto.PostPreviewDto;
 import com.web3.Backend.dto.UserDto;
 import com.web3.Backend.exception.CustomException;
 import com.web3.Backend.exception.ErrorCode;
@@ -14,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -37,6 +39,21 @@ public class UserController {
         data.put("user", userDto);
 
         Response response = new Response("200", "내 정보 조회 성공", data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/mypage/bookmarks")
+    public ResponseEntity<Response> getBookmarks(@CurrentUser UserPrincipal userPrincipal) {
+        if (userPrincipal == null) {
+            throw new CustomException(ErrorCode.UNAUTHORIZED);
+        }
+
+        List<PostPreviewDto> postPreviewDtos = userService.getBookmarks(userPrincipal.getId());
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("postPreviewDtos", postPreviewDtos);
+
+        Response response = new Response("200", "북마크 목록 조회 성공", data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
