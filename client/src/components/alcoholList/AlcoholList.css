@@ -22,17 +22,27 @@
   text-decoration: none;
 }
 
-.link-img-tag {
+.alcohol-image {
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 5; /* 세로형 카드 비율 설정 */
-  object-fit: cover;
+  aspect-ratio: 5 / 6;
+  object-fit: contain;
   border-radius: 8px;
-  background-color: gainsboro;
-  /* border: 1px solid gainsboro; */
+  background-color: rgb(239, 239, 239);
 }
 
-.link-name-tag {
+/* 가로로 긴 이미지에 적용 (세로 기준에 맞추어 조정) */
+.fit-width {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* 세로로 긴 이미지에 적용 (가로 기준에 맞추어 조정) */
+.fit-height {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
 }
 
 .alcohol-name {

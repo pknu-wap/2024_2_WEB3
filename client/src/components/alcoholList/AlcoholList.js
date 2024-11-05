@@ -44,19 +44,12 @@ const AlcoholList = ({ fetchApi }) => {
       <div className="alcohol-container">
         {alcoholList.map((item, index) => (
           <div key={index} className="alcohol-item-wrap">
-            <Link
-              // to={`/api/post/info/${item.postId}`} // 세부 페이지로 이동
-              className="link-img-tag"
-            >
-              <img
-                //이미지 못 받아옴 프론트에서 경로설정 -> src={`${process.env.REACT_APP_API_ROUTE}/${item.postImage}`}
-                // 백엔드에서 경로 설정하면 -> src={item.postImage}
-                src={item.postImage}
-                className="alcohol-image"
-              />
+            <Link to={`/api/post/info/${item.postId}`} className="link-img-tag">
+              <img src={item.postImage} className="alcohol-image" />
             </Link>
+
             <Link
-              // to={`/api/post/info/${item.postId}`} // 세부 페이지로 이동
+              to={`/api/post/info/${item.postId}`}
               className="link-name-tag"
             >
               <div className="alcohol-name">{item.drinkName}</div>
