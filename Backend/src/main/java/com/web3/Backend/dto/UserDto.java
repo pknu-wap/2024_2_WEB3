@@ -9,10 +9,13 @@ public class UserDto {
     private int userId;
     private String userName;
     private String profileImage;
+    private Double preferenceLevel;
 
-    public UserDto(int userId, String userName, String profileImage) {
+    // 생성자
+    public UserDto(int userId, String userName, String profileImage, Double preferenceLevel) {
         this.userId = userId;
         this.userName = userName;
         this.profileImage = profileImage;
+        this.preferenceLevel = preferenceLevel;
     }
 }

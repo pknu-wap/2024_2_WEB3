@@ -32,7 +32,7 @@ public class UserService {
 
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
-                return new UserDto(user.getId(), user.getUserName(), user.getProfileImageUrl());
+                return new UserDto(user.getId(), user.getUserName(), user.getProfileImageUrl(), user.getPreferenceLevel());
             } else {
                 throw new CustomException(ErrorCode.USER_NOT_FOUND);
             }
@@ -71,7 +71,7 @@ public class UserService {
         user.setUserName(newUserName);
         userRepository.save(user);
 
-        return new UserDto(user.getId(), user.getUserName(), user.getProfileImageUrl());
+        return new UserDto(user.getId(), user.getUserName(), user.getProfileImageUrl(), user.getPreferenceLevel());
     }
 
 
