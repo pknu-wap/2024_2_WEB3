@@ -61,5 +61,19 @@ public class UserService {
             throw new CustomException(ErrorCode.DATABASE_ERROR);
         }
     }
+
+    public UserDto updateUserName(int userId, String newUserName) {
+        // 사용자 확인
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+        // 사용자 이름 변경
+        user.setUserName(newUserName);
+        userRepository.save(user);
+
+        return new UserDto(user.getId(), user.getUserName(), user.getProfileImageUrl());
+    }
+
+
 }
 

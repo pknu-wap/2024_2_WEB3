@@ -56,4 +56,23 @@ public class UserController {
         Response response = new Response("200", "북마크 목록 조회 성공", data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @PatchMapping("/mypage/updateInfo")
+    public ResponseEntity<Response> updateUserInfo(@CurrentUser UserPrincipal userPrincipal, @RequestBody Map<String, Object> request) {
+        if (userPrincipal == null) {
+            throw new CustomException(ErrorCode.UNAUTHORIZED);
+        }
+
+        int userId = userPrincipal.getId();
+        String newUserName = (String) request.get("userName");
+
+        // 사용자 이름 업데이트
+        UserDto updatedUser = userService.updateUserName(userId, newUserName);
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("userName", updatedUser.getUserName());
+
+        Response response = new Response("200", "이름 수정 성공", data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
