@@ -75,4 +75,28 @@ public class UserController {
         Response response = new Response("200", "이름 수정 성공", data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @PatchMapping("/mypage/updatePreference")
+    public ResponseEntity<Response> updatePreference(@CurrentUser UserPrincipal userPrincipal, @RequestBody Map<String, Object> request) {
+        if (userPrincipal == null) {
+            throw new CustomException(ErrorCode.UNAUTHORIZED);
+        }
+
+        Double preferenceLevel;
+        try {
+            preferenceLevel = ((Number) request.get("preferenceLevel")).doubleValue();
+        } catch (Exception e) {
+            throw new CustomException(ErrorCode.INVALID_PREFERENCE_LEVEL);
+        }
+
+        // 선호도 수정
+        userService.updatePreferenceLevel(userPrincipal.getId(), preferenceLevel);
+
+        // 응답 생성
+        Map<String, Object> data = new HashMap<>();
+        data.put("preferenceLevel", preferenceLevel);
+
+        Response response = new Response("200", "선호 도수 설정 성공", data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

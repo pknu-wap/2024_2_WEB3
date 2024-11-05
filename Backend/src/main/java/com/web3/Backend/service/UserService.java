@@ -44,13 +44,13 @@ public class UserService {
         }
     }
 
-    public List<PostPreviewDto> getBookmarks(int id) {
+    public List<PostPreviewDto> getBookmarks(int userId) {
         // 사용자 확인
-        userRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+        userRepository.findById(userId).orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
         // 북마크 목록 가져오기
         try {
-            List<Bookmark> bookmarks = bookmarkRepository.findByUserId(id);
+            List<Bookmark> bookmarks = bookmarkRepository.findByUserId(userId);
 
             return bookmarks.stream().map(bookmark -> {
                 Post post = bookmark.getPost();
@@ -72,6 +72,20 @@ public class UserService {
         userRepository.save(user);
 
         return new UserDto(user.getId(), user.getUserName(), user.getProfileImageUrl(), user.getPreferenceLevel());
+    }
+
+    public void updatePreferenceLevel(int userId, Double preferenceLevel) {
+        // 사용자 확인
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+        // 유효한 도수 값인지 검증
+        if (preferenceLevel < 0 || preferenceLevel > 100) {
+            throw new CustomException(ErrorCode.INVALID_PREFERENCE_LEVEL);
+        }
+
+        user.setPreferenceLevel(preferenceLevel);
+        userRepository.save(user);
     }
 
 
