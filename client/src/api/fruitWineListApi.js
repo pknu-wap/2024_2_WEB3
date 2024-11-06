@@ -8,7 +8,7 @@ const apiClient = axios.create({
 const fruitWineListApi = async (page) => {
   try {
     const response = await apiClient.get(`api/post/fruitWine/${page}`); // baseURL 포함된 경로로 요청
-    console.log("서버 응답 메시지:", response.data.message); // 서버 응답 메시지 출력
+    // console.log("서버 응답 메시지:", response.data.message); // 서버 응답 메시지 출력
     return response.data.data; // 필요한 데이터 반환
   } catch (error) {
     console.log("API 호출 중 에러 발생:", error.message);

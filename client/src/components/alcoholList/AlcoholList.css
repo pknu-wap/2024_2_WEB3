@@ -31,20 +31,6 @@
   background-color: rgb(239, 239, 239);
 }
 
-/* 가로로 긴 이미지에 적용 (세로 기준에 맞추어 조정) */
-.fit-width {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* 세로로 긴 이미지에 적용 (가로 기준에 맞추어 조정) */
-.fit-height {
-  width: auto;
-  height: 100%;
-  object-fit: contain;
-}
-
 .alcohol-name {
   margin-top: 8px;
   font-size: 13px;

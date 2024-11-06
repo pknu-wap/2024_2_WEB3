@@ -1,26 +1,31 @@
 import "./AlcoholList.css";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 
 // AlcoholList.js
 const AlcoholList = ({ fetchApi }) => {
   const [alcoholList, setAlcoholList] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1); // 총 페이지 수
+  const [totalPages, setTotalPages] = useState(1);
 
-  // 페이지 변경 시 데이터 로드
-  useEffect(() => {
-    const fetchData = async () => {
+  // 페이지 데이터를 불러오는 함수
+  const fetchData = useCallback(
+    async (pageNum) => {
       try {
-        const data = await fetchApi(page); // 현재 페이지에 맞는 데이터 호출
-        setAlcoholList(data.content); // 현재 페이지의 컨텐츠 설정
-        setTotalPages(data.totalPages); // 전체 페이지 수 설정
+        const data = await fetchApi(pageNum);
+        setAlcoholList(data.content);
+        setTotalPages(data.totalPages);
       } catch (error) {
         console.log("데이터 로딩 중 오류:", error.message);
       }
-    };
-    fetchData();
-  }, [page]);
+    },
+    [fetchApi]
+  );
+
+  // 페이지가 변경될 때만 데이터 호출
+  useEffect(() => {
+    fetchData(page);
+  }, [page, fetchData]);
 
   const renderPageNumbers = () => {
     const pageNumbers = [];
@@ -35,19 +40,21 @@ const AlcoholList = ({ fetchApi }) => {
         </button>
       );
     }
-
     return pageNumbers;
   };
 
   return (
     <div className="AlcoholList">
       <div className="alcohol-container">
-        {alcoholList.map((item, index) => (
-          <div key={index} className="alcohol-item-wrap">
+        {alcoholList.map((item) => (
+          <div key={item.postId} className="alcohol-item-wrap">
             <Link to={`/api/post/info/${item.postId}`} className="link-img-tag">
-              <img src={item.postImage} className="alcohol-image" />
+              <img
+                src={item.postImage}
+                alt={item.drinkName}
+                className="alcohol-image"
+              />
             </Link>
-
             <Link
               to={`/api/post/info/${item.postId}`}
               className="link-name-tag"
@@ -58,7 +65,6 @@ const AlcoholList = ({ fetchApi }) => {
         ))}
       </div>
 
-      {/* 페이지네이션 */}
       <div className="pagination">
         <button onClick={() => setPage(page - 1)} disabled={page === 1}>
           {"<"}
