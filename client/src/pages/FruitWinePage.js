@@ -1,18 +1,18 @@
 import Header from "../components/common/Header";
-import AlcoholList from "../components/alcoholList/AlcoholList";
 import SearchBar from "../components/navSearchBar/SearchBar";
+import AlcoholList from "../components/alcoholList/AlcoholList";
+import fruitWineListApi from "../api/fruitWineListApi";
 import Footer from "../components/common/Footer";
-import cheongTakjuListApi from "../api/cheongTakjuListApi";
 
-const CheongtakjuPage = () => {
+const FruitWinePage = () => {
   return (
     <div>
       <Header />
       <SearchBar />
-      <AlcoholList fetchApi={cheongTakjuListApi} />
+      <AlcoholList fetchApi={fruitWineListApi} />
       <Footer />
     </div>
   );
 };
 
-export default CheongtakjuPage;
+export default FruitWinePage;

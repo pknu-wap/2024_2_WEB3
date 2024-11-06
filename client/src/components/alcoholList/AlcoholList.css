@@ -1,48 +1,89 @@
-/* AlcoholList.css */
-
-.alcohol-list-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.alcohol-card {
-  background-color: #efefef;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  text-align: center;
+.AlcoholList {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  margin: 5%;
   align-items: center;
-  justify-content: flex-start;
-  height: 250px;
+}
+
+.alcohol-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5열 */
+  gap: 3%; /* 아이템 간격 */
+  width: 75%;
+}
+
+.alcohol-item-wrap {
+  display: flex;
+  flex-direction: column; /* 이미지와 텍스트 수직 정렬 */
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
 }
 
 .alcohol-image {
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 6;
+  object-fit: contain;
   border-radius: 8px;
-  margin-bottom: 12px;
-  object-fit: cover;
-}
-
-.alcohol-info {
-  margin-top: auto; /* 텍스트를 카드 하단으로 위치시키기 위해 추가 */
-  text-align: center;
+  background-color: rgb(239, 239, 239);
 }
 
 .alcohol-name {
-  font-size: 1.1rem;
+  margin-top: 8px;
+  font-size: 13px;
   font-weight: bold;
-  margin: 8px 0 4px;
+  color: rgb(78, 75, 69);
+
+  min-width: 100px;
+  max-width: 100px; /* 부모 요소 너비 제한 */
 }
 
-.alcohol-description {
-  font-size: 0.9rem;
-  color: #555;
-  margin: 0;
+.alcohol-image:hover,
+.alcohol-name:hover {
+  cursor: pointer;
+}
+
+.link-img-tag,
+.link-name-tag {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+}
+
+/* 페이지네이션 CSS */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+  background-color: rgba(75, 72, 68, 0.445);
+  color: white;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination .active-page {
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0);
+  color: rgb(0, 0, 0);
 }
