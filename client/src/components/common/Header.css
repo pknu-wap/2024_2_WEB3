@@ -11,7 +11,7 @@
   left: 0;
 
   padding: 1px 10%; /* 상하, 좌우 여백 */
-  background-color: none;
+  background-color: transparent;
   z-index: 100;
   width: 100%;
   box-sizing: border-box; /* 패딩과 보더를 포함하여 너비 계산 */

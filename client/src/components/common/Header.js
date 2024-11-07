@@ -5,11 +5,11 @@ import SearchBar from "../navSearchBar/SearchBar";
 import styled from "styled-components";
 
 const HeaderContainer = styled.header`
-  color: ${({ textColor }) => textColor || "rgb(236, 232, 228)"};
+  color: ${({ $textColor }) => $textColor || "rgb(236, 232, 228)"};
 `;
 
 const StyledButton = styled.button`
-  color: ${({ textColor }) => textColor || "rgb(236, 232, 228)"};
+  color: ${({ $textColor }) => $textColor || "rgb(236, 232, 228)"};
 `;
 
 const Header = ({ textColor: propTextColor }) => {
@@ -31,7 +31,7 @@ const Header = ({ textColor: propTextColor }) => {
   const textColor = propTextColor || getTextColor();
 
   return (
-    <HeaderContainer className="Header" textColor={textColor}>
+    <HeaderContainer className="Header" $textColor={textColor}>
       <div className="logo-section">
         <Link to="/">
           <img src="/images/Holjjak-logo.png" alt="Logo" className="logo-img" />
@@ -39,7 +39,7 @@ const Header = ({ textColor: propTextColor }) => {
       </div>
 
       <div className="nav-section">
-        <Navigation textColor={textColor} />
+        <Navigation $textColor={textColor} />
       </div>
 
       <div className="search-section">
@@ -52,12 +52,12 @@ const Header = ({ textColor: propTextColor }) => {
 
       <div className="login-button-section">
         <Link to="/signIn">
-          <StyledButton className="sign-in-button" textColor={textColor}>
+          <StyledButton className="sign-in-button" $textColor={textColor}>
             로그인
           </StyledButton>
         </Link>
         <Link to="/signUp">
-          <StyledButton className="sign-up-button" textColor={textColor}>
+          <StyledButton className="sign-up-button" $textColor={textColor}>
             회원가입
           </StyledButton>
         </Link>
