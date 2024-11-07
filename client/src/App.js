@@ -5,7 +5,7 @@ import FruitWinePage from "./pages/fruitWinePage";
 import { BrowserRouter, Router, Route, Routes, Link } from "react-router-dom";
 import SignInPage from "./pages/SignInPage";
 import Mypage from "./pages/mypage";
-
+import SearchPage from "./components/search/search";
 
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
           <Route path="/mypage" element={<Mypage />} />
           {/* 과실주 리스트 페이지 */}
           <Route path="/signIn" element={<SignInPage />} />
+          <Route path="/search" element={<SearchPage />} />
         </Routes>
       </BrowserRouter>
     </>
