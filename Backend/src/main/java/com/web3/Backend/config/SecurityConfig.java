@@ -82,7 +82,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/post/cheongtakju/**").permitAll()
                         .requestMatchers("/api/post/fruitWine/**").permitAll()
                         .requestMatchers("/api/post/search").permitAll()
-                        .requestMatchers("/reissue").permitAll()
+                        .requestMatchers("/auth/reissue").permitAll()
                         .requestMatchers("/auth/signup","/auth/login","/auth/logout","/error").permitAll()
                         .requestMatchers("/images/**").permitAll()
                         .anyRequest().authenticated() // 그 외 경로는 인증 필요
