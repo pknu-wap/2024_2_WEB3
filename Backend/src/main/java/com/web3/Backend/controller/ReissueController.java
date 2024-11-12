@@ -62,7 +62,6 @@ public class ReissueController {
         // 7. 새로운 토큰들을 응답 헤더에 설정
         response.setHeader("Authorization", "Bearer " + newAccessToken);
         response.setHeader("refresh", newRefreshToken);
-
         return new ResponseEntity<>("New tokens issued", HttpStatus.OK); // 성공적인 응답
     }
 

@@ -41,17 +41,13 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             // ObjectMapper를 사용하여 JSON 요청을 UserDto 객체로 변환
             ObjectMapper objectMapper = new ObjectMapper();
             UserDto userDto = objectMapper.readValue(request.getInputStream(), UserDto.class);
-
             String username = userDto.getUserName();  // UserDto에서 userName을 가져옴
             String password = userDto.getPassword();  // UserDto에서 password를 가져옴
-
             log.info("Attempting authentication for username: {}, password: {}", username, password);
-
             // username 또는 password가 없으면 예외를 던짐
             if (username == null || password == null) {
                 throw new BadCredentialsException("Username or password not provided");
             }
-
             // 인증 토큰 생성 후 인증 시도
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password, null);
             return authenticationManager.authenticate(authToken);  // AuthenticationManager로 인증 시도
@@ -65,26 +61,20 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication)
             throws IOException, ServletException, java.io.IOException {
-
         log.info("Authentication successful for user: " + authentication.getName());
-
         String username = authentication.getName();
         try {
             // Access Token과 Refresh Token 생성
             String accessToken = jwtUtil.createJwt("access", username, 600000L);
             String refreshToken = jwtUtil.createJwt("refresh", username, 86400000L);
-
             log.info("Access Token: {}", accessToken);
             log.info("Refresh Token: {}", refreshToken);
-
             // DB에 Refresh Token 저장
             addRefreshEntity(username, refreshToken, 86400000L);
-
             // 생성된 JWT 토큰을 응답 헤더에 추가
             response.setHeader("Authorization", "Bearer " + accessToken);  // Access Token을 Authorization 헤더에 추가
             response.setHeader("refresh", refreshToken);  // Refresh Token을 refresh 헤더에 추가
             response.setStatus(HttpServletResponse.SC_OK);  // HTTP 200 OK 상태 코드 반환
-
         } catch (Exception e) {
             log.error("Error creating JWT tokens: ", e);
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

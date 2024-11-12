@@ -55,7 +55,6 @@ public class JWTFilter extends OncePerRequestFilter {
         String category = jwtUtil.getCategory(accessToken);
 
         if (!category.equals("access")) {
-
             //response body
             PrintWriter writer = response.getWriter();
             writer.print("invalid access token");
@@ -66,15 +65,11 @@ public class JWTFilter extends OncePerRequestFilter {
         }
         // username 값을 획득
         String username = jwtUtil.getUsername(accessToken);
-
         User user = new User();
         user.setUserName(username);
-
         CustomUserDetails customUserDetails = new CustomUserDetails(user);
-
         Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, null);
         SecurityContextHolder.getContext().setAuthentication(authToken);
-
         filterChain.doFilter(request, response);
     }
 }
