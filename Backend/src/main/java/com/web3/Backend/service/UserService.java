@@ -12,6 +12,7 @@ import com.web3.Backend.repository.BookmarkRepository;
 import com.web3.Backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +26,9 @@ public class UserService {
 
     @Autowired
     private BookmarkRepository bookmarkRepository;
+
+    @Autowired
+    private FileStorageService fileStorageService;
 
     public UserDto getUserById(int userId) {
         try {
@@ -88,6 +92,19 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public String updateProfileImage(int userId, MultipartFile profileImage) {
+        // 사용자 확인
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
+        // 파일 저장
+        String savedImageUrl = fileStorageService.storeFile(profileImage);
+
+        // 사용자 프로필 이미지 URL 업데이트
+        user.setProfileImageUrl(savedImageUrl);
+        userRepository.save(user);
+
+        return savedImageUrl;
+    }
 }
 

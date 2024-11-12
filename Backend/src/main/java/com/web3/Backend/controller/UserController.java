@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -98,5 +99,33 @@ public class UserController {
 
         Response response = new Response("200", "선호 도수 설정 성공", data);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PatchMapping("/mypage/updateProfileImage")
+    public ResponseEntity<Response> updateProfileImage(
+            @CurrentUser UserPrincipal userPrincipal,
+            @RequestParam("profileImage") MultipartFile profileImage) {
+
+        if (userPrincipal == null) {
+            throw new CustomException(ErrorCode.UNAUTHORIZED);
+        }
+
+        if (profileImage.isEmpty() || !isValidImageFormat(profileImage.getOriginalFilename())) {
+            throw new CustomException(ErrorCode.INVALID_IMAGE_FORMAT);
+        }
+
+        // 프로필 이미지 업데이트
+        String savedImageUrl = userService.updateProfileImage(userPrincipal.getId(), profileImage);
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("profileImageUrl", savedImageUrl);
+
+        Response response = new Response("200", "프로필 사진 설정 성공", data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    // 이미지 파일 형식 검사
+    private boolean isValidImageFormat(String filename) {
+        return filename.matches(".*\\.(jpeg|jpg|png|gif|bmp)$");
     }
 }
