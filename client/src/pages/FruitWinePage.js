@@ -9,7 +9,7 @@ const FruitWinePage = () => {
   return (
     <div>
       <Header />
-      <SearchPage />
+        <SearchPage />
       <AlcoholList fetchApi={fruitWineListApi} />
       <Footer />
     </div>

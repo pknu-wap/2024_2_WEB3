@@ -1,0 +1,705 @@
+[
+{
+  "drinkName": "치키피치",
+  "preferenceLevel":4.6,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/CheekyPeach.jpg"
+},{
+  "drinkName": "P.S 화이트 스파클링",
+  "preferenceLevel":5,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/PS_WhiteSparkling.jpg"
+},{
+  "drinkName": "멜론서리",
+  "preferenceLevel":5,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/MellonSeoli.jpg"
+},{
+  "drinkName": "오롯이 복숭아",
+  "preferenceLevel":9,
+  "area": "세종특별자치시",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/OlosiPeache.jpg"
+},{
+  "drinkName": "너브내스파클링사과와인",
+  "preferenceLevel":8.5,
+  "area": "강원도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/NervneSparklingAppleWine.jpg"
+},{
+  "drinkName": "로제사이더 오미한잔",
+  "preferenceLevel":4.5,
+  "area": "경상북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/RoseCiderOmihanjan.jpg"
+},{
+  "drinkName": "세인트하우스 살구와인",
+  "preferenceLevel":12,
+  "area": "충청남도 ",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/SaintHouseApricotWine.jpg"
+},{
+  "drinkName": "머루와인",
+  "preferenceLevel":12,
+  "area": "전라북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/MeruWine.jpg"
+},{
+  "drinkName": "그랑꼬또 청수",
+  "preferenceLevel":12,
+  "area": "경기도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/GradcoteauFreshWater.jpg"
+},{
+  "drinkName": "베베마루 설레임 로제 스위트와인",
+  "preferenceLevel":12,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/RoséSweetWine.jpg"
+},{
+  "drinkName": "산막와이너리, 화몽",
+  "preferenceLevel":13,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/Hwamong.jpg"
+},{
+  "drinkName": "산막와이너리, 비원퓨어",
+  "preferenceLevel":13,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/BiwonPure.jpg"
+},{
+  "drinkName": "크라테 화이트스위트",
+  "preferenceLevel":11.5,
+  "area": "경상북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/KratteWhiteSweet.jpg"
+},{
+  "drinkName": "김천대학교 자두사랑 자두와인",
+  "preferenceLevel":12,
+  "area": "경상북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/GimcheonUniversityPlumWine.jpg"
+},{
+  "drinkName": "미르아토 로제와인",
+  "preferenceLevel":12,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/MiratoRoseWine.jpg"
+},{
+  "drinkName": "산머루와인 달콤한 스위트",
+  "preferenceLevel":10.5,
+  "area": "경상남도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/SweetSweet.jpg"
+},{
+  "drinkName": "2016년산 하미앙 드라이",
+  "preferenceLevel":12,
+  "area": "경상남도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/HamianDry.jpg"
+},{
+  "drinkName": "고도리 로제와인",
+  "preferenceLevel":12,
+  "area": "경상북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/GodoriRoseWine.jpg"
+},{
+  "drinkName": "소계리 595 스위트 레드와인",
+  "preferenceLevel":12,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/559SweetRedWine.jpg"
+},{
+  "drinkName": "끌로너와 스위트와인",
+  "preferenceLevel":12,
+  "area": "강원도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/ClonerAndSweetWine.jpg"
+},{
+  "drinkName": "고도리 샤인머스캣 화이트와인",
+  "preferenceLevel":10.5,
+  "area": "경상북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/ShineMuscatWhiteWine.jpg"
+},{
+  "drinkName": "포엠 화이트와인",
+  "preferenceLevel":12,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/PoemWhiteWine.jpg"
+},{
+  "drinkName": "산막와이너리, 초련",
+  "preferenceLevel":20,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/Choryun.jpg"
+},{
+  "drinkName": "코이버펑크, 머스캣 베일리 에이 2017",
+  "preferenceLevel":12.5,
+  "area": "경상북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/MuscatBaileyA.jpg"
+},{
+  "drinkName": "산막와이너리, 아로퓨어",
+  "preferenceLevel":13,
+  "area": "충청북도 ",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/Aropure.jpg"
+},{
+  "drinkName": "뱅꼬레 더감",
+  "preferenceLevel":12,
+  "area": "경상북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/BancoreDeogam.jpg"
+},{
+  "drinkName": "샤토미소 아이스와인",
+  "preferenceLevel":12,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/SyatomisoIceWine.jpg"
+},{
+  "drinkName": "산머루와인 깊은맛 드라이",
+  "preferenceLevel":12,
+  "area": "경라남도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/MeruWineDeepDry.jpg"
+},{
+  "drinkName": "너브내 로제 스파클링",
+  "preferenceLevel":12,
+  "area": "강원도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/NeubnaeRoséSparkling.jpg"
+},{
+  "drinkName": "달 1614 스위트와인",
+  "preferenceLevel":12,
+  "area": "전라북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/Moon1614SweetWine.jpg"
+},{
+  "drinkName": "샤토미소 웨딩 자두와인",
+  "preferenceLevel":12,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/WeddingPlumWine.jpg"
+},{
+  "drinkName": "코이버펑크, 카베르네 소비뇽 2019",
+  "preferenceLevel":12.5,
+  "area": "경상북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/CabernetSauvignon.jpg"
+},{
+  "drinkName": "포엠 로제와인",
+  "preferenceLevel":12,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/PoemRoséWine.jpg"
+},{
+  "drinkName": "2016년산 하미앙 스위트",
+  "preferenceLevel":10.5,
+  "area": "경라남도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/HamiangSweet.jpg"
+},{
+  "drinkName": "베리와인1168 스위트와인",
+  "preferenceLevel":13,
+  "area": "충청북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/1168SweetWine.jpg"
+},{
+  "drinkName": "오크와인",
+  "preferenceLevel":12,
+  "area": "경라남도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/OakWine.jpg"
+},{
+  "drinkName": "너브내 스파클링 화이트",
+  "preferenceLevel":12,
+  "area": "강원도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/SparklingWhite.jpg"
+},{
+  "drinkName": "소백산(샤토소백) 스위트 레드와인",
+  "preferenceLevel":12,
+  "area": "경상북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/SobakSweetRedWine.jpg"
+},{
+  "drinkName": "크라테 미디엄드라이",
+  "preferenceLevel":11.5,
+  "area": "경상북도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/MediumDry.jpg"
+},{
+  "drinkName": "2018년산 하미앙 오크와인",
+  "preferenceLevel":12,
+  "area": "경라남도",
+  "type": "과실주",
+  "postImage": "/images/fruitWine/HamianOakWine.jpg"
+}, 
+
+  {"drinkName":"소풍",
+    "preferenceLevel":5.5,
+    "area":"경상남도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju1.jpg"
+  },
+
+  {"drinkName":"가와지탁주",
+    "preferenceLevel":7.5,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju2.jpg"
+  },
+
+  {"drinkName":"연희유자",
+    "preferenceLevel":10,
+    "area":"서울특별시",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju3.jpg"
+  },
+
+  {"drinkName":"팔팔막걸리",
+    "preferenceLevel":6,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju4.jpg"
+  },
+
+  {"drinkName":"설레 7도",
+    "preferenceLevel":7,
+    "area":"경상남도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju5.jpg"
+  },
+
+  {"drinkName":"보은주",
+    "preferenceLevel":10,
+    "area":"충청북도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju6.jpg"
+  },
+
+  {"drinkName":"바텐더의막걸리",
+    "preferenceLevel":14,
+    "area":"서울특별시",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju7.jpg"
+  },
+
+  {"drinkName":"김유정역",
+    "preferenceLevel":6,
+    "area":"강원도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju8.jpg"
+  },
+
+  {"drinkName":"님 그리다",
+    "preferenceLevel":6,
+    "area":"경상남도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju9.jpg"
+  },
+
+  {"drinkName":"일엽편주",
+    "preferenceLevel":12,
+    "area":"경상북도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju10.jpg"
+  },
+
+  {"drinkName":"입장탁주",
+    "preferenceLevel":7,
+    "area":"충청남도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju11.jpg"
+  },
+
+  {"drinkName":"메들리손막걸리",
+    "preferenceLevel":8,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju12.jpg"
+  },
+
+  {"drinkName":"자작막걸리",
+    "preferenceLevel":12,
+    "area":"강원도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju13.jpg"
+  },
+
+  {"drinkName":"냥이탁주 화이트",
+    "preferenceLevel":10.5,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju14.jpg"
+  },
+
+  {"drinkName":"대대포9",
+    "preferenceLevel":9,
+    "area":"전라남도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju15.jpg"
+  },
+
+  {"drinkName":"아임프리6.0",
+    "preferenceLevel":6,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju16.jpg"
+  },
+
+  {"drinkName":"냥이탁주 9도",
+    "preferenceLevel":9,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju17.jpg"
+  },
+
+  {"drinkName":"골목막걸리 프리미엄 12",
+    "preferenceLevel":12,
+    "area":"충청남도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju18.jpg"
+  },
+
+  {"drinkName":"과천미주",
+    "preferenceLevel":9,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju19.jpg"
+  },
+
+  {"drinkName":"복순도가 슈퍼드라이",
+    "preferenceLevel":6.5,
+    "area":"울산광역시",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju20.jpg"
+  },
+
+  {"drinkName":"옹근달 본막걸리",
+    "preferenceLevel":15,
+    "area":"인천광역시",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju21.jpg"
+  },
+
+  {"drinkName":"산정호수 동정춘막걸리",
+    "preferenceLevel":6,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju22.jpg"
+  },
+
+  {"drinkName":"단홍",
+    "preferenceLevel":13.5,
+    "area":"서울특별시",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju23.jpg"
+  },
+
+  {"drinkName":"오산막걸리",
+    "preferenceLevel":6,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju24.jpg"
+  },
+
+  {"drinkName":"일곱쌀",
+    "preferenceLevel":7,
+    "area":"서울특별시",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju25.jpg"
+  },
+
+  {"drinkName":"탁112클래식",
+    "preferenceLevel":12,
+    "area":"인천광역시",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju26.jpg"
+  },
+
+  {"drinkName":"생 옥수수 동동주",
+    "preferenceLevel":6,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju27.jpg"
+  },
+
+  {"drinkName":"담향 대대포 블루",
+    "preferenceLevel":6,
+    "area":"전라남도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju28.jpg"
+  },
+
+  {"drinkName":"도갓집 막걸리",
+    "preferenceLevel":6,
+    "area":"전라남도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju29.jpg"
+  },
+
+  {"drinkName":"한영석 하향주",
+    "preferenceLevel":13.8,
+    "area":"전라북도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju30.jpg"
+  },
+
+  {"drinkName":"이화주(술샘)",
+    "preferenceLevel":8,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju31.jpg"
+  },
+
+  {"drinkName":"관악산생막걸리",
+    "preferenceLevel":6,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju32.jpg"
+  },
+
+  {"drinkName":"하얀까마귀",
+    "preferenceLevel":8,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju33.jpg"
+  },
+
+  {"drinkName":"정감생막걸리",
+    "preferenceLevel":6,
+    "area":"경상남도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju34.jpg"
+  },
+
+  {"drinkName":"눈내린여름밤",
+    "preferenceLevel":12,
+    "area":"서울특별시",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju35.jpg"
+  },
+
+  {"drinkName":"한강의설레임",
+    "preferenceLevel":11,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju36.jpg"
+  },
+
+  {"drinkName":"시향가 미니캔막걸리",
+    "preferenceLevel":8,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju37.jpg"
+  },
+
+  {"drinkName":"강냉이 막걸리",
+    "preferenceLevel":6,
+    "area":"충청북도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju38.jpg"
+  },
+
+  {"drinkName":"말이야 막걸리야",
+    "preferenceLevel":6,
+    "area":"전라남도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju39.jpg"
+  },
+
+  {"drinkName":"연꽃담은술",
+    "preferenceLevel":8,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju40.jpg"
+  },
+
+  {"drinkName":"냥이탁주 fresh",
+    "preferenceLevel":5,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju41.jpg"
+  },
+
+  {"drinkName":"주홍춘",
+    "preferenceLevel":10,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju42.jpg"
+  },
+
+  {"drinkName":"양조학당 뜰",
+    "preferenceLevel":12,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju43.jpg"
+  },
+
+  {"drinkName":"금풍양조",
+    "preferenceLevel":6.9,
+    "area":"인천광역시",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju44.jpg"
+  },
+
+  {"drinkName":"영일만친구 막걸리",
+    "preferenceLevel":6,
+    "area":"경상북도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju45.jpg"
+  },
+
+  {"drinkName":"선희주",
+    "preferenceLevel":12,
+    "area":"충청북도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju46.jpg"
+  },
+
+  {"drinkName":"연오랑탁주",
+    "preferenceLevel":12,
+    "area":"경상북도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju47.jpg"
+  },
+
+  {"drinkName":"청혼 화이트",
+    "preferenceLevel":13,
+    "area":"경기도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju48.jpg"
+  },
+
+  {"drinkName":"오희 스파클링 막걸리",
+    "preferenceLevel":8.5,
+    "area":"경상북도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju49.jpg"
+  },
+
+  {"drinkName":"곤드레생막걸리",
+    "preferenceLevel":6,
+    "area":"강원도",
+    "type":"탁주",
+    "postIamge":"/images/cheongtakju/takju50.jpg"
+  },
+
+  {"drinkName":"세종대왕어주 약주",
+    "preferenceLevel":15,
+    "area":"충청북도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju1.jpg"
+  },
+
+  {"drinkName":"주교주",
+    "preferenceLevel":16,
+    "area":"경기도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju2.jpg"
+  },
+
+  {"drinkName":"일엽편주",
+    "preferenceLevel":15,
+    "area":"경상북도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju3.jpg"
+  },
+
+  {"drinkName":"모월 연",
+    "preferenceLevel":13,
+    "area":"강원도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju4.jpg"
+  },
+
+  {"drinkName":"메들리아카시아",
+    "preferenceLevel":7,
+    "area":"경기도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju5.jpg"
+  },
+
+  {"drinkName":"경산대추약주 추",
+    "preferenceLevel":16,
+    "area":"경상북도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju6.jpg"
+  },
+
+  {"drinkName":"보리수헤는밤",
+    "preferenceLevel":8,
+    "area":"충청남도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju7.jpg"
+  },
+
+  {"drinkName":"지란지교 약주",
+    "preferenceLevel":17,
+    "area":"전라북도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju8.jpg"
+  },
+
+  {"drinkName":"모월 청",
+    "preferenceLevel":16,
+    "area":"강원도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju9.jpg"
+  },
+
+  {"drinkName":"담골드",
+    "preferenceLevel":12,
+    "area":"경기도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju10.jpg"
+  },
+
+  {"drinkName":"청혼 블루",
+    "preferenceLevel":15,
+    "area":"경기도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju11.jpg"
+  },
+
+  {"drinkName":"복단지",
+    "preferenceLevel":14,
+    "area":"경기도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju12.jpg"
+  },
+
+  {"drinkName":"서설",
+    "preferenceLevel":13,
+    "area":"경기도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju13.jpg"
+  },
+
+  {"drinkName":"호산춘",
+    "preferenceLevel":18,
+    "area":"경상북도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju14.jpg"
+  },
+
+  {"drinkName":"일지춘",
+    "preferenceLevel":15,
+    "area":"강원도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju15.jpg"
+  },
+
+  {"drinkName":"과하주 온",
+    "preferenceLevel":18.5,
+    "area":"강원도",
+    "type":"청주",
+    "postIamge":"/images/cheongtakju/cheongju16.jpg"
+  }
+]

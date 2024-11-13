@@ -5,25 +5,37 @@ import "./search.css";
 function SearchPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState([]);
-  
+  const [filteredData, setFilteredData] = useState([]);
+
   // 데이터 가져오기
   useEffect(() => {
-    axios.get("https://example.com/api/drinks")  // 실제 API URL로 대체
+    axios
+      .get("/data/drinks.json")  // JSON 파일의 경로로 대체
       .then(response => setData(response.data))
       .catch(error => console.error("Error fetching data:", error));
   }, []);
 
-  const filteredData = data.filter(item =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleSearch = () => {
+    const results = data.filter(item =>
+      item.name && item.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredData(results);
+  };
 
   return (
-    <div>
+    <div className="search-container">
       <input
         type="text"
-        placeholder="검색어를 입력하세요"
+        placeholder="원하는 술을 검색해 보세요!"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
+        className="search-input"
+      />
+      <img 
+        src="/images/search-icon.png" // 돋보기 아이콘 이미지 경로로 변경
+        alt="search icon"
+        onClick={handleSearch} // 돋보기 클릭 시 데이터 필터링 결과 출력
+        className="search-icon"
       />
       <ul>
         {filteredData.map(item => (
