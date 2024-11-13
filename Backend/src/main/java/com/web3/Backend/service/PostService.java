@@ -51,8 +51,6 @@ public class PostService {
             throw new CustomException(ErrorCode.DATABASE_ERROR);
         }
     }
-
-
     public String clickBookmark(UserPrincipal userPrincipal, int postId) throws CustomException {
 
         Post post = postRepository.findById(postId)

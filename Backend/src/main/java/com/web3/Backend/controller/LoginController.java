@@ -44,7 +44,6 @@ public class LoginController {
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,password);
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
-
         RefreshEntity existingRefreshToken = refreshRepository.findByUsername(username);
 
         String accessToken = jwtUtil.createJwt("access", username, 600000L);
@@ -56,7 +55,7 @@ public class LoginController {
                 //refresh token이 만료되었으면
                 refreshToken= jwtUtil.createJwt("refresh",username,8640000L);
                 //기존의 만료된 refresh token을 삭제하고 새로 저장
-                refreshRepository.deleteByRefresh(existingRefreshToken.getRefresh());
+                refreshRepository.delete(existingRefreshToken);
                 addRefreshEntity(username,refreshToken,8640000L);
             }else{
                 //refresh toekn이 만료되지 않았으면 기존의 refresh token을 사용
@@ -67,14 +66,12 @@ public class LoginController {
             refreshToken = jwtUtil.createJwt("refresh", username, 86400000L);
             addRefreshEntity(username,refreshToken,86400000L);
         }
-
         // 응답 헤더에 access token 과 refresh token을 설정
         response.setHeader("Authorization", "Bearer " + accessToken);
         response.setHeader("refresh", refreshToken);
 
         return ResponseEntity.status(HttpServletResponse.SC_OK).body("login successful");
     }
-
     private void addRefreshEntity(String username, String refresh, Long expiredMs) {
         Date expiration = new Date(System.currentTimeMillis() + expiredMs);
         RefreshEntity refreshEntity = new RefreshEntity(username, refresh, expiration.toString());
