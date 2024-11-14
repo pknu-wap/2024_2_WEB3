@@ -23,13 +23,10 @@ import java.util.Optional;
 public class PostService {
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private PostRepository postRepository;
-
     @Autowired
     private BookmarkRepository bookmarkRepository;
-
     public PostDto getPostById(int postId) {
         try {
             Optional<Post> postOptional = postRepository.findById(postId);
@@ -54,8 +51,6 @@ public class PostService {
             throw new CustomException(ErrorCode.DATABASE_ERROR);
         }
     }
-
-
     public String clickBookmark(UserPrincipal userPrincipal, int postId) throws CustomException {
 
         Post post = postRepository.findById(postId)
@@ -63,7 +58,6 @@ public class PostService {
 
         User user = userRepository.findById(Math.toIntExact(userPrincipal.getId()))
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-
 
         Bookmark bookmarkEntry = bookmarkRepository.findByUserAndPost(user, post);
 
