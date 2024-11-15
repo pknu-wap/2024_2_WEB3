@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,8 +36,16 @@ public class UserController {
         int userId = currentUser.getUser().getId();
         UserDto userDto = userService.getUserById(userId);
 
-        Map<String, Object> data = new HashMap<>();
-        data.put("user", userDto);
+        Map<String, Object> data = new LinkedHashMap<>();
+        Map<String, Object> userMap = new LinkedHashMap<>();
+
+        // 순서대로 넣어줌
+        userMap.put("userId", userDto.getUserId());
+        userMap.put("userName", userDto.getUserName());
+        userMap.put("profileImage", userDto.getProfileImageUrl());
+        userMap.put("preferenceLevel", userDto.getPreferenceLevel());
+
+        data.put("userDto", userMap);
 
         Response response = new Response("200", "내 정보 조회 성공", data);
         return new ResponseEntity<>(response, HttpStatus.OK);

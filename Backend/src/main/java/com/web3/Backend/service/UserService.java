@@ -37,7 +37,7 @@ public class UserService {
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
                 return UserDto.builder()
-                        .userId(String.valueOf(user.getId()))
+                        .userId(user.getUserId())
                         .userName(user.getUserName())
                         .profileImageUrl(user.getProfileImageUrl())
                         .preferenceLevel(user.getPreferenceLevel())
