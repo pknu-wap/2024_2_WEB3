@@ -21,7 +21,7 @@ public class JWTFilter extends OncePerRequestFilter {
     }
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if(request.getRequestURI().equals("/auth/signup") ||
+        if(request.getRequestURI().startsWith("/auth/signup") ||
                 request.getRequestURI().startsWith("/api/post/cheongtakju") ||
                 request.getRequestURI().startsWith("/api/post/fruitWine") ||
                 request.getRequestURI().startsWith("/api/post/search")) {

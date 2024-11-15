@@ -18,9 +18,6 @@ public class CustomUserDetails implements UserDetails {
     private String password;
     private List<GrantedAuthority> authorities;
 
-
-
-
     public CustomUserDetails(User user) {
         this.user = user;
         this.username = user.getUserName();

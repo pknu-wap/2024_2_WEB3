@@ -20,7 +20,6 @@ public class CustomLogoutFilter extends GenericFilterBean {
         this.jwtUtil = jwtUtil;
         this.refreshRepository = refreshRepository;
     }
-
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         doFilter((HttpServletRequest) request, (HttpServletResponse) response, chain);
@@ -30,7 +29,7 @@ public class CustomLogoutFilter extends GenericFilterBean {
         String requestUri = request.getRequestURI();
 
         // '/logout' 요청이 들어오면 필터가 이를 처리
-        if ("/logout".equals(requestUri)) {
+        if ("/auth/logout".equals(requestUri)) {
             String authHeader = request.getHeader("Authorization");
 
             // Authorization 헤더에서 리프레시 토큰을 추출

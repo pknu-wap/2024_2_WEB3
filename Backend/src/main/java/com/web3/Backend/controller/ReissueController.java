@@ -65,13 +65,11 @@ public class ReissueController {
         // 6. 기존의 Refresh Token 삭제 후 새로운 Refresh Token을 DB에 저장
         refreshRepository.deleteByRefresh(refreshToken); // 기존 Refresh Token 삭제
         addRefreshEntity(username, newRefreshToken, 86400000L); // 새로운 Refresh Token 저장
-
         // 7. 새로운 토큰들을 응답 헤더에 설정
         response.setHeader("Authorization", "Bearer " + newAccessToken);
         response.setHeader("refresh", newRefreshToken);
         return new ResponseEntity<>("New tokens issued", HttpStatus.OK); // 성공적인 응답
     }
-
     // RefreshEntity 추가 메서드
     private void addRefreshEntity(String username, String refresh, Long expiredMs) {
         Date expiration = new Date(System.currentTimeMillis() + expiredMs); // 만료 시간 계산

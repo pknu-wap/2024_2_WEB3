@@ -19,7 +19,7 @@ public class UserDto {
     private String userName;
     // 사용자 아이디 정규식 : 2~10자의 영어, 한글, 숫자만 허용
 
-    @Pattern(regexp = "^[a-zA-zㄱ-ㅎ가-힣0-9]{2,10}$",message ="userId는 2~10자여야 하며 문자, 한글 및 숫자만 포함해야 합니다.")
+    @Pattern(regexp = "^[a-zA-zㄱ-ㅎ가-힣0-9]*@[a-zA-Zㄱ-ㅎ가-힣0-9]{2,20}$",message ="userId는 2~20자여야 하며 문자, 한글 및 숫자이고 반드시 '@'를 포함해야 합니다.")
     private String userId;
     // 패스워드 정규식 : 최소 8자 이상, 대소문자, 숫자, 특수문자 포함
     @NotBlank
