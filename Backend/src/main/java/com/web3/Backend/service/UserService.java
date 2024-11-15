@@ -20,24 +20,20 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private BookmarkRepository bookmarkRepository;
-
     @Autowired
     private FileStorageService fileStorageService;
 
     public UserDto getUserById(int userId) {
         try {
             Optional<User> userOptional = userRepository.findById(userId);
-
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
                 return UserDto.builder()
-                        .userId(String.valueOf(user.getId()))
+                        .userId(user.getUserId())
                         .userName(user.getUserName())
                         .profileImageUrl(user.getProfileImageUrl())
                         .preferenceLevel(user.getPreferenceLevel())

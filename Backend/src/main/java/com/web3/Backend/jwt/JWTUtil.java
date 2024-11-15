@@ -1,7 +1,6 @@
 package com.web3.Backend.jwt;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;

@@ -23,7 +23,6 @@ import java.util.Date;
 
 @Slf4j
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
-
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
     private final RefreshRepository refreshRepository;

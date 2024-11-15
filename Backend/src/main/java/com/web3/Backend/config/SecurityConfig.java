@@ -68,10 +68,8 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // 명시적으로 CORS 설정
                 // CSRF 비활성화
                 .csrf(csrf -> csrf.disable())
-
                 // 폼 로그인 비활성화
                 .formLogin(form -> form.disable())
-
                 // HTTP Basic 인증 비활성화
                 .httpBasic(httpBasic -> httpBasic.disable())
 
@@ -104,7 +102,6 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://holjjak.netlify.app"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization","refresh","Content-Type"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
