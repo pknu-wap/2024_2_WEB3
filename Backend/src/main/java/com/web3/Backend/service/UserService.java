@@ -36,7 +36,12 @@ public class UserService {
 
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
-                return new UserDto(user.getId(), user.getUserName(), user.getProfileImageUrl(), user.getPreferenceLevel());
+                return UserDto.builder()
+                        .userId(String.valueOf(user.getId()))
+                        .userName(user.getUserName())
+                        .profileImageUrl(user.getProfileImageUrl())
+                        .preferenceLevel(user.getPreferenceLevel())
+                        .build();
             } else {
                 throw new CustomException(ErrorCode.USER_NOT_FOUND);
             }
@@ -66,16 +71,26 @@ public class UserService {
         }
     }
 
-    public UserDto updateUserName(int userId, String newUserName) {
+    public UserDto updateUserId(int userId, String newUserId) {
         // 사용자 확인
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
-        // 사용자 이름 변경
-        user.setUserName(newUserName);
+        // 새로운 userId가 이미 존재하는지 확인
+        if (userRepository.existsByUserId(newUserId)) {
+            throw new CustomException(ErrorCode.USER_ID_ALREADY_EXISTS);  // 이미 존재하는 userId일 경우 예외 처리
+        }
+
+        // 사용자 userId 변경
+        user.setUserId(newUserId);
         userRepository.save(user);
 
-        return new UserDto(user.getId(), user.getUserName(), user.getProfileImageUrl(), user.getPreferenceLevel());
+        return UserDto.builder()
+                .userId(user.getUserId())
+                .userName(user.getUserName())
+                .profileImageUrl(user.getProfileImageUrl())
+                .preferenceLevel(user.getPreferenceLevel())
+                .build();
     }
 
     public void updatePreferenceLevel(int userId, Double preferenceLevel) {

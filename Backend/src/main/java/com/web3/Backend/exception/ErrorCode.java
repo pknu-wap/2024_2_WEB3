@@ -14,7 +14,9 @@ public enum ErrorCode {
     DATABASE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "500", "데이터베이스 처리 중 오류가 발생했습니다."),
     INVALID_PREFERENCE_LEVEL(HttpStatus.BAD_REQUEST, "400-3", "유효하지 않은 도수 값입니다."),// 음수거나 범위에서 벗어난 경우
     INVALID_IMAGE_FORMAT(HttpStatus.BAD_REQUEST, "400-4", "유효하지 않은 이미지 형식입니다."),
-    INVALID_RATING_VALUE(HttpStatus.BAD_REQUEST, "400-5", "유효하지 않은 별점 값입니다.");
+    INVALID_RATING_VALUE(HttpStatus.BAD_REQUEST, "400-5", "유효하지 않은 별점 값입니다."),
+
+    USER_ID_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "400-6", "이미 존재하는 아이디입니다.");  // 아이디 중복 오류
 
 
     private final HttpStatus httpStatus;

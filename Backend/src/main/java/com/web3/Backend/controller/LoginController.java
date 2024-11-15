@@ -1,6 +1,7 @@
 package com.web3.Backend.controller;
 
 import com.web3.Backend.domain.RefreshEntity;
+import com.web3.Backend.dto.CustomUserDetails;
 import com.web3.Backend.dto.UserDto;
 import com.web3.Backend.jwt.JWTUtil;
 import com.web3.Backend.repository.RefreshRepository;
@@ -33,6 +34,7 @@ public class LoginController {
 
     @PostMapping("/auth/login")
     public ResponseEntity<String> login(@RequestBody @Validated UserDto userDto, BindingResult bindingResult, HttpServletResponse response) {
+
         if(bindingResult.hasErrors()){
             //유효성 검사 실패 시, 오류 메시지 반환
             String errorMessage = bindingResult.getFieldError().getDefaultMessage();
@@ -44,16 +46,20 @@ public class LoginController {
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,password);
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
+
+        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        int userId = customUserDetails.getUser().getId();  // UserDetails에서 userId를 추출
+
         RefreshEntity existingRefreshToken = refreshRepository.findByUsername(username);
 
-        String accessToken = jwtUtil.createJwt("access", username, 600000L);
+        String accessToken = jwtUtil.createJwt("access", username, 600000L, userId);
         String refreshToken;
 
         if(existingRefreshToken != null) {
             //기존 refresh token이 있다면, 만료되었는지 확인
             if(jwtUtil.isExpired(existingRefreshToken.getRefresh())){
                 //refresh token이 만료되었으면
-                refreshToken= jwtUtil.createJwt("refresh",username,8640000L);
+                refreshToken= jwtUtil.createJwt("refresh",username,8640000L, userId);
                 //기존의 만료된 refresh token을 삭제하고 새로 저장
                 refreshRepository.delete(existingRefreshToken);
                 addRefreshEntity(username,refreshToken,8640000L);
@@ -63,7 +69,7 @@ public class LoginController {
             }
         }else{
             //새로 refresh token 생성
-            refreshToken = jwtUtil.createJwt("refresh", username, 86400000L);
+            refreshToken = jwtUtil.createJwt("refresh", username, 86400000L, userId);
             addRefreshEntity(username,refreshToken,86400000L);
         }
         // 응답 헤더에 access token 과 refresh token을 설정

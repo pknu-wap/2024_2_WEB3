@@ -1,17 +1,16 @@
 package com.web3.Backend.controller;
 
+import com.web3.Backend.dto.CustomUserDetails;
 import com.web3.Backend.dto.PostPreviewDto;
 import com.web3.Backend.dto.UserDto;
 import com.web3.Backend.exception.CustomException;
 import com.web3.Backend.exception.ErrorCode;
 import com.web3.Backend.response.Response;
 import com.web3.Backend.security.CurrentUser;
-import com.web3.Backend.security.UserPrincipal;
 import com.web3.Backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,13 +26,13 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/mypage/info")
-    public ResponseEntity<Response> getUserInfo(@CurrentUser UserPrincipal currentUser) {
+    public ResponseEntity<Response> getUserInfo(@CurrentUser CustomUserDetails currentUser) {
         // 사용자 인증 확인
         if (currentUser == null) {
             throw new CustomException(ErrorCode.UNAUTHORIZED);
         }
 
-        int userId = currentUser.getId();
+        int userId = currentUser.getUser().getId();
         UserDto userDto = userService.getUserById(userId);
 
         Map<String, Object> data = new HashMap<>();
@@ -44,12 +43,12 @@ public class UserController {
     }
 
     @GetMapping("/mypage/bookmarks")
-    public ResponseEntity<Response> getBookmarks(@CurrentUser UserPrincipal userPrincipal) {
-        if (userPrincipal == null) {
+    public ResponseEntity<Response> getBookmarks(@CurrentUser CustomUserDetails customUserDetails) {
+        if (customUserDetails == null) {
             throw new CustomException(ErrorCode.UNAUTHORIZED);
         }
 
-        List<PostPreviewDto> postPreviewDtos = userService.getBookmarks(userPrincipal.getId());
+        List<PostPreviewDto> postPreviewDtos = userService.getBookmarks(customUserDetails.getUser().getId());
 
         Map<String, Object> data = new HashMap<>();
         data.put("postPreviewDtos", postPreviewDtos);
@@ -59,27 +58,27 @@ public class UserController {
     }
 
     @PatchMapping("/mypage/updateInfo")
-    public ResponseEntity<Response> updateUserInfo(@CurrentUser UserPrincipal userPrincipal, @RequestBody Map<String, Object> request) {
-        if (userPrincipal == null) {
+    public ResponseEntity<Response> updateUserInfo(@CurrentUser CustomUserDetails customUserDetails, @RequestBody Map<String, Object> request) {
+        if (customUserDetails == null) {
             throw new CustomException(ErrorCode.UNAUTHORIZED);
         }
 
-        int userId = userPrincipal.getId();
-        String newUserName = (String) request.get("userName");
+        int userId = customUserDetails.getUser().getId();  // 현재 사용자의 ID
+        String newUserId = (String) request.get("userId");  // 요청에서 새로운 userId 가져오기
 
-        // 사용자 이름 업데이트
-        UserDto updatedUser = userService.updateUserName(userId, newUserName);
+        // userId 변경
+        UserDto updatedUser = userService.updateUserId(userId, newUserId);
 
         Map<String, Object> data = new HashMap<>();
-        data.put("userName", updatedUser.getUserName());
+        data.put("userId", updatedUser.getUserId());
 
-        Response response = new Response("200", "이름 수정 성공", data);
+        Response response = new Response("200", "아이디 수정 성공", data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PatchMapping("/mypage/updatePreference")
-    public ResponseEntity<Response> updatePreference(@CurrentUser UserPrincipal userPrincipal, @RequestBody Map<String, Object> request) {
-        if (userPrincipal == null) {
+    public ResponseEntity<Response> updatePreference(@CurrentUser CustomUserDetails customUserDetails, @RequestBody Map<String, Object> request) {
+        if (customUserDetails == null) {
             throw new CustomException(ErrorCode.UNAUTHORIZED);
         }
 
@@ -91,7 +90,7 @@ public class UserController {
         }
 
         // 선호도 수정
-        userService.updatePreferenceLevel(userPrincipal.getId(), preferenceLevel);
+        userService.updatePreferenceLevel(customUserDetails.getUser().getId(), preferenceLevel);
 
         // 응답 생성
         Map<String, Object> data = new HashMap<>();
@@ -103,10 +102,10 @@ public class UserController {
 
     @PatchMapping("/mypage/updateProfileImage")
     public ResponseEntity<Response> updateProfileImage(
-            @CurrentUser UserPrincipal userPrincipal,
+            @CurrentUser CustomUserDetails customUserDetails,
             @RequestParam("profileImage") MultipartFile profileImage) {
 
-        if (userPrincipal == null) {
+        if (customUserDetails == null) {
             throw new CustomException(ErrorCode.UNAUTHORIZED);
         }
 
@@ -115,7 +114,7 @@ public class UserController {
         }
 
         // 프로필 이미지 업데이트
-        String savedImageUrl = userService.updateProfileImage(userPrincipal.getId(), profileImage);
+        String savedImageUrl = userService.updateProfileImage(customUserDetails.getUser().getId(), profileImage);
 
         Map<String, Object> data = new HashMap<>();
         data.put("profileImageUrl", savedImageUrl);
@@ -129,3 +128,4 @@ public class UserController {
         return filename.matches(".*\\.(jpeg|jpg|png|gif|bmp)$");
     }
 }
+

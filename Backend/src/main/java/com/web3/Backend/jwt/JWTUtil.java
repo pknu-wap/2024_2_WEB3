@@ -36,6 +36,12 @@ public class JWTUtil {
         return claims.get("category",String.class);
     }
 
+    public int getUserId(String token) {
+        JwtParser parser = Jwts.parser().setSigningKey(secretKey).build();
+        Claims claims = parser.parseClaimsJws(token).getBody();
+        return claims.get("userId", Integer.class); // JWT에서 userId를 추출
+    }
+
     public Boolean isExpired(String token) {
         JwtParser parser = Jwts.parser()
                 .setSigningKey(secretKey)
@@ -45,12 +51,13 @@ public class JWTUtil {
         return expiration.before(new Date());
     }
 
-    public String createJwt(String category,String username, Long expiredMs) {
+    public String createJwt(String category, String username, Long expiredMs, int userId) {
         return Jwts.builder()
                 .claim("category", category)
                 .claim("username", username)
+                .claim("userId", userId)  // userId를 JWT에 포함
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis()+ expiredMs))
+                .setExpiration(new Date(System.currentTimeMillis() + expiredMs))
                 .signWith(secretKey)
                 .compact();
     }

@@ -64,9 +64,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         log.info("Authentication successful for user: " + authentication.getName());
         String username = authentication.getName();
         try {
+
+            CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+            int userId = customUserDetails.getUser().getId();  // CustomUserDetails에서 userId를 가져옴
             // Access Token과 Refresh Token 생성
-            String accessToken = jwtUtil.createJwt("access", username, 600000L);
-            String refreshToken = jwtUtil.createJwt("refresh", username, 86400000L);
+            String accessToken = jwtUtil.createJwt("access", username, 600000L, userId);
+            String refreshToken = jwtUtil.createJwt("refresh", username, 86400000L, userId);
             log.info("Access Token: {}", accessToken);
             log.info("Refresh Token: {}", refreshToken);
             // DB에 Refresh Token 저장
