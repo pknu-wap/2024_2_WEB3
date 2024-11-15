@@ -1,11 +1,14 @@
 package com.web3.Backend.controller;
 
 import com.web3.Backend.domain.RefreshEntity;
+import com.web3.Backend.dto.CustomUserDetails;
 import com.web3.Backend.jwt.JWTUtil;
 import com.web3.Backend.repository.RefreshRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,9 +54,13 @@ public class ReissueController {
             return new ResponseEntity<>("Invalid refresh token", HttpStatus.BAD_REQUEST); // DB에 존재하지 않는 사용자
         }
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        int userId = customUserDetails.getUserId();  // CustomUserDetails에서 userId 추출
+
         // 5. 새로운 Access Token과 Refresh Token 발급
-        String newAccessToken = jwtUtil.createJwt("access", username, 600000L); // 새로운 Access Token 생성
-        String newRefreshToken = jwtUtil.createJwt("refresh", username, 86400000L); // 새로운 Refresh Token 생성
+        String newAccessToken = jwtUtil.createJwt("access", username, 600000L, userId); // 새로운 Access Token 생성
+        String newRefreshToken = jwtUtil.createJwt("refresh", username, 86400000L, userId); // 새로운 Refresh Token 생성
 
         // 6. 기존의 Refresh Token 삭제 후 새로운 Refresh Token을 DB에 저장
         refreshRepository.deleteByRefresh(refreshToken); // 기존 Refresh Token 삭제

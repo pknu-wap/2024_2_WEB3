@@ -9,4 +9,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Boolean existsByUserName(String username);
 
     User findByUserName(String username);
+    boolean existsByUserId(String userId);  // userId가 존재하는지 확인하는 메서드
 }

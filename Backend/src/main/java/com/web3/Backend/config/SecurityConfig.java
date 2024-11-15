@@ -79,7 +79,6 @@ public class SecurityConfig {
                 .authorizeRequests(auth -> auth
                         .requestMatchers("/auth", "/").permitAll()
                         .requestMatchers("/api/post/info/**").permitAll()
-                        .requestMatchers("/api/post/bookmark/**").permitAll()
                         .requestMatchers("/api/post/cheongtakju/**").permitAll()
                         .requestMatchers("/api/post/fruitWine/**").permitAll()
                         .requestMatchers("/api/post/search").permitAll()

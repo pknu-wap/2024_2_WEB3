@@ -31,4 +31,16 @@ public class GlobalExceptionHandler {
         Response response = new Response("401", "인증되지 않은 사용자입니다.", null);
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Response> handleBadRequest(Exception ex) {
+        Response response = new Response("400", "잘못된 요청입니다.", null);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Response> handleServerError(Exception ex) {
+        Response response = new Response("500", "서버 내부 오류입니다.", null);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

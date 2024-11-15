@@ -3,12 +3,12 @@ package com.web3.Backend.service;
 import com.web3.Backend.domain.Bookmark;
 import com.web3.Backend.domain.Post;
 import com.web3.Backend.domain.User;
+import com.web3.Backend.dto.CustomUserDetails;
 import com.web3.Backend.dto.PostDto;
 import com.web3.Backend.exception.CustomException;
 import com.web3.Backend.exception.ErrorCode;
 import com.web3.Backend.repository.BookmarkRepository;
 import com.web3.Backend.repository.UserRepository;
-import com.web3.Backend.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -51,16 +51,23 @@ public class PostService {
             throw new CustomException(ErrorCode.DATABASE_ERROR);
         }
     }
-    public String clickBookmark(UserPrincipal userPrincipal, int postId) throws CustomException {
+    public String clickBookmark(CustomUserDetails customUserDetails, int postId) throws CustomException {
 
+        int userId = customUserDetails.getUser().getId();
+        System.out.println("User ID from SecurityContext: " + userId);  // ID 확인 로그 추가
+
+        // 포스트 찾기
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
 
-        User user = userRepository.findById(Math.toIntExact(userPrincipal.getId()))
+        // 사용자 찾기 (CustomUserDetails에서 id 추출)
+        User user = userRepository.findById(Math.toIntExact(customUserDetails.getUser().getId()))
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
+        // 북마크 엔트리 찾기
         Bookmark bookmarkEntry = bookmarkRepository.findByUserAndPost(user, post);
 
+        // 북마크 삭제 또는 추가
         if (bookmarkEntry != null) {
             bookmarkRepository.delete(bookmarkEntry);
             return "북마크가 삭제되었습니다.";
