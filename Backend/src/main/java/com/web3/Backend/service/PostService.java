@@ -104,8 +104,11 @@ public class PostService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
 
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
         try {
-            Rating existingRating = ratingRepository.findByPostAndUserId(post, userId);
+            Rating existingRating = ratingRepository.findByPostAndUser(post, user);
 
             if (existingRating != null) {
                 // 기존 별점 수정
@@ -122,7 +125,7 @@ public class PostService {
                 // 새 별점 등록
                 Rating newRating = new Rating();
                 newRating.setPost(post);
-                newRating.setUserId(userId);
+                newRating.setUser(user);
                 newRating.setRatingValue(ratingValue);
                 ratingRepository.save(newRating);
 

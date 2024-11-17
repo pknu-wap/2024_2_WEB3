@@ -19,8 +19,9 @@ public class Rating {
     @JoinColumn(name = "postId", nullable = false)
     private Post post; // 별점이 속한 게시물
 
-    @Column(nullable = false)
-    private int userId; // 별점을 남긴 사용자 ID
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)
+    private User user; // 별점을 남긴 사용자
 
     @Column(nullable = false)
     private Double ratingValue; // 사용자 별점
