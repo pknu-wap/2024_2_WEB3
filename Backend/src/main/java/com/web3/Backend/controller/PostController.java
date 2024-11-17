@@ -1,6 +1,8 @@
 package com.web3.Backend.controller;
 
 import com.web3.Backend.dto.CustomUserDetails;
+import com.web3.Backend.dto.RatingDto;
+import com.web3.Backend.exception.CustomException;
 import com.web3.Backend.response.Response;
 import com.web3.Backend.dto.PostDto;
 import com.web3.Backend.service.PostService;
@@ -44,6 +46,20 @@ public class PostController {
         String username = customUserDetails.getUsername();  // username 사용
         String result = postService.clickBookmark(customUserDetails, postId);
         Response response = new Response("200", result);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/post/rating/{postId}")
+    public ResponseEntity<Response> ratePost(
+            @PathVariable("postId") int postId,
+            @RequestBody RatingDto ratingDto) {
+
+        CustomUserDetails customUserDetails =
+                (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        double updatedRating = postService.ratePost(customUserDetails, postId, ratingDto.getRating());
+
+        Response response = new Response("200", "별점 등록 성공", Map.of("rating", updatedRating));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     //청탁주 페이지
