@@ -2,12 +2,14 @@ package com.web3.Backend.service;
 
 import com.web3.Backend.domain.Bookmark;
 import com.web3.Backend.domain.Post;
+import com.web3.Backend.domain.Rating;
 import com.web3.Backend.domain.User;
 import com.web3.Backend.dto.CustomUserDetails;
 import com.web3.Backend.dto.PostDto;
 import com.web3.Backend.exception.CustomException;
 import com.web3.Backend.exception.ErrorCode;
 import com.web3.Backend.repository.BookmarkRepository;
+import com.web3.Backend.repository.RatingRepository;
 import com.web3.Backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +29,9 @@ public class PostService {
     private PostRepository postRepository;
     @Autowired
     private BookmarkRepository bookmarkRepository;
+
+    @Autowired
+    private RatingRepository ratingRepository;
     public PostDto getPostById(int postId) {
         try {
             Optional<Post> postOptional = postRepository.findById(postId);
@@ -81,6 +86,52 @@ public class PostService {
             } catch (Exception e) {
                 throw new CustomException(ErrorCode.DATABASE_ERROR);
             }
+        }
+    }
+
+
+    public double ratePost(int postId, int userId, double ratingValue) {
+        if (ratingValue < 0.0 || ratingValue > 5.0) {
+            throw new CustomException(ErrorCode.INVALID_RATING_VALUE);
+        }
+
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
+
+        try {
+            Rating existingRating = ratingRepository.findByPostAndUserId(post, userId);
+
+            if (existingRating != null) {
+                // 기존 별점 수정
+                double oldRating = existingRating.getRatingValue();
+                existingRating.setRatingValue(ratingValue);
+                ratingRepository.save(existingRating);
+
+                // 평균 별점 재계산
+                post.setRating(
+                        ((post.getRating() * post.getRatingCount()) - oldRating + ratingValue)
+                                / post.getRatingCount()
+                );
+            } else {
+                // 새 별점 등록
+                Rating newRating = new Rating();
+                newRating.setPost(post);
+                newRating.setUserId(userId);
+                newRating.setRatingValue(ratingValue);
+                ratingRepository.save(newRating);
+
+                // 평균 별점 및 카운트 업데이트
+                int newCount = post.getRatingCount() + 1;
+                post.setRating(
+                        ((post.getRating() * post.getRatingCount()) + ratingValue) / newCount
+                );
+                post.setRatingCount(newCount);
+            }
+
+            postRepository.save(post);
+            return post.getRating();
+        } catch (Exception e) {
+            throw new CustomException(ErrorCode.DATABASE_ERROR);
         }
     }
     //청탁주, 과일주 페이지에 필요한 데이터 페이징 처리

@@ -21,4 +21,9 @@ public class Post {
     private String area;
     private String food;
 
+    @Column(nullable = false)
+    private Double rating = 0.0;
+
+    @Column(nullable = false)
+    private int ratingCount = 0; // 별점 개수
 }
