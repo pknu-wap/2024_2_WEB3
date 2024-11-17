@@ -11,8 +11,9 @@ import lombok.Setter;
 public class Rating {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT 설정
+    @Column(name = "ratingId") // 데이터베이스 필드와 매핑
+    private Long ratingId; // 기본 키
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "postId", nullable = false)

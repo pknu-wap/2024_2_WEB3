@@ -17,6 +17,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.web3.Backend.repository.PostRepository;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,7 @@ public class PostService {
                 postDto.setPostImage(post.getPostImage());
                 postDto.setType(post.getType());
                 postDto.setArea(post.getArea());
+                postDto.setRating(post.getRating());
 
                 return postDto;
             } else {
@@ -90,7 +92,11 @@ public class PostService {
     }
 
 
-    public double ratePost(int postId, int userId, double ratingValue) {
+    public double ratePost(CustomUserDetails customUserDetails, int postId, double ratingValue) {
+        // 1. 사용자 ID 추출
+        int userId = customUserDetails.getUser().getId();
+
+
         if (ratingValue < 0.0 || ratingValue > 5.0) {
             throw new CustomException(ErrorCode.INVALID_RATING_VALUE);
         }
@@ -128,8 +134,10 @@ public class PostService {
                 post.setRatingCount(newCount);
             }
 
+            double adjustedRating = Math.round(post.getRating() * 2) / 2.0;
             postRepository.save(post);
-            return post.getRating();
+
+            return adjustedRating;
         } catch (Exception e) {
             throw new CustomException(ErrorCode.DATABASE_ERROR);
         }

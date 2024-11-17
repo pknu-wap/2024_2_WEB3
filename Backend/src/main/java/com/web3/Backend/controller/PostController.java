@@ -52,10 +52,12 @@ public class PostController {
     @PostMapping("/post/rating/{postId}")
     public ResponseEntity<Response> ratePost(
             @PathVariable("postId") int postId,
-            @RequestParam("userId") int userId,
             @RequestBody RatingDto ratingDto) {
 
-        double updatedRating = postService.ratePost(postId, userId, ratingDto.getRating());
+        CustomUserDetails customUserDetails =
+                (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        double updatedRating = postService.ratePost(customUserDetails, postId, ratingDto.getRating());
 
         Response response = new Response("200", "별점 등록 성공", Map.of("rating", updatedRating));
         return new ResponseEntity<>(response, HttpStatus.OK);
