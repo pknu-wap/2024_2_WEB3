@@ -1,19 +1,14 @@
 .Footer {
   display: flex;
   justify-content: space-between;
-  background-color: #574f4b;
+  background-color: rgba(128, 128, 128, 0.477);
   padding: 2% 10%;
+  /* background-color: transparent; */
 }
 
-.footer-left {
+.footer-wrap {
   text-align: left;
   flex-grow: 2;
-}
-
-.footer-right {
-  /* 오른쪽 요소의 추가 스타일링 */
-  display: flex;
-  flex-grow: 1;
 }
 
 .footer-links {
@@ -40,7 +35,7 @@
 }
 
 .footer-logo {
-  width: 5%;
+  width: 30px;
   height: auto;
   margin: 0 10px 0 -10px;
 }

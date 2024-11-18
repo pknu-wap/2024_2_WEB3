@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Footer = ({}) => {
   return (
     <footer className="Footer">
-      <div className="footer-left">
+      <div className="footer-wrap">
         <div className="footer-links">
           <Link to="/JamWa" className="footer-link">
             개인정보처리방침
@@ -19,17 +19,13 @@ const Footer = ({}) => {
         </div>
 
         <div className="footer-bottom">
-          <img src="/images/Holjjak-logo.png" className="footer-logo" />
+          <img src="/images/logo-white.png" className="footer-logo" />
 
           <div className="footer-text">
             <p>부산광역시 남구 용소로 45, 부경대학교</p>
             <p>Copyright © 2024 PNKU WAP WEP TEAM 3</p>
           </div>
         </div>
-      </div>
-
-      <div className="footer-right">
-        <div className="icon"></div>
       </div>
     </footer>
   );
