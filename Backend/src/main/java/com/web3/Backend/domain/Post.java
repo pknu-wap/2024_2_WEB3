@@ -27,5 +27,4 @@ public class Post {
     @Column(nullable = false)
     private int ratingCount = 0; // 별점 개수
 
-
 }
