@@ -34,7 +34,7 @@ public class SignUpService {
         }
 
         // 패스워드 정규식 검사
-        String passwordPattern = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*?&])[A-Za-z/d@$!%*?&].{8,16}$";
+        String passwordPattern = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&].{8,16}$";
         Pattern pattern = Pattern.compile(passwordPattern);
         if(!pattern.matcher(password).matches()){
             throw new IllegalArgumentException("password must be 8-16 characters, including at least one number, one letter, and one special character.");
