@@ -24,13 +24,13 @@ public class SignUpService {
         String userId = userDto.getUserId();
 
         // 사용자명 정규식 검사 (UserDto에서 이미 처리됨)
-        if (!username.matches("^[a-zA-Zㄱ-ㅎ가-힣]{2,10}$")) {
-            throw new IllegalArgumentException("userName must be 2-10 characters and contain only letters and Korean characters.");
+        if (!username.matches("^[a-zA-Z0-9]{2,10}@[a-zA-Z0-9]{2,20}$")) {
+            throw new IllegalArgumentException("userName must contain 2 to 10 alphanumeric characters followed by an '@' symbol, and the domain must contain 2 to 20 alphanumeric characters.");
         }
 
         // 사용자 아이디 정규식 검사 (UserDto에서 이미 처리됨)
-        if (!userId.matches("^[a-zA-Zㄱ-ㅎ가-힣0-9]*@[a-zA-Zㄱ-ㅎ가-힣0-9]{2,20}$")) {
-            throw new IllegalArgumentException("userId must be 2-20 characters long, and include an '@' symbol.");
+        if (!userId.matches("^[a-zA-zㄱ-ㅎ가-힣]{2,10}$")) {
+            throw new IllegalArgumentException("userId must be between 2 and 10 characters, consisting of letters or Korean characters.");
         }
 
         // 패스워드 정규식 검사
