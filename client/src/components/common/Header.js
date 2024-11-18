@@ -1,7 +1,6 @@
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import Navigation from "../navSearchBar/Navigation";
-import SearchBar from "../navSearchBar/SearchBar";
 import styled from "styled-components";
 
 const HeaderContainer = styled.header`
@@ -12,7 +11,11 @@ const StyledButton = styled.button`
   color: ${({ $textColor }) => $textColor || "rgb(236, 232, 228)"};
 `;
 
-const Header = ({ textColor: propTextColor }) => {
+const Header = ({
+  textColor: propTextColor,
+  showNavigation = true,
+  isLoggedIn = false,
+}) => {
   const location = useLocation();
 
   // 경로에 따라 Header text 색상 설정
@@ -38,27 +41,16 @@ const Header = ({ textColor: propTextColor }) => {
         </Link>
       </div>
 
-      <div className="nav-section">
-        <Navigation $textColor={textColor} />
-      </div>
-
-      <div className="search-section">
-        {/* <SearchBar /> */}
-
-        <Link to="/mypage">
-          <button className="mypage-button">마이페이지</button>
-        </Link>
-      </div>
+      {showNavigation && (
+        <div className="nav-section">
+          <Navigation $textColor={textColor} />
+        </div>
+      )}
 
       <div className="login-button-section">
-        <Link to="/signIn">
+        <Link to={isLoggedIn ? "/mypage" : "/signIn"}>
           <StyledButton className="sign-in-button" $textColor={textColor}>
-            로그인
-          </StyledButton>
-        </Link>
-        <Link to="/signUp">
-          <StyledButton className="sign-up-button" $textColor={textColor}>
-            회원가입
+            {isLoggedIn ? "마이페이지" : "로그인"}
           </StyledButton>
         </Link>
       </div>
