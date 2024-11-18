@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .Header {
   display: flex;
   justify-content: space-between; /* 좌우로 요소를 분배 */
@@ -6,20 +12,19 @@
   overflow: hidden;
   flex-wrap: nowrap; /* 요소들이 줄바꿈 없이 수평으로 배치 */
   box-sizing: border-box; /* 패딩 포함 너비 조정 */
-
   top: 0;
   left: 0;
 
-  padding: 1px 10%; /* 상하, 좌우 여백 */
+  padding: 9px 13%; /* 상하, 좌우 여백 */
   background-color: transparent;
   z-index: 100;
   width: 100%;
   box-sizing: border-box; /* 패딩과 보더를 포함하여 너비 계산 */
-  /* background-color: rgba(255, 255, 255, 0.1); */
 }
 
 .logo-img {
-  height: 55px;
+  /* width: 31.47px; */
+  height: 51px;
 }
 
 .login-button-section {
@@ -30,20 +35,17 @@
 }
 
 .sign-in-button {
-  background: none;
+  width: 80px;
+  height: 33px;
+  top: 28px;
+  border-radius: 5.75px;
+  background-color: #ffffff;
+  color: black;
   border: none;
-  margin: auto 20px;
-  padding: 0;
+  font-size: 12px;
 }
 
-.sign-up-button {
-  background: none;
-  border: none;
-  padding: 0;
-}
-
-.sign-in-button:hover,
-.sign-up-button:hover {
+.sign-in-button:hover {
   cursor: pointer;
 }
 

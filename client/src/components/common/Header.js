@@ -8,7 +8,7 @@ const HeaderContainer = styled.header`
 `;
 
 const StyledButton = styled.button`
-  color: ${({ $textColor }) => $textColor || "rgb(236, 232, 228)"};
+  color: ${({ $textColor }) => $textColor || "rgb(0, 0, 0)"};
 `;
 
 const Header = ({
@@ -26,7 +26,7 @@ const Header = ({
       case "/cheongtakju":
         return "#574f4b";
       default:
-        return "rgb(236, 232, 228)"; // 기본 색상
+        return "rgb(255, 255, 255)"; // 기본 색상
     }
   };
 
@@ -49,7 +49,7 @@ const Header = ({
 
       <div className="login-button-section">
         <Link to={isLoggedIn ? "/mypage" : "/signIn"}>
-          <StyledButton className="sign-in-button" $textColor={textColor}>
+          <StyledButton className="sign-in-button" $textColor={"rgb(0, 0, 0)"}>
             {isLoggedIn ? "마이페이지" : "로그인"}
           </StyledButton>
         </Link>

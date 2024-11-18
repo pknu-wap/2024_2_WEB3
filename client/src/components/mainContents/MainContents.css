@@ -2,32 +2,15 @@
   position: relative;
   overflow: visible;
   /* margin-top: 57px; */
-  height: 80vh;
-  background: linear-gradient(45deg, #c6c0b8, #b2a89f, #7f6f66, #574f4b);
-}
-
-.banner-img,
-.banner-title,
-.banner-text {
-  transition: transform 0.1s ease-out; /* transform 변화에 부드러운 전환 추가 */
+  /* height: 80vh; */
+  /* background: linear-gradient(45deg, #c6c0b8, #b2a89f, #7f6f66, #574f4b); */
 }
 
 .background-img {
   position: absolute;
   width: 100%;
-  height: 80vh;
+  height: auto;
   z-index: 0;
-}
-
-.banner-section::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(114, 109, 105, 0.5); /* 검정색 반투명 오버레이 */
-  opacity: 0.6; /* 불투명도 조정 */
 }
 
 .banner-img {

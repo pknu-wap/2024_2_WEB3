@@ -31,87 +31,10 @@ const MainContents = () => {
   return (
     <div className="MainContents">
       <div className="banner-section">
-        <img
-          src="/images/banner-img.png"
-          className="banner-img"
-          style={{ transform: `translateY(-${offsetImg}px)` }}
-        />
-        <div className="banner-wrap">
-          <div
-            className="banner-title"
-            style={{ transform: `translateY(-${offsetText}px)` }}
-          >
-            홀짝, 우리 술과 함께하는 공간
-          </div>
-          <div
-            className="banner-text"
-            style={{ transform: `translateY(-${offsetText}px)` }}
-          >
-            우리 술에 담긴 이야기를 알고 계시나요? 전통주는 각 지역의 풍토와
-            시간이 빚어낸 특별한 술입니다. <br />
-            다채로운 우리 술 속에서 나만의 취향을 찾고 홀짝에서 나를 위한 특별한
-            한 잔을 발견해 보세요!
-            <br />
-          </div>
-        </div>
-        <img src="/images/background-img2.jpg" className="background-img" />
+        <img src="/images/banner-img-figma.png" className="background-img" />
       </div>
 
-      <div className="category-section">
-        <motion.div
-          className="category-title"
-          ref={refCategoryTitle}
-          {...categoryTitleProps} // 애니메이션 속성 적용
-        >
-          다채로운 전통주 한 잔, 홀짝 맛보는 즐거움
-        </motion.div>
-
-        <div className="category-container">
-          <div className="category-imgbox category-imgbox1">
-            <Link to="/cheongtakju">
-              <img
-                src="/images/liquor1.jpg"
-                className="liquor-image liquor-image1"
-              />
-            </Link>
-            <div className="caption">
-              <span>쌀과 물로 빚어낸 맑은 술, 청주</span>
-              <br />
-              청주는 빛깔이 맑고 투명해 '맑은 술'로 불리며, 쌀을 발효해 은은한
-              향과 부드러운 맛을 자랑합니다.
-            </div>
-          </div>
-
-          <div className="category-imgbox category-imgbox2">
-            <Link to="/cheongtakju">
-              <img
-                src="/images/liquor2.jpg"
-                className="liquor-image liquor-image2"
-              />
-            </Link>
-            <div className="caption">
-              <span>부드럽고 진한 맛, 전통의 탁주</span>
-              <br />
-              탁주는 쌀과 누룩으로 만든 걸쭉한 전통주로, 고소하고 깊은 맛이
-              특징입니다. 신선한 발효 향이 어우러져 풍미가 깊습니다.
-            </div>
-          </div>
-
-          <div className="category-imgbox category-imgbox3">
-            <Link to="/fruitWine">
-              <img
-                src="/images/liquor3.jpg"
-                className="liquor-image liquor-image3"
-              />
-            </Link>
-            <div className="caption">
-              <span>과일의 향과 맛을 담은 술, 과실주</span> <br />
-              과실주는 매실, 복숭아, 오미자 등 다양한 과일로 만든 전통주로,
-              과일의 상큼한 향과 맛을 즐길 수 있습니다.
-            </div>
-          </div>
-        </div>
-      </div>
+      <div className="category-section"></div>
 
       <div className="bookmark-section">
         <motion.div
