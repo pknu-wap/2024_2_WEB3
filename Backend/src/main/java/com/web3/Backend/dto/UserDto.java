@@ -22,7 +22,7 @@ public class UserDto {
     private String userId;
     // 패스워드 정규식 : 최소 8자 이상, 대소문자, 숫자, 특수문자 포함
     @NotBlank
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*?&])[A-Za-z/d@$!%*?&].{8,16}$",message="비밀번호는 숫자 1개, 문자 1개, 특수 문자 1개 이상을 포함하여 8~16자여야 합니다.")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&].{8,16}$",message="비밀번호는 숫자 1개, 문자 1개, 특수 문자 1개 이상을 포함하여 8~16자여야 합니다.")
     private String password;
     @Null
     private Double preferenceLevel;
