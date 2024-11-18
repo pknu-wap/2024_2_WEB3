@@ -157,6 +157,7 @@ public class PostService {
                         .postImage("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + post.getPostImage())
                         .type(post.getType())
                         .area(post.getArea())
+                        .rating(0.0)
                         .build());
     }
 
@@ -171,6 +172,7 @@ public class PostService {
                         .postImage("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + post.getPostImage())
                         .type(post.getType())
                         .area(post.getArea())
+                        .rating(0.0)
                         .build());
     }
     //검색 기능을 페이징 처리
@@ -184,6 +186,7 @@ public class PostService {
                         .postImage(post.getPostImage())
                         .type(post.getType())
                         .area(post.getArea())
+                        .rating(0.0) //rating을 사용하지 않으므로 기본값으로 설정
                         .build());
     }
 }

@@ -72,7 +72,6 @@ public class PostController {
         data.put("content",postPage.getContent());
         data.put("totalPages",postPage.getTotalPages());
         data.put("currentPage",postPage.getNumber());
-
         Response response = new Response("200","청탁주 정보 조회 성공",data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
