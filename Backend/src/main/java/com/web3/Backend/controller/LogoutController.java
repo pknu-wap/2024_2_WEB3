@@ -30,9 +30,7 @@ public class LogoutController {
         String refreshToken = authHeader.substring(7); // "Bearer " 제거
 
         // 리프레시 토큰 만료 체크
-        try {
-            jwtUtil.isExpired(refreshToken);
-        } catch (ExpiredJwtException e) {
+        if (jwtUtil.isExpired(refreshToken)) {
             return new ResponseEntity<>("Refresh token expired", HttpStatus.BAD_REQUEST);
         }
 
@@ -43,7 +41,7 @@ public class LogoutController {
             return new ResponseEntity<>("Refresh token not found", HttpStatus.BAD_REQUEST);
         }
         // DB에서 리프레시 토큰 삭제
-        refreshRepository.deleteByRefresh(refreshToken);
+        refreshRepository.delete(refreshEntity);
         return new ResponseEntity<>("Successfully log out", HttpStatus.OK);
     }
 }

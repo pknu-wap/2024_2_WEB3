@@ -22,7 +22,7 @@ public class CustomUserDetails implements UserDetails {
         this.user = user;
         this.username = user.getUserName();
         this.password = user.getPassword();
-        this.authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));  // 예시로 ROLE_USER 권한 설정
+        this.authorities = Collections.emptyList(); //권한을 빈 리스트로 설정
     }
 
     @Override
@@ -37,7 +37,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // 기본 권한 ROLE_USER를 추가
+        // 빈 리스트를 반환하여 권한이 없음을 나타냄
         return authorities;
     }
 
