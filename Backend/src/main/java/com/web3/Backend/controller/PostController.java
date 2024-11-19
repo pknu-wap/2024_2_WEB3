@@ -1,5 +1,6 @@
 package com.web3.Backend.controller;
 
+import com.web3.Backend.domain.Comment;
 import com.web3.Backend.dto.CustomUserDetails;
 import com.web3.Backend.dto.RatingDto;
 import com.web3.Backend.exception.CustomException;
@@ -14,7 +15,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -62,6 +65,40 @@ public class PostController {
         Response response = new Response("200", "별점 등록 성공", Map.of("rating", updatedRating));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    //댓글 등록
+    @PostMapping("/post/comment/{postId}")
+    public ResponseEntity<Response> addComment(
+            @PathVariable int postId,
+            @RequestBody Map<String, String> requestBody) {
+
+        CustomUserDetails customUserDetails =
+                (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String content = requestBody.get("content");
+        if (content == null || content.isBlank()) {
+            return new ResponseEntity<>(new Response("400", "내용을 입력해주세요.", null), HttpStatus.BAD_REQUEST);
+        }
+
+        Comment comment = postService.addComment(customUserDetails, postId, content);
+
+        // 응답 생성
+        Map<String, Object> data = Map.of("content", comment.getContent());
+        Response response = new Response("200", "댓글 등록 성공", data);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    //댓글 조회
+    @GetMapping("/post/comments/{postId}")
+    public ResponseEntity<Response> getCommentsByPostId(@PathVariable int postId) {
+        Map<String, Object> data = postService.getCommentsDataByPostId(postId);
+
+        Response response = new Response("200", "댓글 조회 성공", data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
     //청탁주 페이지
     @GetMapping("/post/cheongtakju/{page}")
     public ResponseEntity<Response> getCheongTakjuPage(
