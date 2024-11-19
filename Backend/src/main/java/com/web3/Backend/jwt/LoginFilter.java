@@ -50,7 +50,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             // 인증 토큰 생성 후 인증 시도
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password, null);
             return authenticationManager.authenticate(authToken);  // AuthenticationManager로 인증 시도
-
         } catch (IOException | java.io.IOException e) {
             // JSON 파싱 에러 발생 시 예외 처리
             throw new BadCredentialsException("Invalid request format", e);
@@ -63,7 +62,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         log.info("Authentication successful for user: " + authentication.getName());
         String username = authentication.getName();
         try {
-
             CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
             int userId = customUserDetails.getUser().getId();  // CustomUserDetails에서 userId를 가져옴
             // Access Token과 Refresh Token 생성
