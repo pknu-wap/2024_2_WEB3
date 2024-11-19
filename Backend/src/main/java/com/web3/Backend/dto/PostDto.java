@@ -5,7 +5,6 @@ import lombok.*;
 @Data
 @Builder
 @AllArgsConstructor
-
 public class PostDto {
     private int postId;
     private String drinkName;
@@ -19,7 +18,7 @@ public class PostDto {
     public PostDto(){}
 
     public Double getRating() {
-        // 반환할 때만 0.5 단위로 반올림
-        return Math.round(rating * 2) / 2.0;
+        //rating을 0.0으로 기본값을 설정
+       return rating == null ? 0.0 : Math.round(rating * 2 ) / 2.0;
     }
 }
