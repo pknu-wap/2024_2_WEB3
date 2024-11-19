@@ -1,25 +1,21 @@
 package com.web3.Backend.service;
 
-import com.web3.Backend.domain.Bookmark;
-import com.web3.Backend.domain.Post;
-import com.web3.Backend.domain.Rating;
-import com.web3.Backend.domain.User;
+import com.web3.Backend.domain.*;
 import com.web3.Backend.dto.CustomUserDetails;
 import com.web3.Backend.dto.PostDto;
 import com.web3.Backend.exception.CustomException;
 import com.web3.Backend.exception.ErrorCode;
-import com.web3.Backend.repository.BookmarkRepository;
-import com.web3.Backend.repository.RatingRepository;
-import com.web3.Backend.repository.UserRepository;
+import com.web3.Backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import com.web3.Backend.repository.PostRepository;
 
-import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -33,6 +29,9 @@ public class PostService {
 
     @Autowired
     private RatingRepository ratingRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
     public PostDto getPostById(int postId) {
         try {
             Optional<Post> postOptional = postRepository.findById(postId);
@@ -145,6 +144,55 @@ public class PostService {
             throw new CustomException(ErrorCode.DATABASE_ERROR);
         }
     }
+
+    public Comment addComment(CustomUserDetails customUserDetails, int postId, String content) {
+
+        int userId = customUserDetails.getUser().getId();
+        // 게시물 존재 여부 확인
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new CustomException(ErrorCode.POST_NOT_FOUND));
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.UNAUTHORIZED));
+
+        // 댓글 생성 및 저장
+        Comment comment = Comment.builder()
+                .post(post)
+                .user(user)
+                .content(content)
+                .build();
+
+        commentRepository.save(comment);
+
+        return commentRepository.save(comment);
+    }
+
+    public Map<String, Object> getCommentsDataByPostId(int postId) {
+        // 게시물 존재 여부 확인
+        Optional<Post> postOptional = postRepository.findById(postId);
+        if (postOptional.isEmpty()) {
+            throw new CustomException(ErrorCode.POST_NOT_FOUND);
+        }
+
+        // 댓글 조회
+        List<Comment> comments = commentRepository.findByPost(postOptional.get());
+
+        // 댓글 데이터를 List<Map<String, Object>> 형태로 변환
+        List<Map<String, Object>> commentData = comments.stream()
+                .map(comment -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("commentId", comment.getCommentId());
+                    map.put("content", comment.getContent());
+                    map.put("postId", comment.getPost().getPostId());
+                    map.put("userId", comment.getUser().getUserId());
+                    return map;
+                })
+                .collect(Collectors.toList());
+
+        // 데이터를 Map으로 감싸서 반환
+        return Map.of("comments", commentData);
+    }
+
     //청탁주, 과일주 페이지에 필요한 데이터 페이징 처리
     public Page<PostDto> getCheongTakjuPage(int page, int size){
         PageRequest pageRequest = PageRequest.of(page, size);
