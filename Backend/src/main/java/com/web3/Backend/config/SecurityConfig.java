@@ -83,6 +83,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/reissue").permitAll()
                         .requestMatchers("/auth/signup","/auth/login","/auth/logout","/error").permitAll()
                         .requestMatchers("/images/**").permitAll()
+                        .requestMatchers("/api/post/comments/**").permitAll()
                         .anyRequest().authenticated() // 그 외 경로는 인증 필요
                 )
                 // JWT 필터 등록
