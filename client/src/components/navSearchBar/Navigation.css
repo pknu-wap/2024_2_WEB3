@@ -1,6 +1,6 @@
 nav {
   display: flex; /* Flexbox로 가로 배치 */
-  justify-content: space-around; /* 간격을 균등하게 배치 */
+  /* justify-content: space-around; */
   align-items: center; /* 세로 중앙 정렬 */
 }
 
@@ -8,9 +8,18 @@ nav div {
   margin: 0 10px; /* 좌우에 여유 공간 */
 }
 
+.nav-line {
+  color: #d9d9d9;
+  z-index: 3;
+}
+
 nav .link {
   text-decoration: none;
-  font-weight: 500;
-  font-size: 14px;
-  margin: auto 8px;
+  font-size: 20px;
+  /* color: white; */
+}
+
+nav .link-fruit {
+  /* margin: auto 41px auto 113.77px; */
+  margin-left: 70px;
 }

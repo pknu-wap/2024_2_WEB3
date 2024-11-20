@@ -12,13 +12,22 @@ function Navigation({ textColor }) {
   return (
     <nav>
       <div>
-        <StyledLink to="/cheongtakju" className="link" textColor={textColor}>
-          청주/탁주
+        <StyledLink
+          to="/fruitWine"
+          className="link-fruit"
+          textColor={textColor}
+        >
+          과실주
         </StyledLink>
       </div>
+      <div className="nav-line">|</div>
       <div>
-        <StyledLink to="/fruitWine" className="link" textColor={textColor}>
-          과실주
+        <StyledLink
+          to="/cheongtakju"
+          className="link-cheong"
+          textColor={textColor}
+        >
+          청주/탁주
         </StyledLink>
       </div>
     </nav>

@@ -1,181 +1,105 @@
 import "./MainContents.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import useScrollFadeIn from "../../hooks/useScrollFadeIn";
-import { motion, useInView } from "framer-motion";
+import Footer from "../common/Footer";
 
 const MainContents = () => {
-  const [offsetImg, setOffsetImg] = useState(0); // 배경 이미지의 offset
-  const [offsetText, setOffsetText] = useState(0); // 텍스트의 offset
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-
-      // 배경 이미지의 패럴랙스 효과 (더 빠르게)
-      const maxOffsetImg = 500;
-      setOffsetImg(Math.min(scrollPosition * 1.02, maxOffsetImg));
-
-      // 텍스트의 패럴랙스 효과 (더 느리게)
-      const maxOffsetText = 500;
-      setOffsetText(Math.min(scrollPosition * 0.15, maxOffsetText));
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // 각 애니메이션 요소에 커스텀 훅 사용
-  const [refCategoryTitle, categoryTitleProps] = useScrollFadeIn();
-
   return (
     <div className="MainContents">
       <div className="banner-section">
         <img
-          src="/images/banner-img.png"
+          src="images/mainpage/banner-img-figma.png"
           className="banner-img"
-          style={{ transform: `translateY(-${offsetImg}px)` }}
         />
-        <div className="banner-wrap">
-          <div
-            className="banner-title"
-            style={{ transform: `translateY(-${offsetText}px)` }}
-          >
-            홀짝, 우리 술과 함께하는 공간
-          </div>
-          <div
-            className="banner-text"
-            style={{ transform: `translateY(-${offsetText}px)` }}
-          >
-            우리 술에 담긴 이야기를 알고 계시나요? 전통주는 각 지역의 풍토와
-            시간이 빚어낸 특별한 술입니다. <br />
-            다채로운 우리 술 속에서 나만의 취향을 찾고 홀짝에서 나를 위한 특별한
-            한 잔을 발견해 보세요!
-            <br />
-          </div>
-        </div>
-        <img src="/images/background-img2.jpg" className="background-img" />
       </div>
 
+      {/* 검색창 */}
+      <input
+        type="text"
+        className="search-bar"
+        placeholder="원하는 술을 검색해보세요!"
+      />
+
+      {/* 카테고리 섹션 */}
       <div className="category-section">
-        <motion.div
-          className="category-title"
-          ref={refCategoryTitle}
-          {...categoryTitleProps} // 애니메이션 속성 적용
-        >
-          다채로운 전통주 한 잔, 홀짝 맛보는 즐거움
-        </motion.div>
+        <p className="category-title">
+          다채로운 전통주 한 잔, <span className="highlight">홀짝</span> 맛보는
+          즐거움
+        </p>
 
-        <div className="category-container">
-          <div className="category-imgbox category-imgbox1">
-            <Link to="/cheongtakju">
-              <img
-                src="/images/liquor1.jpg"
-                className="liquor-image liquor-image1"
-              />
-            </Link>
-            <div className="caption">
-              <span>쌀과 물로 빚어낸 맑은 술, 청주</span>
-              <br />
-              청주는 빛깔이 맑고 투명해 '맑은 술'로 불리며, 쌀을 발효해 은은한
-              향과 부드러운 맛을 자랑합니다.
-            </div>
+        {/* 첫 번째 블록 */}
+        <div class="category-block category-block1">
+          <div class="cate-img cate-img1">
+            <img src="images/mainpage/category-img1.png" alt="category-img1" />
           </div>
-
-          <div className="category-imgbox category-imgbox2">
-            <Link to="/cheongtakju">
-              <img
-                src="/images/liquor2.jpg"
-                className="liquor-image liquor-image2"
-              />
+          <div class="cate-text cate-text1">
+            <h3>
+              쌀과 물로 빚어낸 맑은 술, <span className="cate-span">청주</span>
+            </h3>
+            <p>
+              빛깔이 맑고 투명해 '맑은 술'로 불리는 청주는 쌀을 발효해 <br />
+              은은한 향과 부드러운 맛을 자랑합니다.
+            </p>
+            <Link to="/cheongtakju" className="cate-link">
+              더 보러가기 &gt;
             </Link>
-            <div className="caption">
-              <span>부드럽고 진한 맛, 전통의 탁주</span>
-              <br />
-              탁주는 쌀과 누룩으로 만든 걸쭉한 전통주로, 고소하고 깊은 맛이
-              특징입니다. 신선한 발효 향이 어우러져 풍미가 깊습니다.
-            </div>
           </div>
-
-          <div className="category-imgbox category-imgbox3">
-            <Link to="/fruitWine">
-              <img
-                src="/images/liquor3.jpg"
-                className="liquor-image liquor-image3"
-              />
-            </Link>
-            <div className="caption">
-              <span>과일의 향과 맛을 담은 술, 과실주</span> <br />
-              과실주는 매실, 복숭아, 오미자 등 다양한 과일로 만든 전통주로,
-              과일의 상큼한 향과 맛을 즐길 수 있습니다.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="bookmark-section">
-        <motion.div
-          className="category-title"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          기억하고 싶은 한 잔, 나만의 리스트 저장
-        </motion.div>
-        <div className="bookmark-container">
           <img
-            src="https://cdn-icons-png.freepik.com/256/1753/1753035.png?uid=R169101181&ga=GA1.1.2009468932.1727855191&semt=ais_hybrid"
-            className="bookmark-image"
+            src="/images/mainpage/sub-category-img1.png"
+            alt="sub-category-img1"
+            class="cate-sub cate-sub1"
           />
-
-          <div className="bookmark-desc">
-            <div className="bm-desc1">
-              <h4>북마크 하기</h4>
-              마음에 드는 술을 발견하면 북마크 버튼을 눌러 리스트에 추가하세요.
-              <br />
-              저장된 전통주는 마이 페이지에서 다시 찾아볼 수 있습니다. <br />
-              북마크를 통해 좋아하는 전통주와 관심 있는 술을 간편하게 관리하고
-              <br />
-              나만의 전통주 컬렉션을 만들어가세요!
-            </div>
-            <div className="bm-desc2">
-              <h4>선호 도수 설정하기</h4>
-              마이페이지에서 나만의 선호 도수를 설정해 보세요.
-              <br />
-              좋아하는 도수를 설정해두고 전통주를 고를 때 기준을 세울 수
-              있습니다.
-              <br />
-              도수에 대한 나만의 선호도를 기록하며 전통주 탐색의 즐거움을
-              더해보세요.
-            </div>
-          </div>
         </div>
-      </div>
 
-      <div className="pairing-section">
-        <motion.div
-          className="category-title"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          전통주와 어울리는 완벽한 안주를 만나보세요.
-        </motion.div>
-        <div className="pairing-container">
-          <img
-            src="https://cdn-icons-png.freepik.com/256/2960/2960456.png?uid=R169101181&ga=GA1.1.2009468932.1727855191&semt=ais_hybrid"
-            className="pairing-image"
-          />
-
-          <div className="pairing-desc">
-            선택한 전통주와 가장 잘 어울리는 안주를 추천받아 보세요! <br />
-            각 전통주의 특성에 맞춘 안주를 제안하여, <br />
-            술과 안주가 조화를 이루는 최상의 맛을 경험해 보세요. <br />술 한
-            잔과 안주 한 접시의 완벽한 페어링을 통해
-            <br /> 전통주를 더욱 깊이 있고 풍부하게 즐겨보세요.
+        {/* 두 번째 블록 */}
+        <div class="category-block category-block2">
+          <div class="cate-text cate-text2">
+            <h3>
+              부드럽고 진한 맛, 전통의 <span className="cate-span">탁주</span>
+            </h3>
+            <p>
+              쌀과 누룩으로 만든 걸쭉한 전통주인 탁주는 고소하고 깊은 맛이
+              특징입니다. <br />
+              신선한 발효 향이 어우러져 풍미가 깊습니다.
+            </p>
+            <Link to="/cheongtakju" className="cate-link">
+              더 보러가기 &gt;
+            </Link>
           </div>
+          <div class="cate-img cate-img2">
+            <img src="images/mainpage/category-img2.png" alt="category-img2" />
+          </div>
+          <img
+            src="/images/mainpage/sub-category-img2.png"
+            alt="sub-category-img2"
+            class="cate-sub cate-sub2"
+          />
+        </div>
+
+        {/* 세 번째 블록 */}
+        <div class="category-block category-block3">
+          <div class="cate-img cate-img3">
+            <img src="images/mainpage/category-img3.png" alt="category-img3" />
+          </div>
+          <div class="cate-text cate-text3">
+            <h3>
+              과일의 향과 맛을 담은 술,
+              <span className="cate-span"> 과실주</span>
+            </h3>
+            <p>
+              매실, 복숭아, 오미자 등 다양한 과일로 만든 전통주인 과실주는
+              과일의 상큼한 향과 <br />
+              맛을 즐길 수 있습니다.
+            </p>
+            <Link to="/fruitWine" className="cate-link">
+              더 보러가기 &gt;
+            </Link>
+          </div>
+          <img
+            src="/images/mainpage/sub-category-img3.png"
+            alt="sub-category-img3"
+            class="cate-sub cate-sub3"
+          />
         </div>
       </div>
     </div>
