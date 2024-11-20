@@ -1,7 +1,6 @@
 import "./MainContents.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import useScrollFadeIn from "../../hooks/useScrollFadeIn";
 import Footer from "../common/Footer";
 
 const MainContents = () => {
@@ -42,15 +41,15 @@ const MainContents = () => {
               은은한 향과 부드러운 맛을 자랑합니다.
             </p>
             <Link to="/cheongtakju" className="cate-link">
-              더 알아보기 &gt;
+              더 보러가기 &gt;
             </Link>
           </div>
+          <img
+            src="/images/mainpage/sub-category-img1.png"
+            alt="sub-category-img1"
+            class="cate-sub cate-sub1"
+          />
         </div>
-        <img
-          src="/images/mainpage/sub-category-img1.png"
-          alt="sub-category-img1"
-          class="cate-sub cate-sub1"
-        />
 
         {/* 두 번째 블록 */}
         <div class="category-block category-block2">
@@ -64,12 +63,17 @@ const MainContents = () => {
               신선한 발효 향이 어우러져 풍미가 깊습니다.
             </p>
             <Link to="/cheongtakju" className="cate-link">
-              더 알아보기 &gt;
+              더 보러가기 &gt;
             </Link>
           </div>
           <div class="cate-img cate-img2">
             <img src="images/mainpage/category-img2.png" alt="category-img2" />
           </div>
+          <img
+            src="/images/mainpage/sub-category-img2.png"
+            alt="sub-category-img2"
+            class="cate-sub cate-sub2"
+          />
         </div>
 
         {/* 세 번째 블록 */}
@@ -80,7 +84,7 @@ const MainContents = () => {
           <div class="cate-text cate-text3">
             <h3>
               과일의 향과 맛을 담은 술,
-              <span className="cate-span">과실주</span>
+              <span className="cate-span"> 과실주</span>
             </h3>
             <p>
               매실, 복숭아, 오미자 등 다양한 과일로 만든 전통주인 과실주는
@@ -88,26 +92,13 @@ const MainContents = () => {
               맛을 즐길 수 있습니다.
             </p>
             <Link to="/fruitWine" className="cate-link">
-              더 알아보기 &gt;
+              더 보러가기 &gt;
             </Link>
           </div>
-        </div>
-
-        <div class="cate-sub-images">
-          <img
-            src="/images/mainpage/sub-category-img1.png"
-            alt="sub-category-img1"
-            class="cate-sub cate-sub1"
-          />
-          <img
-            src="/images/mainpage/sub-category-img2.png"
-            alt="sub-category-img2"
-            class="cate-sub cate-sub1"
-          />
           <img
             src="/images/mainpage/sub-category-img3.png"
             alt="sub-category-img3"
-            class="cate-sub cate-sub1"
+            class="cate-sub cate-sub3"
           />
         </div>
       </div>

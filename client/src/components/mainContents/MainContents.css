@@ -1,15 +1,12 @@
 .MainContents {
-  /* background-color: #f2eee7; */
-  min-height: 300vh; /* 화면 전체 높이를 채우기 위해 추가 */
-  width: 100%; /* 전체 너비 */
-  height: 100%;
+  /* min-height: 400vh; */
+  width: 100%;
   display: flex;
   flex-direction: column; /* 세로로 쌓이도록 설정 */
   align-items: center; /* 가로 중앙 정렬 */
-
-  /* position: relative; */
   z-index: -10; /* 기본 콘텐츠 위에 배경 배치 */
 
+  /* background-color: #f2eee7; */
   background: linear-gradient(
     to right,
     #f2eee7 0%,
@@ -51,13 +48,16 @@
 
 /* 카테고리 섹션 */
 .category-section {
-  width: 80%;
+  width: 78%;
   margin: 200px 10% auto 10%;
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: 90px; /* 각 블록 간 간격 */
-  padding: 20px;
+  gap: 30px;
+  padding: 20% auto;
+
+  overflow: hidden;
+  /* border: 2px solid salmon; */
 }
 
 .category-title {
@@ -76,8 +76,28 @@
 .category-block {
   /* border: 2px solid salmon; */
   display: flex;
-  align-items: center;
-  gap: 80px; /* 가로 배치된 아이템 간격 */
+  gap: 50px; /* 가로 배치된 아이템 간격 */
+  max-width: 100%;
+
+  /* 서브 이미지의 부모 요소 */
+  position: relative;
+  overflow: visible;
+}
+
+.category-block1 {
+  align-self: flex-start;
+  margin-left: 10%;
+}
+
+.category-block2 {
+  align-self: flex-end;
+  margin-right: 8%;
+}
+
+.category-block3 {
+  align-self: center;
+  margin-top: 30px;
+  margin-bottom: 10%;
 }
 
 .cate-img1 img {
@@ -87,58 +107,83 @@
 }
 
 .cate-img2 img {
-  width: 341px;
+  width: 300px;
+  height: auto;
+  object-fit: cover;
 }
 
 .cate-img3 img {
-  width: 464px;
+  width: 380px;
+  height: auto;
+  object-fit: cover;
 }
 
-.category-text {
+.cate-text {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.cate-text1 {
   text-align: left;
+  margin-top: 15%;
+}
+
+.cate-text2 {
+  text-align: right;
+  margin-top: 13%;
+}
+
+.cate-text3 {
+  text-align: left;
+  margin-top: 6%;
+  margin-left: 10px;
 }
 
 .cate-text h3 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.cate-span {
   font-size: 18px;
+  font-weight: bold;
 }
 
 .cate-text p {
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.5;
-  margin: 24px auto;
+  margin: 20px auto;
 }
 
 .cate-link {
-  font-size: 14px;
+  font-size: 12px;
   color: #ac9885;
   text-decoration: underline;
   text-underline-offset: 5px;
 }
 
 /* 카테고리 서브 이미지 */
-.cate-sub-images {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  height: 400px;
-}
-
 .cate-sub {
-  width: 80px;
-  height: auto;
-  transform: translate(0, 0); /* 위치 조정 */
+  position: absolute;
 }
 
 .cate-sub1 {
-  /* transform: translate(-20px, 50px); */
-  width: 300px;
+  width: 50%;
+  top: 30%;
+  right: 0;
+  transform: translateX(100%);
 }
 
 .cate-sub2 {
-  transform: translate(30px, -40px);
+  width: 40%;
+  top: 60%;
+  left: 0;
+  transform: translateX(-135%);
 }
 
 .cate-sub3 {
-  transform: translate(80px, 20px);
+  width: 60%;
+  top: 35%;
+  right: 0;
+  transform: translateX(56%);
 }
