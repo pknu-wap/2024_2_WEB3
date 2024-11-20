@@ -35,22 +35,44 @@
 }
 
 .sign-in-button {
-  width: 80px;
-  height: 33px;
+  width: 70px;
+  height: 30px;
   top: 28px;
   border-radius: 5.75px;
   background-color: #ffffff;
   color: black;
   border: none;
   font-size: 12px;
+  font-family: "Pretendard", sans-serif;
+  transition: 0.2s;
 }
 
 .sign-in-button:hover {
   cursor: pointer;
+  background-color: #ffffffdd;
+  transition: 0.2s;
 }
 
 .nav-section {
   display: flex;
   flex: auto;
   white-space: nowrap;
+}
+
+.mypage-btn {
+  width: 34px;
+}
+
+.logout-button {
+  font-family: "Pretendard", sans-serif;
+  background: none;
+  border: none;
+  color: black;
+  font-size: 12px;
+  text-align: center;
+}
+
+.logout-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
