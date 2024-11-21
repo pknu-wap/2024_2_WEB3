@@ -1,6 +1,7 @@
 import "./AlcoholList.css";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
+import Filters from "../filters/Filters";
 
 // AlcoholList.js
 const AlcoholList = ({ fetchApi }) => {
@@ -14,7 +15,7 @@ const AlcoholList = ({ fetchApi }) => {
       try {
         const data = await fetchApi(pageNum);
         setAlcoholList(data.content);
-        setTotalPages(data.totalPages);
+        setTotalPages(data.totalPages - 1);
       } catch (error) {
         console.log("데이터 로딩 중 오류:", error.message);
       }
@@ -45,6 +46,7 @@ const AlcoholList = ({ fetchApi }) => {
 
   return (
     <div className="AlcoholList">
+      {/* <Filters className="Filters" /> */}
       <div className="alcohol-container">
         {alcoholList.map((item) => (
           <div key={item.postId} className="alcohol-item-wrap">

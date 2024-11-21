@@ -1,21 +1,29 @@
 import "./Header.css";
-import { Link, useLocation } from "react-router-dom";
 import Navigation from "../navSearchBar/Navigation";
-import styled from "styled-components";
-import React, { useState, useEffect } from "react";
 import logoutApi from "../../api/logoutApi.js";
+import styled from "styled-components";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const HeaderContainer = styled.header`
   color: ${({ $textColor }) => $textColor || "rgb(236, 232, 228)"};
+  background-color: ${(props) =>
+    props.bgColor || "transparent"}; // 기본값: 투명
 `;
 
 const StyledButton = styled.button`
   color: ${({ $textColor }) => $textColor || "rgb(0, 0, 0)"};
 `;
 
-const Header = ({ textColor: propTextColor, showNavigation = true }) => {
+const Header = ({
+  textColor: propTextColor,
+  showNavigation = true,
+  bgColor,
+}) => {
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   // 로그인 상태 확인
   useEffect(() => {
@@ -53,8 +61,26 @@ const Header = ({ textColor: propTextColor, showNavigation = true }) => {
   // props로 받은 textColor가 없을 때만 getTextColor() 사용
   const textColor = propTextColor || getTextColor();
 
+  // 드롭다운 외부 클릭 감지
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <HeaderContainer className="Header" $textColor={textColor}>
+    <HeaderContainer
+      className="Header"
+      $textColor={textColor}
+      bgColor={bgColor}
+    >
       <div className="logo-section">
         <Link to="/">
           <img src="/images/Holjjak-logo.png" alt="Logo" className="logo-img" />
@@ -69,22 +95,41 @@ const Header = ({ textColor: propTextColor, showNavigation = true }) => {
 
       <div className="login-button-section">
         {/* 임시 마이페이지 버튼 */}
-        <Link to="/mypage">
+        {/* <Link to="/mypage">
           <img
             src="/images/mainpage/mypage-btn-img.png"
             alt="마이페이지"
             className="mypage-btn"
           />
-        </Link>
+        </Link> */}
 
         {/* 임시 로그아웃 버튼 */}
-        <StyledButton
+        {/* <StyledButton
           className="logout-button"
           // $textColor={textColor}
           onClick={handleLogout}
         >
           로그아웃
-        </StyledButton>
+        </StyledButton> */}
+
+        <div className="dropdown-container" ref={dropdownRef}>
+          <img
+            src="/images/mainpage/mypage-btn-img.png"
+            alt="마이페이지"
+            className="user-btn"
+            onClick={() => setIsDropdownOpen((prev) => !prev)}
+          />
+          <ul className={`dropdown-menu ${isDropdownOpen ? "open" : ""}`}>
+            <li className="dropdown-menu-item">
+              <Link to="/mypage" className="mypage-link">
+                마이페이지
+              </Link>
+            </li>
+            <li className="dropdown-menu-item" onClick={handleLogout}>
+              로그아웃
+            </li>
+          </ul>
+        </div>
 
         {isLoggedIn ? (
           <>{/* 연동 후 로그아웃, 마이페이지 버튼 */}</>

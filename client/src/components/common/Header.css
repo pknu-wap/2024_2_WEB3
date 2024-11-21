@@ -9,17 +9,20 @@
   justify-content: space-between; /* 좌우로 요소를 분배 */
   align-items: center; /* 세로 가운데 정렬 */
   position: absolute;
-  overflow: hidden;
   flex-wrap: nowrap; /* 요소들이 줄바꿈 없이 수평으로 배치 */
   box-sizing: border-box; /* 패딩 포함 너비 조정 */
   top: 0;
   left: 0;
-
   padding: 9px 13%; /* 상하, 좌우 여백 */
   background-color: transparent;
   z-index: 100;
   width: 100%;
   box-sizing: border-box; /* 패딩과 보더를 포함하여 너비 계산 */
+
+  /* overflow: hidden; */
+  overflow: visible;
+
+  /* border: 2px solid salmon; */
 }
 
 .logo-img {
@@ -59,20 +62,59 @@
   white-space: nowrap;
 }
 
-.mypage-btn {
-  width: 34px;
+.user-btn {
+  width: 30px;
 }
 
-.logout-button {
+.user-btn:hover {
+  cursor: pointer;
+}
+
+/* 마이페이지 드롭다운 */
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  z-index: 9999; /* 높은 z-index 설정 */
+}
+
+/* 드롭다운 메뉴 활성화 상태 */
+.dropdown-menu.open {
+  display: block;
+}
+
+/* 메뉴 항목 스타일 */
+.dropdown-menu-item {
+  padding: 7px 20px;
+  cursor: pointer;
+
   font-family: "Pretendard", sans-serif;
   background: none;
   border: none;
   color: black;
   font-size: 12px;
   text-align: center;
+  transition: 0.3s;
 }
 
-.logout-button:hover {
+.dropdown-menu-item:hover {
   cursor: pointer;
   opacity: 0.8;
+  transition: 0.3s;
+  background-color: #d7d7d7;
+}
+
+.mypage-link {
+  text-decoration: none;
+  color: inherit;
 }

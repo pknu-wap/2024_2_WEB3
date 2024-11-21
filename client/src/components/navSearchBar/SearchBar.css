@@ -1,24 +1,28 @@
 .SearchBar {
   display: flex;
   justify-content: center; /* 수평 중앙 정렬 */
-  align-items: center; /* 수직 중앙 정렬 (필요시 상위 컨테이너에 적용) */
-  margin: 5% 0; /* 페이지 상단으로부터 간격 */
+  align-items: center; /* 수직 중앙 정렬 */
   flex-wrap: nowrap;
+  /* margin: 8% 0; */
+  padding-top: 7%;
+  background-color: #f2eee7;
+  /* border: 2px solid saddlebrown; */
 }
 
 .SearchBar input {
-  width: 100%; /* 화면 크기에 맞게 너비 설정 */
-  max-width: 500px; /* 최대 너비 제한 */
-  padding: 10px 15px; /* 여백 설정 */
+  font-family: "Pretendard", sans-serif;
+  width: 50%;
+  height: 55px;
+  padding: 0 30px;
   font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
+  border-radius: 50px;
+  border: none;
+  background-color: #d4cdc1;
+  color: white;
 }
 
 input::placeholder {
-  color: rgb(73, 73, 73);
-  opacity: 0.8;
-  font-size: 13px;
+  color: white;
 }
 
 input:focus {
