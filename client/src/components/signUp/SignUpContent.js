@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import "./SignUpContent.css";
 import Header from "../common/Header";
+import { Link,useNavigate } from "react-router-dom";
+import { signupAPI } from "../../api/signApi";
 
 const SignUpContent = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const [pwCheck, setPwCheck] = useState("");
   const [nickname, setNickname] = useState("");
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({
     idError: "",
@@ -16,7 +19,7 @@ const SignUpContent = () => {
 
   const validateForm = () => {
     const newErrors = {
-      idError: id.includes("@") ? "" : "@ 가 포함되어야 합니다.",
+      // idError: id.includes("@") ? "" : "@ 가 포함되어야 합니다.",
       pwError: pw.length >= 8 ? "" : "8자리 이상 입력해주세요.",
       pwCheckError: pw === pwCheck ? "" : "비밀번호와 일치하지 않습니다.",
     };
@@ -26,10 +29,12 @@ const SignUpContent = () => {
     return !newErrors.idError && !newErrors.pwError && !newErrors.pwCheckError;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateForm()) {
-      // 폼이 유효할 때만 회원가입 로직을 수행
-      console.log("회원가입 완료!");
+      const result = await signupAPI(id, pw, nickname);
+      if(result === 'User successfully created'){
+        navigate("/signIn");
+      }
     }
   };
 
