@@ -7,7 +7,7 @@ const apiClient = axios.create({
 
 const searchapi = async (drinkName, page) => {
   try {
-    const response = await apiClient.get(`/api/post/search`, {
+    const response = await apiClient.get(`/api/post/search?drinkName=${drinkName}&page=${page}`, {
       params: {
         drinkName: encodeURIComponent(drinkName), // URL 인코딩된 drinkName 전달
         page,

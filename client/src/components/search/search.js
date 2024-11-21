@@ -15,6 +15,7 @@ function SearchPage() {
       setLoading(true);
       setError(null);
       const result = await searchapi(searchQuery, page);
+      console.log(result); // 데이터가 제대로 오는지 확인
       setFilteredData(result);  // 검색 결과를 업데이트
     } catch (error) {
       setError("검색 중 문제가 발생했습니다.");
