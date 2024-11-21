@@ -27,3 +27,50 @@
   height: 20px;
   cursor: pointer;
 }
+
+.results-list {
+  list-style: none;
+  padding: 0;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.result-image {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.result-details {
+  text-align: left;
+}
+
+.search-button {
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #45a049;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 5px 0;
+}
