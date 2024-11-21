@@ -44,23 +44,32 @@ const AlcoholList = ({ fetchApi }) => {
     return pageNumbers;
   };
 
+  const handleSaveToLocalStorage = (item) => {
+    try {
+      localStorage.setItem("selectedAlcohol", JSON.stringify(item));
+    } catch (error) {
+      console.error("Failed to save to localStorage:", error);
+    }
+  };
+
   return (
     <div className="AlcoholList">
       {/* <Filters className="Filters" /> */}
       <div className="alcohol-container">
         {alcoholList.map((item) => (
-          <div key={item.postId} className="alcohol-item-wrap">
-            <Link to={`/api/post/info/${item.postId}`} className="link-img-tag">
+          <div
+            key={item.postId}
+            className="alcohol-item-wrap"
+            onClick={() => handleSaveToLocalStorage(item)}
+          >
+            <Link to={`/alcohol/${item.postId}`} className="link-img-tag">
               <img
                 src={item.postImage}
                 alt={item.drinkName}
                 className="alcohol-image"
               />
             </Link>
-            <Link
-              to={`/api/post/info/${item.postId}`}
-              className="link-name-tag"
-            >
+            <Link to={`/alcohol/${item.postId}`} className="link-name-tag">
               <div className="alcohol-name">{item.drinkName}</div>
             </Link>
           </div>
