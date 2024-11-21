@@ -2,8 +2,8 @@ import apiClient from "./apiClient";
 
 export const signupAPI = async (id, pw, nickname) => {
   const body = {
-    userName: nickname,
-    userId: id,
+    userName: id,
+    userId: nickname,
     password: pw,
   };
   try {
@@ -16,15 +16,14 @@ export const signupAPI = async (id, pw, nickname) => {
 };
 
 export const signinAPI = async (id, pw) => {
-    const body ={
-        userName: id,
-        password: pw
-    }
-    try {
-        const response = await apiClient.post(`/auth/login`, body);
-        return response.data;
-    }catch(error){
-        throw error;
-    }
-
-}
+  const body = {
+    userName: id,
+    password: pw,
+  };
+  try {
+    const response = await apiClient.post(`/auth/login`, body);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
