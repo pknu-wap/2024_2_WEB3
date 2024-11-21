@@ -17,8 +17,8 @@ function SearchPage() {
 
   const handleSearch = () => {
     const results = data.filter(item =>
-      item.name && item.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+      item.drinkName && item.drinkName.toLowerCase().includes(searchQuery.toLowerCase())
+    );    
     setFilteredData(results);
   };
 
