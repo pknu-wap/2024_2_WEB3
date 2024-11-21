@@ -3,12 +3,13 @@ import AlcoholList from "../components/alcoholList/AlcoholList";
 import SearchBar from "../components/navSearchBar/SearchBar";
 import Footer from "../components/common/Footer";
 import cheongTakjuListApi from "../api/cheongTakjuListApi";
+import SearchPage from "../components/search/search";
 
 const CheongtakjuPage = () => {
   return (
     <div>
       <Header />
-      <SearchBar />
+      <SearchPage />
       <AlcoholList fetchApi={cheongTakjuListApi} />
       <Footer />
     </div>
