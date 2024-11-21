@@ -124,7 +124,7 @@ const LeftContent = styled.div`
 `;
 
 const ProductImage = styled.img`
-  max-width: 90%;
+  max-width: 300px;
   height: auto;
   object-fit: contain;
   z-index: 2;
@@ -167,6 +167,7 @@ const DetailItem = styled.div`
 `;
 
 const DetailLabel = styled.span`
+  z-index: 2;
   font-weight: bold;
   color: #555;
   width: 120px;
@@ -191,6 +192,7 @@ const DetailLabel2 = styled.span`
 `;
 
 const DetailValue = styled.span`
+  z-index: 2;
   color: #333;
 `;
 
