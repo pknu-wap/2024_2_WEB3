@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import SearchBar from "../navSearchBar/SearchBar";
 import "./MainContents.css";
+import Navigation from "../navSearchBar/Navigation";
 
 // SearchBar의 스타일 확장
 const MainSearchBar = styled(SearchBar)`
@@ -18,10 +19,11 @@ const MainContents = () => {
       </div>
 
       <MainSearchBar />
+      {/* <Navigation /> */}
 
       {/* 카테고리 섹션 */}
-      <div className="category-section">
-        <p className="category-title">
+      <div className="section category-section">
+        <p className="title category-title">
           다채로운 전통주 한 잔, <span className="highlight">홀짝</span> 맛보는
           즐거움
         </p>
@@ -99,6 +101,57 @@ const MainContents = () => {
             alt="sub-category-img3"
             class="cate-sub cate-sub3"
           />
+        </div>
+      </div>
+
+      {/* 북마크 섹션 */}
+      <div className="section bookmark-section">
+        <p className="title bookmark-title">
+          기억하고 싶은 한 잔, 나만의 리스트 저장
+        </p>
+
+        <div className="bmk-container">
+          <div className="bmk-text bmk-text1">
+            <h3>마이페이지에서 나만의 선호 도수를 설정해 보세요</h3>
+            <p>
+              새로운 전통주를 고를 때 기준을 세울 수 있습니다. <br />
+              나만의 선호도를 기록하여 전통주 탐색의 즐거움을 더해보세요!
+            </p>
+          </div>
+
+          <div className="bmk-img">
+            <img src="/images/mainpage/bmk-img.png" alt="bookmark-image" />
+          </div>
+
+          <div className="bmk-text bmk-text2">
+            <h3>마음에 드는 술을 리스트에 추가해 보세요</h3>
+            <p>
+              마이페이지에서 좋아하거나 관심이 있는 전통주를 간편하게 모아 보며
+              <br />
+              나만의 전통주 컬렉션을 만들어가세요.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* 페어링 섹션 */}
+      <div className="section pairing-section">
+        <p className="title pairing-title">전통주와 어울리는 완벽한 안주</p>
+
+        <div className="pairing-container">
+          <div className="pairing-img">
+            <img src="images/mainpage/pairing-img.png" alt="pairing-image" />
+          </div>
+
+          <div className="pairing-text">
+            <h3>선택한 전통주와 가장 잘 어울리는 안주를 추천 받아 보세요!</h3>
+            <p>
+              각 전통주의 특성에 맞춘 안주를 제안하여 술과 안주가 조화를 이루는
+              최상의 맛을 경험하실 수 있습니다.
+              <br />술 한 잔과 안주 한 접시의 완벽한 페어링을 통해 전통주를 더욱
+              깊이 있고 풍부하게 즐겨보세요.
+            </p>
+          </div>
         </div>
       </div>
     </div>

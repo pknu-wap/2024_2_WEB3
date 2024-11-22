@@ -3,11 +3,12 @@
   flex-direction: column;
   position: relative;
   z-index: 0;
+  background-color: #f2eee7;
 }
 
 .main-footer {
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
   left: 0;
   width: 100%; /* 화면 너비를 채움 */
   z-index: -1; /* 다른 요소 뒤로 보냄 */
@@ -17,7 +18,8 @@
 
 .main-footer-img {
   width: 100%; /* 이미지를 화면 너비에 맞춤 */
-  opacity: 0.8;
+  margin: 0;
+  padding: 0;
 }
 
 .Footer {
