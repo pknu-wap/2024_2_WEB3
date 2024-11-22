@@ -1,13 +1,14 @@
 .AlcoholList {
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  margin: 5% 10%;
+  justify-content: center;
   align-items: center;
-  width: 80%;
-  height: 150vh;
+  margin: 5% 10%;
+  width: 75%;
+  padding-bottom: 5%;
 
   overflow: hidden;
+  /* overflow: visible; */
   /* background-color: rgba(255, 255, 255, 0.51); */
   background: linear-gradient(
     to bottom,
@@ -42,8 +43,9 @@
   height: auto;
   aspect-ratio: 5 / 6;
   object-fit: contain;
-  border-radius: 8px;
-  background-color: rgb(158, 158, 158);
+  border-radius: 2px;
+  border: 0.1px solid rgba(0, 0, 0, 0.546);
+  background-color: rgba(255, 255, 255, 0.737);
 }
 
 .alcohol-name {
@@ -79,11 +81,16 @@
   /* margin: 0 3px; */
   padding: 15% 25%;
   font-size: 14px;
+  color: #d4cdc1;
   cursor: pointer;
   border: none;
   background-color: rgba(255, 255, 255, 0);
   border-radius: 4px;
   transition: background-color 0.3s;
+}
+
+.pagination .page-btn {
+  color: #545454;
 }
 
 .pagination button:hover {
@@ -99,5 +106,5 @@
 .pagination .active-page {
   font-weight: bold;
   background-color: rgba(255, 255, 255, 0);
-  color: rgb(0, 0, 0);
+  color: #545454;
 }

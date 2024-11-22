@@ -77,11 +77,16 @@ const AlcoholList = ({ fetchApi }) => {
       </div>
 
       <div className="pagination">
-        <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+        <button
+          className="page-btn"
+          onClick={() => setPage(page - 1)}
+          disabled={page === 1}
+        >
           {"<"}
         </button>
         {renderPageNumbers()}
         <button
+          className="page-btn"
           onClick={() => setPage(page + 1)}
           disabled={page === totalPages}
         >
