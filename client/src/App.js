@@ -1,7 +1,6 @@
 import "./App.css";
 import MainPage from "./pages/MainPage";
-import CheongtakjuPage from "./pages/CheongtakjuPage";
-import FruitWinePage from "./pages/FruitWinePage";
+import ListPage from "./pages/ListPage";
 import SignInPage from "./pages/SignInPage";
 import Mypage from "./pages/mypage";
 import SignUpPage from "./pages/SignUpPage";
@@ -14,8 +13,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/cheongtakju" element={<CheongtakjuPage />} />{" "}
-          <Route path="/fruitWine" element={<FruitWinePage />} />{" "}
+          <Route path="/cheongtakju" element={<ListPage />} />
+          <Route path="/fruitWine" element={<ListPage />} />
           <Route path="/signIn" element={<SignInPage />} />
           <Route path="/signUp" element={<SignUpPage />} />
           <Route path="/mypage" element={<Mypage />} />
