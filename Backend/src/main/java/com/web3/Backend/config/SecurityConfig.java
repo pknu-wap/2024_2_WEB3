@@ -79,6 +79,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/post/info/**").permitAll()
                         .requestMatchers("/api/post/cheongtakju/**").permitAll()
                         .requestMatchers("/api/post/fruitWine/**").permitAll()
+                        .requestMatchers("/api/post/all/**").permitAll()
                         .requestMatchers("/api/post/search").permitAll()
                         .requestMatchers("/auth/reissue").permitAll()
                         .requestMatchers("/auth/signup","/auth/login","/auth/logout","/error").permitAll()

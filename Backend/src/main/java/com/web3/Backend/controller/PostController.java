@@ -98,33 +98,75 @@ public class PostController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    // 전체 페이지
+    @GetMapping("/post/all/{page}")
+    public ResponseEntity<Response> getAllPosts(
+            @PathVariable int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) List<String> areas,
+            @RequestParam(required = false) String preferenceLevel
+    ) {
+
+        try {
+            Page<PostDto> postPage = postService.getAllPosts(page, size, areas, preferenceLevel);
+            return buildResponse(postPage, "전체 데이터 조회 성공");
+        } catch (IllegalArgumentException e) {
+            return buildErrorResponse(e.getMessage());
+        }
+    }
 
     //청탁주 페이지
     @GetMapping("/post/cheongtakju/{page}")
     public ResponseEntity<Response> getCheongTakjuPage(
             @PathVariable int page,
-            @RequestParam(defaultValue="10") int size){
-        Page<PostDto> postPage = postService.getCheongTakjuPage(page,size);
-        Map<String, Object> data = new HashMap<>();
-        data.put("content",postPage.getContent());
-        data.put("totalPages",postPage.getTotalPages());
-        data.put("currentPage",postPage.getNumber());
-        Response response = new Response("200","청탁주 정보 조회 성공",data);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) List<String> areas,
+            @RequestParam(required = false) String preferenceLevel) {
+
+        try {
+            Page<PostDto> postPage = postService.getCheongTakjuPage(page, size, areas, preferenceLevel);
+            return buildResponse(postPage, "청탁주 데이터 조회 성공");
+        } catch (IllegalArgumentException e) {
+            return buildErrorResponse(e.getMessage());
+        }
     }
+
     //과실주 페이지
     @GetMapping("/post/fruitWine/{page}")
     public ResponseEntity<Response> getFruitWinePage(
             @PathVariable int page,
-            @RequestParam(defaultValue="10") int size){
-        Page<PostDto> postPage = postService.getFruitWinePage(page,size);
-        Map<String, Object> data = new HashMap<>();
-        data.put("content",postPage.getContent());
-        data.put("totalPages",postPage.getTotalPages());
-        data.put("currentPage",postPage.getNumber());
-        Response response = new Response("200","과실주 정보 조회 성공",data);
-        return new ResponseEntity<>(response,HttpStatus.OK);
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) List<String> areas,
+            @RequestParam(required = false) String preferenceLevel) {
+        try {
+            Page<PostDto> postPage = postService.getFruitWinePage(page, size, areas, preferenceLevel);
+            return buildResponse(postPage, "과실주 데이터 조회 성공");
+        } catch (IllegalArgumentException e) {
+            return buildErrorResponse(e.getMessage());
+        }
     }
+
+    //공통 응답 생성(성공)
+    private ResponseEntity<Response> buildResponse(Page<PostDto> postPage, String successMessage) {
+        if (postPage.getContent().isEmpty()) {
+            Response response = new Response("404", "데이터가 없습니다.", null);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+        Map<String, Object> data = new HashMap<>();
+        data.put("content", postPage.getContent());
+        data.put("totalPages", postPage.getTotalPages());
+        data.put("currentPage", postPage.getNumber());
+
+        Response response = new Response("200", successMessage, data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    // 공통 응답 생성 (실패)
+    private ResponseEntity<Response> buildErrorResponse(String errorMessage) {
+        Response response = new Response("400", errorMessage, null);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
 
     //검색 기능
     @GetMapping("/post/search")

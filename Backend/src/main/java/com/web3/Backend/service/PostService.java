@@ -9,6 +9,7 @@ import com.web3.Backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -193,36 +194,119 @@ public class PostService {
         return Map.of("comments", commentData);
     }
 
-    //청탁주, 과일주 페이지에 필요한 데이터 페이징 처리
-    public Page<PostDto> getCheongTakjuPage(int page, int size){
-        PageRequest pageRequest = PageRequest.of(page, size);
+    //전체 페이지
+    public Page<PostDto> getAllPosts(int page, int size, List<String> areas, String preferenceLevel) {
+        Pageable pageable = PageRequest.of(page, size);
+        validateAreas(areas);
 
-        return postRepository.findByTypeIn(List.of("청주","탁주"),pageRequest)
-                .map(post -> PostDto.builder()
-                        .postId(post.getPostId())
-                        .drinkName(post.getDrinkName())
-                        .preferenceLevel(post.getPreferenceLevel())
-                        .postImage("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + post.getPostImage())
-                        .type(post.getType())
-                        .area(post.getArea())
-                        .rating(0.0)
-                        .build());
+        Page<Post> postPage;
+
+        if (preferenceLevel != null && areas != null && !areas.isEmpty()) {
+            Double[] range = getPreferenceLevelRange(preferenceLevel);
+            postPage = postRepository.findByAreaInAndPreferenceLevelBetween(areas, range[0], range[1], pageable);
+        } else if (areas != null && !areas.isEmpty()) {
+            postPage = postRepository.findByAreaIn(areas, pageable);
+        } else if (preferenceLevel != null) {
+            Double[] range = getPreferenceLevelRange(preferenceLevel);
+            postPage = postRepository.findByPreferenceLevelBetween(range[0], range[1], pageable);
+        } else {
+            postPage = postRepository.findAll(pageable);
+        }
+
+        return postPage.map(this::mapToPostDto);
     }
 
-    public Page<PostDto> getFruitWinePage(int page, int size){
-        PageRequest pageRequest = PageRequest.of(page,size);
+    // 청탁주 페이지
+    public Page<PostDto> getCheongTakjuPage(int page, int size, List<String> areas, String preferenceLevel) {
+        Pageable pageable = PageRequest.of(page, size);
+        validateAreas(areas);
 
-        return postRepository.findByType("과실주",pageRequest)
-                .map(post -> PostDto.builder()
-                        .postId(post.getPostId())
-                        .drinkName(post.getDrinkName())
-                        .preferenceLevel(post.getPreferenceLevel())
-                        .postImage("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + post.getPostImage())
-                        .type(post.getType())
-                        .area(post.getArea())
-                        .rating(0.0)
-                        .build());
+        Page<Post> postPage;
+
+        if (preferenceLevel != null && areas != null && !areas.isEmpty()) {
+            Double[] range = getPreferenceLevelRange(preferenceLevel);
+            postPage = postRepository.findByTypeInAndAreaInAndPreferenceLevelBetween(
+                    List.of("청주", "탁주"), areas, range[0], range[1], pageable);
+        } else if (areas != null && !areas.isEmpty()) {
+            postPage = postRepository.findByTypeInAndAreaIn(List.of("청주", "탁주"), areas, pageable);
+        } else if (preferenceLevel != null) {
+            Double[] range = getPreferenceLevelRange(preferenceLevel);
+            postPage = postRepository.findByTypeInAndPreferenceLevelBetween(List.of("청주", "탁주"), range[0], range[1], pageable);
+        } else {
+            postPage = postRepository.findByTypeIn(List.of("청주", "탁주"), pageable);
+        }
+
+        return postPage.map(this::mapToPostDto);
     }
+
+    // 과실주 페이지
+    public Page<PostDto> getFruitWinePage(int page, int size, List<String> areas, String preferenceLevel) {
+        Pageable pageable = PageRequest.of(page, size);
+        validateAreas(areas);
+
+        Page<Post> postPage;
+
+        if (preferenceLevel != null && areas != null && !areas.isEmpty()) {
+            Double[] range = getPreferenceLevelRange(preferenceLevel);
+            postPage = postRepository.findByTypeAndAreaInAndPreferenceLevelBetween(
+                    "과실주", areas, range[0], range[1], pageable);
+        } else if (areas != null && !areas.isEmpty()) {
+            postPage = postRepository.findByTypeAndAreaIn("과실주", areas, pageable);
+        } else if (preferenceLevel != null) {
+            Double[] range = getPreferenceLevelRange(preferenceLevel);
+            postPage = postRepository.findByTypeAndPreferenceLevelBetween("과실주", range[0], range[1], pageable);
+        } else {
+            postPage = postRepository.findByType("과실주", pageable);
+        }
+
+        return postPage.map(this::mapToPostDto);
+    }
+
+    // 유효성 검사: 지역
+    private void validateAreas(List<String> areas) {
+        if (areas != null) {
+            List<String> validAreas = List.of("서울특별시", "부산광역시", "대구광역시", "인천광역시",
+                    "광주광역시", "대전광역시", "울산광역시", "세종특별자치시", "경기도", "강원도", "충청북도",
+                    "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주특별자치도");
+
+            // 여러 지역이 들어오는 경우에도 잘 처리되도록 검증
+            for (String area : areas) {
+                if (!validAreas.contains(area)) {
+                    throw new IllegalArgumentException("잘못된 지역 값입니다: " + area);
+                }
+            }
+        }
+    }
+
+    // Post -> PostDto 매핑 메서드
+    private PostDto mapToPostDto(Post post) {
+        return PostDto.builder()
+                .postId(post.getPostId())
+                .drinkName(post.getDrinkName())
+                .preferenceLevel(post.getPreferenceLevel())
+                .postImage("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + post.getPostImage())
+                .type(post.getType())
+                .area(post.getArea())
+                .rating(0.0) // 기본 rating 0.0 설정
+                .build();
+    }
+
+    // preferenceLevel을 범위로 변환
+    private Double[] getPreferenceLevelRange(String preferenceLevel) {
+        switch (preferenceLevel) {
+            case "0-5":
+                return new Double[]{0.0, 5.0};
+            case "5-10":
+                return new Double[]{5.0, 10.0};
+            case "10-15":
+                return new Double[]{10.0, 15.0};
+            case "15-50":
+                return new Double[]{15.0, 50.0};
+            default:
+                throw new IllegalArgumentException("잘못된 preferenceLevel 값입니다: " + preferenceLevel);
+        }
+    }
+
     //검색 기능을 페이징 처리
     public Page<PostDto> searchPostByName(String drinkName,int page,int size){
         PageRequest pageRequest = PageRequest.of(page,size);
