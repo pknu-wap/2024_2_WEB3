@@ -1,24 +1,23 @@
-import "./MainContents.css";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import Footer from "../common/Footer";
+import React from "react";
+import styled from "styled-components";
+import SearchBar from "../navSearchBar/SearchBar";
+import "./MainContents.css";
+
+// SearchBar의 스타일 확장
+const MainSearchBar = styled(SearchBar)`
+  width: 100%;
+  margin-bottom: 10px;
+`;
 
 const MainContents = () => {
   return (
     <div className="MainContents">
       <div className="banner-section">
-        <img
-          src="images/mainpage/banner-img-figma.png"
-          className="banner-img"
-        />
+        <img src="images/mainpage/main-banner.png" className="banner-img" />
       </div>
 
-      {/* 검색창 */}
-      <input
-        type="text"
-        className="search-bar"
-        placeholder="원하는 술을 검색해보세요!"
-      />
+      <MainSearchBar />
 
       {/* 카테고리 섹션 */}
       <div className="category-section">
