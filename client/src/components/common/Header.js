@@ -8,7 +8,7 @@ import { Link, useLocation } from "react-router-dom";
 const HeaderContainer = styled.header`
   color: ${({ $textColor }) => $textColor || "rgb(236, 232, 228)"};
   background-color: ${(props) =>
-    props.bgColor || "transparent"}; // 기본값: 투명
+    props.bgcolor || "transparent"}; // 기본값: 투명
 `;
 
 const StyledButton = styled.button`
@@ -18,7 +18,7 @@ const StyledButton = styled.button`
 const Header = ({
   textColor: propTextColor,
   showNavigation = true,
-  bgColor,
+  bgcolor,
 }) => {
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -79,7 +79,7 @@ const Header = ({
     <HeaderContainer
       className="Header"
       $textColor={textColor}
-      bgColor={bgColor}
+      bgcolor={bgcolor}
     >
       <div className="logo-section">
         <Link to="/">
@@ -95,23 +95,6 @@ const Header = ({
 
       <div className="login-button-section">
         {/* 임시 마이페이지 버튼 */}
-        {/* <Link to="/mypage">
-          <img
-            src="/images/mainpage/mypage-btn-img.png"
-            alt="마이페이지"
-            className="mypage-btn"
-          />
-        </Link> */}
-
-        {/* 임시 로그아웃 버튼 */}
-        {/* <StyledButton
-          className="logout-button"
-          // $textColor={textColor}
-          onClick={handleLogout}
-        >
-          로그아웃
-        </StyledButton> */}
-
         <div className="dropdown-container" ref={dropdownRef}>
           <img
             src="/images/mainpage/mypage-btn-img.png"
@@ -132,7 +115,7 @@ const Header = ({
         </div>
 
         {isLoggedIn ? (
-          <>{/* 연동 후 로그아웃, 마이페이지 버튼 */}</>
+          <>{/* 로그아웃, 마이페이지 */}</>
         ) : (
           <Link to="/signIn">
             <StyledButton

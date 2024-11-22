@@ -1,0 +1,26 @@
+.MainPage {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 0;
+}
+
+.main-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%; /* 화면 너비를 채움 */
+  z-index: -1; /* 다른 요소 뒤로 보냄 */
+  margin: 0;
+  padding: 0;
+}
+
+.main-footer-img {
+  width: 100%; /* 이미지를 화면 너비에 맞춤 */
+  opacity: 0.8;
+}
+
+.Footer {
+  position: relative; /* 푸터를 이미지 위에 올림 */
+  z-index: 1; /* 푸터는 이미지 위에 있어야 하므로 z-index를 높게 설정 */
+}
