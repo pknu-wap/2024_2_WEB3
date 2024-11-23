@@ -19,7 +19,7 @@ const MainContents = () => {
       </div>
 
       <MainSearchBar />
-      {/* <Navigation /> */}
+      <Navigation />
 
       {/* 카테고리 섹션 */}
       <div className="section category-section">
@@ -29,11 +29,11 @@ const MainContents = () => {
         </p>
 
         {/* 첫 번째 블록 */}
-        <div class="category-block category-block1">
-          <div class="cate-img cate-img1">
+        <div className="category-block category-block1">
+          <div className="cate-img cate-img1">
             <img src="images/mainpage/category-img1.png" alt="category-img1" />
           </div>
-          <div class="cate-text cate-text1">
+          <div className="cate-text cate-text1">
             <h3>
               쌀과 물로 빚어낸 맑은 술, <span className="cate-span">청주</span>
             </h3>
@@ -48,13 +48,13 @@ const MainContents = () => {
           <img
             src="/images/mainpage/sub-category-img1.png"
             alt="sub-category-img1"
-            class="cate-sub cate-sub1"
+            className="cate-sub cate-sub1"
           />
         </div>
 
         {/* 두 번째 블록 */}
-        <div class="category-block category-block2">
-          <div class="cate-text cate-text2">
+        <div className="category-block category-block2">
+          <div className="cate-text cate-text2">
             <h3>
               부드럽고 진한 맛, 전통의 <span className="cate-span">탁주</span>
             </h3>
@@ -67,22 +67,22 @@ const MainContents = () => {
               더 보러가기 &gt;
             </Link>
           </div>
-          <div class="cate-img cate-img2">
+          <div className="cate-img cate-img2">
             <img src="images/mainpage/category-img2.png" alt="category-img2" />
           </div>
           <img
             src="/images/mainpage/sub-category-img2.png"
             alt="sub-category-img2"
-            class="cate-sub cate-sub2"
+            className="cate-sub cate-sub2"
           />
         </div>
 
         {/* 세 번째 블록 */}
-        <div class="category-block category-block3">
-          <div class="cate-img cate-img3">
+        <div className="category-block category-block3">
+          <div className="cate-img cate-img3">
             <img src="images/mainpage/category-img3.png" alt="category-img3" />
           </div>
-          <div class="cate-text cate-text3">
+          <div className="cate-text cate-text3">
             <h3>
               과일의 향과 맛을 담은 술,
               <span className="cate-span"> 과실주</span>
@@ -99,7 +99,7 @@ const MainContents = () => {
           <img
             src="/images/mainpage/sub-category-img3.png"
             alt="sub-category-img3"
-            class="cate-sub cate-sub3"
+            className="cate-sub cate-sub3"
           />
         </div>
       </div>

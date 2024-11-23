@@ -25,7 +25,7 @@
 .alcohol-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5열 */
-  gap: 3%; /* 아이템 간격 */
+  gap: 2%; /* 아이템 간격 */
   width: 100%;
 }
 
@@ -38,27 +38,35 @@
   text-decoration: none;
 }
 
+.link-img-tag {
+  background-color: rgba(212, 205, 193, 0.32);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%; /* 전체 너비 */
+}
+
 .alcohol-image {
   width: 100%;
   height: auto;
   aspect-ratio: 5 / 6;
   object-fit: contain;
-  border-radius: 2px;
-  border: 0.1px solid rgba(0, 0, 0, 0.546);
-  background-color: rgba(255, 255, 255, 0.737);
+  transition: transform 0.2s ease-in-out;
+  /* opacity: 1; */
 }
 
 .alcohol-name {
   margin-top: 8px;
   margin-bottom: 13px;
-  font-size: 14px;
-  font-weight: bold;
-  color: rgb(78, 75, 69);
+  font-size: 13px;
+  font-weight: 500;
+  color: #94866f;
+  cursor: pointer;
 }
 
-.alcohol-image:hover,
-.alcohol-name:hover {
+.alcohol-image:hover {
   cursor: pointer;
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
 }
 
 .link-img-tag,
@@ -80,7 +88,7 @@
 .pagination button {
   /* margin: 0 3px; */
   padding: 15% 25%;
-  font-size: 14px;
+  font-size: 16px;
   color: #d4cdc1;
   cursor: pointer;
   border: none;
@@ -106,5 +114,5 @@
 .pagination .active-page {
   font-weight: bold;
   background-color: rgba(255, 255, 255, 0);
-  color: #545454;
+  color: #797979;
 }

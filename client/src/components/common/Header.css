@@ -56,12 +56,6 @@
   transition: 0.2s;
 }
 
-.nav-section {
-  display: flex;
-  flex: auto;
-  white-space: nowrap;
-}
-
 .user-btn {
   width: 30px;
 }

@@ -15,11 +15,7 @@ const StyledButton = styled.button`
   color: ${({ $textColor }) => $textColor || "rgb(0, 0, 0)"};
 `;
 
-const Header = ({
-  textColor: propTextColor,
-  showNavigation = true,
-  bgcolor,
-}) => {
+const Header = ({ textColor: propTextColor, bgcolor }) => {
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -86,12 +82,6 @@ const Header = ({
           <img src="/images/Holjjak-logo.png" alt="Logo" className="logo-img" />
         </Link>
       </div>
-
-      {showNavigation && (
-        <div className="nav-section">
-          <Navigation $textColor={textColor} />
-        </div>
-      )}
 
       <div className="login-button-section">
         {/* 임시 마이페이지 버튼 */}

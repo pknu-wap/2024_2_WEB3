@@ -55,6 +55,7 @@ const Filters = ({ onFilterChange }) => {
   return (
     <div className={`Filters ${open ? "open" : ""}`}>
       <button className="toggle-button" onClick={toggleDropdown}>
+        <img src="/images/listPage/filter-img.png" alt="버튼 아이콘" />
         {open ? "닫기" : "필터 열기"}
       </button>
       <div className={`filter-dropdown ${open ? "show" : ""}`}>
