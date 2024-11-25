@@ -1,0 +1,29 @@
+/* 페이지 전체 레이아웃 */
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 수평 중앙 정렬 */
+  background-color: #d6d1c9;
+  border-radius: 20px;
+  padding: 10px 15px;
+  max-width: 600px;
+  margin-top: 90px;
+  margin-left: auto;
+  margin-right: auto; /* 좌우 중앙 정렬 */
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 16px;
+  color: #333;
+}
+
+/* 검색 아이콘 스타일 */
+.search-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}

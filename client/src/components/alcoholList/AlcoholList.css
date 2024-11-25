@@ -1,0 +1,89 @@
+.AlcoholList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5%;
+  align-items: center;
+}
+
+.alcohol-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5열 */
+  gap: 3%; /* 아이템 간격 */
+  width: 75%;
+}
+
+.alcohol-item-wrap {
+  display: flex;
+  flex-direction: column; /* 이미지와 텍스트 수직 정렬 */
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.alcohol-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 6;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: rgb(239, 239, 239);
+}
+
+.alcohol-name {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  color: rgb(78, 75, 69);
+
+  min-width: 100px;
+  max-width: 100px; /* 부모 요소 너비 제한 */
+}
+
+.alcohol-image:hover,
+.alcohol-name:hover {
+  cursor: pointer;
+}
+
+.link-img-tag,
+.link-name-tag {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+}
+
+/* 페이지네이션 CSS */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+  background-color: rgba(75, 72, 68, 0.445);
+  color: white;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination .active-page {
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0);
+  color: rgb(0, 0, 0);
+}
