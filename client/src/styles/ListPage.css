@@ -4,12 +4,6 @@
   position: relative;
   background-color: rgb(242, 238, 231);
   z-index: 0;
-  /* border: 3px solid rebeccapurple; */
-}
-
-.AlcoholList {
-  justify-content: center;
-  align-self: center;
 }
 
 .list-footer {

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { CATEGORY } from "../../constants";
 import React from "react";
 import styled from "styled-components";
 import SearchBar from "../navSearchBar/SearchBar";
@@ -41,7 +42,7 @@ const MainContents = () => {
               빛깔이 맑고 투명해 '맑은 술'로 불리는 청주는 쌀을 발효해 <br />
               은은한 향과 부드러운 맛을 자랑합니다.
             </p>
-            <Link to="/cheongtakju" className="cate-link">
+            <Link to={`/list/${CATEGORY.CHEONG_TAKJU}`} className="cate-link">
               더 보러가기 &gt;
             </Link>
           </div>
@@ -63,7 +64,7 @@ const MainContents = () => {
               특징입니다. <br />
               신선한 발효 향이 어우러져 풍미가 깊습니다.
             </p>
-            <Link to="/cheongtakju" className="cate-link">
+            <Link to={`/list/${CATEGORY.CHEONG_TAKJU}`} className="cate-link">
               더 보러가기 &gt;
             </Link>
           </div>
@@ -92,7 +93,7 @@ const MainContents = () => {
               과일의 상큼한 향과 <br />
               맛을 즐길 수 있습니다.
             </p>
-            <Link to="/fruitWine" className="cate-link">
+            <Link to={`/list/${CATEGORY.FRUIT_WINE}`} className="cate-link">
               더 보러가기 &gt;
             </Link>
           </div>

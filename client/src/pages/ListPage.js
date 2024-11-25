@@ -1,17 +1,16 @@
 import { CATEGORY } from "../constants";
+import { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import cheongTakjuListApi from "../api/cheongTakjuListApi";
-import fruitWineListApi from "../api/fruitWineListApi";
-import allListApi from "../api/allListApi";
 import AlcoholList from "../components/alcoholList/AlcoholList";
 import Header from "../components/common/Header";
 import SearchBar from "../components/navSearchBar/SearchBar";
 import Footer from "../components/common/Footer";
+import Navigation from "../components/navSearchBar/Navigation";
+import Filters from "../components/filters/Filters";
 import "../styles/ListPage.css";
 
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Navigation from "../components/navSearchBar/Navigation";
+import alcoholListApi from "../api/alcoholListApi";
 
 // SearchBar의 스타일 확장
 const ListSearchBar = styled(SearchBar)`
@@ -20,30 +19,24 @@ const ListSearchBar = styled(SearchBar)`
 
 const ListPage = () => {
   const { category } = useParams(); // URL에서 category 가져오기
-  const [fetchApi, setFetchApi] = useState(null);
+  const [filters, setFilters] = useState({ preferenceLevel: "", areas: [] });
+  const [currentCategory, setCurrentCategory] = useState(category);
 
-  // 카테고리에 따라 fetchApi 설정
   useEffect(() => {
-    switch (category) {
-      case CATEGORY.FRUIT_WINE:
-        setFetchApi(() => fruitWineListApi);
-        break;
-      case CATEGORY.ALL:
-        setFetchApi(() => allListApi);
-        break;
-      case CATEGORY.CHEONG_TAKJU:
-      default:
-        setFetchApi(() => cheongTakjuListApi);
-        break;
+    // 카테고리 변경 시 필터 초기화 및 API 호출
+    if (category !== currentCategory) {
+      setFilters({ alcoholLevel: "", regions: [] }); // 필터 초기화
+      setCurrentCategory(category); // 현재 카테고리 업데이트
     }
-  }, [category]);
+  }, [category, currentCategory, filters]);
 
   return (
     <div className="ListPage">
       <Header bgColor="#F2EEE7" />
       <ListSearchBar />
       <Navigation />
-      <AlcoholList fetchApi={fetchApi} category={category} />
+      <Filters onFilterChange={setFilters} category={category} />
+      <AlcoholList category={category} filters={filters} />
       <Footer className="footer1" />
       <div className="list-footer">
         <img

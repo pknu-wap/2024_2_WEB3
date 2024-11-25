@@ -1,41 +1,60 @@
 .Filters {
   /* border: 3px solid salmon; */
-  /* width: 100%; */
   display: flex;
-  /* justify-content: flex-end; */
-}
-.Filters {
-  position: relative;
-  width: 300px;
-  margin: 0 auto;
+  position: absolute;
+  justify-content: flex-end;
+  top: 22.4%;
+  padding-right: 14.4%;
+  width: 100%;
+  /* padding: 13px 13px 4% 0; */
 }
 
-.toggle-button {
-  width: 50%;
-  padding: 10px;
-  background-color: #ffffff;
-  color: rgba(0, 0, 0, 0.578);
+.filter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 70px;
+  padding: 6px 0;
+
+  background-color: #edeae3;
+  color: #94866f;
   border: none;
-  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
   border-radius: 4px;
   font-size: 13px;
+  transition: 0.3s;
 }
 
+.filter-button img {
+  width: 15px;
+}
+
+.filter-button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.filter-button:focus {
+  outline: none;
+}
+
+/* 드롭다운 메뉴 */
 .filter-dropdown {
-  border: 1px solid #ccc;
-  padding: 16px;
-  width: 100%;
-  background-color: white;
   position: absolute;
-  top: 50px;
-  left: 0;
+  padding: 16px;
+  width: 20%;
+  background-color: rgba(255, 255, 255, 0.98);
+  top: 40px;
   transform: scaleY(0);
   transform-origin: top;
   transition: transform 0.3s ease-in-out;
   z-index: 100;
   display: none;
-  border-radius: 4px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(82, 82, 82, 0.1);
 }
 
 .Filters.open .filter-dropdown {
@@ -44,14 +63,39 @@
 }
 
 .filter-section {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid gainsboro;
+}
+
+.filter-section.region {
+  padding-bottom: 10px;
+}
+
+.filter-section h4 {
+  font-family: "Pretendard", sans-serif;
+  color: rgba(88, 79, 66, 0.934);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.filter-section.level {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .checkbox-label {
   display: flex;
   align-items: center;
+  width: calc(50% - 5px); /* 두 개씩 배치하기 위해 너비 설정 */
   margin-bottom: 8px;
   cursor: pointer;
+  color: #94866f;
 }
 
 .checkbox-label input[type="checkbox"] {
@@ -61,22 +105,22 @@
 .custom-checkbox {
   width: 16px;
   height: 16px;
-  border: 2px solid #ccc;
+  border: 2px solid rgb(207, 207, 207);
   border-radius: 4px;
   margin-right: 8px;
   position: relative;
 }
 
 .checkbox-label input[type="checkbox"]:checked + .custom-checkbox {
-  background-color: #333;
-  border-color: #333;
+  background-color: #947b64;
+  border-color: #947b64;
 }
 
 .checkbox-label input[type="checkbox"]:checked + .custom-checkbox::after {
   content: "";
   position: absolute;
-  top: 2px;
-  left: 5px;
+  /* top: 1px; */
+  left: 4px;
   width: 4px;
   height: 8px;
   border: solid white;
@@ -85,25 +129,33 @@
 }
 
 .region-buttons {
+  /* 지역 필터 버튼 div */
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 
 .region-button {
-  border: 1px solid #ccc;
-  background-color: #f5f5f5;
-  padding: 8px 12px;
+  border: 1px solid rgb(176, 176, 176);
+  color: rgb(184, 184, 184);
+  background-color: rgba(255, 255, 255, 0);
+  padding: 7px 10px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 30px;
+}
+
+.region-button:hover {
+  background-color: #edeae3;
 }
 
 .region-button.active {
-  background-color: #333;
-  color: white;
+  background-color: #d4cdc1;
+  border: 1px solid #d4cdc1;
+  color: #ffffff;
 }
 
-.filter-buttons {
+/* 선택 버튼 */
+.select-buttons {
   display: flex;
   justify-content: space-between;
   gap: 8px;
@@ -119,10 +171,22 @@
 }
 
 .reset-button {
-  background-color: #f5f5f5;
+  background-color: #ffffff;
+  border: 1px solid #947b64;
+  color: #947b64;
+}
+
+.reset-button:hover {
+  opacity: 0.7;
 }
 
 .complete-button {
-  background-color: #333;
+  transition: 0.2s;
+  background-color: #94866f;
   color: white;
+}
+
+.complete-button:hover {
+  transition: 0.2s;
+  opacity: 0.7;
 }

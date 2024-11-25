@@ -3,9 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 5% 10%;
-  width: 75%;
-  padding-bottom: 5%;
+  margin: 5% 12%;
+  width: 76%;
+  padding: 4% 2%;
 
   overflow: hidden;
   /* overflow: visible; */
@@ -17,15 +17,10 @@
   );
 }
 
-.Filters {
-  /* border: 2px solid rgb(106, 0, 255); */
-  justify-content: flex-end;
-}
-
 .alcohol-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5열 */
-  gap: 2%; /* 아이템 간격 */
+  gap: 3%; /* 아이템 간격 */
   width: 100%;
 }
 
@@ -42,7 +37,7 @@
   background-color: rgba(212, 205, 193, 0.32);
   border-radius: 10px;
   overflow: hidden;
-  width: 100%; /* 전체 너비 */
+  width: 95%; /* 전체 너비 */
 }
 
 .alcohol-image {
@@ -57,8 +52,9 @@
 .alcohol-name {
   margin-top: 8px;
   margin-bottom: 13px;
-  font-size: 13px;
   font-weight: 500;
+  font-size: 13px;
+  overflow: hidden;
   color: #94866f;
   cursor: pointer;
 }
@@ -81,13 +77,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 5px;
   margin-top: 5%;
   margin-bottom: 10%;
 }
 
 .pagination button {
-  /* margin: 0 3px; */
-  padding: 15% 25%;
+  margin: 0;
+  padding: 5px 8px;
   font-size: 16px;
   color: #d4cdc1;
   cursor: pointer;

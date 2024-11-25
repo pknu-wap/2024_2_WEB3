@@ -1,9 +1,9 @@
-import "./AlcoholList.css";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
-import Filters from "../filters/Filters";
+import alcoholListApi from "../../api/alcoholListApi";
+import "./AlcoholList.css";
 
-const AlcoholList = ({ fetchApi, category }) => {
+const AlcoholList = ({ category, filters }) => {
   const [alcoholList, setAlcoholList] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -11,19 +11,16 @@ const AlcoholList = ({ fetchApi, category }) => {
   const [loadedStates, setLoadedStates] = useState({});
 
   // 데이터를 불러오는 함수
-  const fetchData = useCallback(
-    async (pageNum) => {
-      if (!fetchApi) return; // fetchApi가 없으면 실행하지 않음
-      try {
-        const data = await fetchApi(pageNum);
-        setAlcoholList(data.content || []);
-        setTotalPages(data.totalPages - 1 || 1);
-      } catch (error) {
-        console.error("데이터 로딩 중 오류:", error.message);
-      }
-    },
-    [fetchApi]
-  );
+  const fetchData = useCallback(async () => {
+    if (!category) return;
+    try {
+      const data = await alcoholListApi(category, page, filters);
+      setAlcoholList(data.content || []);
+      setTotalPages(data.totalPages - 1 || 1);
+    } catch (error) {
+      // console.log("리스트 데이터 로딩 중 오류:", error.message);
+    }
+  }, [category, page, filters, alcoholListApi]);
 
   // 페이지가 변경될 때만 데이터 호출
   useEffect(() => {
@@ -65,14 +62,9 @@ const AlcoholList = ({ fetchApi, category }) => {
 
   return (
     <div className="AlcoholList">
-      <Filters />
       <div className="alcohol-container">
         {alcoholList.map((item) => (
-          <div
-            key={item.postId}
-            className="alcohol-item-wrap"
-            onClick={() => handleSaveToLocalStorage(item)}
-          >
+          <div key={item.postId} className="alcohol-item-wrap">
             <Link to={`/alcohol/${item.postId}`} className="link-img-tag">
               <img
                 src={item.postImage}
