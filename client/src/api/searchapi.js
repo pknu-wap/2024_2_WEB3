@@ -2,27 +2,22 @@ import axios from "axios";
 
 // Axios 인스턴스 생성
 const apiClient = axios.create({
-  baseURL: process.env.REACT_APP_API_ROUTE, // .env에서 설정한 baseURL 사용
+  baseURL: process.env.REACT_APP_API_ROUTE, // .env에 설정된 baseURL
 });
 
-const searchapi = async (drinkName, page) => {
+const searchapi = async (drinkName) => {
   try {
-    const response = await apiClient.get(`/api/post/search?drinkName=${drinkName}&page=${page}`, {
-      params: {
-        drinkName: encodeURIComponent(drinkName), // URL 인코딩된 drinkName 전달
-        page,
-      },
-    });
+    const response = await apiClient.get(`/api/post/search?drinkName=${encodeURIComponent(drinkName)}`);
 
-    // 성공 응답을 반환, 데이터는 response.data.data.postDtos
+    // 성공 응답 처리
     if (response.data.code === "200") {
-      return response.data.data.postDtos; // 필요한 데이터 반환
+      return response.data.data.postDtos; // 검색 결과 반환
     } else {
       throw new Error(response.data.message || "전통주 검색 실패");
     }
   } catch (error) {
     console.error("API 호출 중 에러 발생:", error.message);
-    throw error; // 에러를 호출한 곳에서 처리하도록 전달
+    throw error; // 에러를 상위 호출로 전달
   }
 };
 

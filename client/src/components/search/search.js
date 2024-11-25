@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import searchapi from "../../api/searchapi";
 import "./search.css";
 
 function SearchPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-  const [page, setPage] = useState(1);  // 페이지 상태 추가
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);  // page 상태 추가
 
-  // API로부터 데이터를 검색해서 필터링하는 함수
   const fetchData = async () => {
     try {
       setLoading(true);
       setError(null);
-      const result = await searchapi(searchQuery, page);
-      console.log(result); // 데이터가 제대로 오는지 확인
-      setFilteredData(result);  // 검색 결과를 업데이트
+      const result = await searchapi(searchQuery, page);  // page를 포함한 API 호출
+      console.log(result); // API 응답 확인
+      if (result && Array.isArray(result)) {
+        setFilteredData(result);  // 정상적인 데이터만 업데이트
+      } else {
+        setFilteredData([]); // 잘못된 데이터일 경우 빈 배열로 처리
+      }
     } catch (error) {
       setError("검색 중 문제가 발생했습니다.");
     } finally {
@@ -24,16 +27,19 @@ function SearchPage() {
     }
   };
 
-  // searchQuery가 변경되거나 페이지가 바뀔 때마다 fetchData 호출
-  useEffect(() => {
-    if (searchQuery.trim() !== "") {
-      fetchData();
-    }
-  }, [searchQuery, page]);
-
   const handleSearch = () => {
-    setPage(1);  // 새 검색 시 페이지를 1로 리셋
+    if (searchQuery.trim() === "") {
+      setError("검색어를 입력해주세요."); // 검색어가 비어있으면 에러 처리
+      return;
+    }
+    setPage(1); // 검색할 때마다 페이지를 1로 초기화
     fetchData();
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch(); // 엔터 키 입력 시 검색 실행
+    }
   };
 
   return (
@@ -43,26 +49,31 @@ function SearchPage() {
         placeholder="원하는 술을 검색해 보세요!"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
+        onKeyDown={handleKeyPress}
         className="search-input"
       />
-      <img 
-        src="/images/search-icon.png" // 돋보기 아이콘 이미지 경로로 변경
+      <img
+        src="/images/search-icon.png"
         alt="search icon"
-        onClick={handleSearch} // 돋보기 클릭 시 데이터 필터링 결과 출력
+        onClick={handleSearch}
         className="search-icon"
       />
       {loading && <p>검색 중...</p>}
       {error && <p>{error}</p>}
       <ul>
-        {filteredData.map((item, index) => (
-          <li key={index}>
-            <div>{item.drinkName}</div>
-            <div>{item.preferenceLevel}</div>
-            <div>{item.area}</div>
-            <div>{item.type}</div>
-            <img src={item.postImage} alt={item.drinkName} />
-          </li>
-        ))}
+        {Array.isArray(filteredData) && filteredData.length > 0 ? (
+          filteredData.map((item, index) => (
+            <li key={index}>
+              <div>{item.drinkName}</div>
+              <div>{item.preferenceLevel}</div>
+              <div>{item.area}</div>
+              <div>{item.type}</div>
+              <img src={item.postImage} alt={item.drinkName} />
+            </li>
+          ))
+        ) : (
+          <p>검색 결과가 없습니다.</p>
+        )}
       </ul>
     </div>
   );
