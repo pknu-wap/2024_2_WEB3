@@ -5,6 +5,8 @@ import FruitWinePage from "./pages/FruitWinePage";
 import SignInPage from "./pages/SignInPage";
 import Mypage from "./pages/mypage";
 import SignUpPage from "./pages/SignUpPage";
+import SearchPage from "./components/search/search";
+import ResultsPage from "./pages/searchresult";
 import { BrowserRouter, Router, Route, Routes, Link } from "react-router-dom";
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
           <Route path="/signIn" element={<SignInPage />} />
           <Route path="/signUp" element={<SignUpPage />} />
           <Route path="/mypage" element={<Mypage />} />
+          <Route path="/" element={<SearchPage />} />
+          <Route path="/results" element={<ResultsPage />} />
         </Routes>
       </BrowserRouter>
     </>
