@@ -25,6 +25,7 @@ public class JWTFilter extends OncePerRequestFilter {
                 request.getRequestURI().startsWith("/api/post/all")||
                 request.getRequestURI().startsWith("/api/post/cheongtakju") ||
                 request.getRequestURI().startsWith("/api/post/fruitWine") ||
+                request.getRequestURI().startsWith("/api/post/info") ||
                 request.getRequestURI().startsWith("/api/post/search")) {
 
             filterChain.doFilter(request,response);
