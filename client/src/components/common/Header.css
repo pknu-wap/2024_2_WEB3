@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between; /* 좌우로 요소를 분배 */
+  align-items: center; /* 세로 가운데 정렬 */
+  position: absolute;
+  overflow: hidden;
+  flex-wrap: nowrap; /* 요소들이 줄바꿈 없이 수평으로 배치 */
+  box-sizing: border-box; /* 패딩 포함 너비 조정 */
+  top: 0;
+  left: 0;
+
+  padding: 9px 13%; /* 상하, 좌우 여백 */
+  background-color: transparent;
+  z-index: 100;
+  width: 100%;
+  box-sizing: border-box; /* 패딩과 보더를 포함하여 너비 계산 */
+}
+
+.logo-img {
+  /* width: 31.47px; */
+  height: 51px;
+}
+
+.login-button-section {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.sign-in-button {
+  width: 70px;
+  height: 30px;
+  top: 28px;
+  border-radius: 5.75px;
+  background-color: #ffffff;
+  color: black;
+  border: none;
+  font-size: 12px;
+  font-family: "Pretendard", sans-serif;
+  transition: 0.2s;
+}
+
+.sign-in-button:hover {
+  cursor: pointer;
+  background-color: #ffffffdd;
+  transition: 0.2s;
+}
+
+.nav-section {
+  display: flex;
+  flex: auto;
+  white-space: nowrap;
+}
+
+.mypage-btn {
+  width: 34px;
+}
+
+.logout-button {
+  font-family: "Pretendard", sans-serif;
+  background: none;
+  border: none;
+  color: black;
+  font-size: 12px;
+  text-align: center;
+}
+
+.logout-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
