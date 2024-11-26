@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SignUpContent.css";
 import Header from "../common/Header";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signupAPI } from "../../api/signApi";
 
 const SignUpContent = () => {
@@ -32,7 +32,7 @@ const SignUpContent = () => {
   const handleSubmit = async () => {
     if (validateForm()) {
       const result = await signupAPI(id, pw, nickname);
-      if(result === 'User successfully created'){
+      if (result === "User successfully created") {
         navigate("/signIn");
       }
     }
@@ -60,7 +60,15 @@ const SignUpContent = () => {
   };
 
   return (
-    <div className="signup-background">
+    <div
+      className="signup-background"
+      style={{
+        backgroundImage: "url('/images/bg2.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <Header textColor="#574f4b" />
       <div className="signup-container">
         <div className="signup-left"></div>

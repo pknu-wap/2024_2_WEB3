@@ -8,7 +8,6 @@ export const signupAPI = async (id, pw, nickname) => {
   };
   try {
     const response = await apiClient.post(`/auth/signup`, body);
-
     return response.data;
   } catch (error) {
     throw error;
