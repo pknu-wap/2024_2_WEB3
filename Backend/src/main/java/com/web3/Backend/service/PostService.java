@@ -315,7 +315,7 @@ public class PostService {
                         .postId(post.getPostId())
                         .drinkName(post.getDrinkName())
                         .preferenceLevel(post.getPreferenceLevel())
-                        .postImage(post.getPostImage())
+                        .postImage("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + post.getPostImage())
                         .type(post.getType())
                         .area(post.getArea())
                         .rating(0.0) //rating을 사용하지 않으므로 기본값으로 설정
