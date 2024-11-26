@@ -1,5 +1,4 @@
 import "./Header.css";
-import Navigation from "../navSearchBar/Navigation";
 import logoutApi from "../../api/logoutApi.js";
 import styled from "styled-components";
 import React, { useState, useEffect, useRef } from "react";
@@ -17,13 +16,16 @@ const StyledButton = styled.button`
 
 const Header = ({ textColor: propTextColor, bgcolor }) => {
   const location = useLocation();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("accessToken")
+  );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   // 로그인 상태 확인
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
+    console.log("Access Token from localStorage:", token); // 확인 로그
     setIsLoggedIn(!!token); // 토큰이 있으면 true, 없으면 false
   }, []);
 
@@ -84,28 +86,27 @@ const Header = ({ textColor: propTextColor, bgcolor }) => {
       </div>
 
       <div className="login-button-section">
-        {/* 임시 마이페이지 버튼 */}
-        <div className="dropdown-container" ref={dropdownRef}>
-          <img
-            src="/images/mainpage/mypage-btn-img.png"
-            alt="마이페이지"
-            className="user-btn"
-            onClick={() => setIsDropdownOpen((prev) => !prev)}
-          />
-          <ul className={`dropdown-menu ${isDropdownOpen ? "open" : ""}`}>
-            <li className="dropdown-menu-item">
-              <Link to="/mypage" className="mypage-link">
-                마이페이지
-              </Link>
-            </li>
-            <li className="dropdown-menu-item" onClick={handleLogout}>
-              로그아웃
-            </li>
-          </ul>
-        </div>
-
         {isLoggedIn ? (
-          <>{/* 로그아웃, 마이페이지 */}</>
+          <>
+            <div className="dropdown-container" ref={dropdownRef}>
+              <img
+                src="/images/mainpage/mypage-btn-img.png"
+                alt="마이페이지"
+                className="user-btn"
+                onClick={() => setIsDropdownOpen((prev) => !prev)}
+              />
+              <ul className={`dropdown-menu ${isDropdownOpen ? "open" : ""}`}>
+                <li className="dropdown-menu-item">
+                  <Link to="/mypage" className="mypage-link">
+                    마이페이지
+                  </Link>
+                </li>
+                <li className="dropdown-menu-item" onClick={handleLogout}>
+                  로그아웃
+                </li>
+              </ul>
+            </div>
+          </>
         ) : (
           <Link to="/signIn">
             <StyledButton
