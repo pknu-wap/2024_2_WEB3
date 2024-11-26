@@ -1,0 +1,17 @@
+.results-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .results-container li {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .results-container img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+  }

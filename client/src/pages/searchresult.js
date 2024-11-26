@@ -4,6 +4,7 @@ import searchapi from "../api/searchapi";
 import Header from "../components/common/Header";
 import SearchPage from "../components/search/search";
 import Footer from "../components/common/Footer";
+import "./searchresult.css";
 
 
 function ResultsPage() {
