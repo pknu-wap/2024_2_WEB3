@@ -13,7 +13,7 @@ function SearchPage() {
     try {
       setLoading(true);
       setError(null);
-      const result = await searchapi(searchQuery, page);  // page를 포함한 API 호출
+      const result = await searchapi(searchQuery);  // page를 포함한 API 호출
       console.log(result); // API 응답 확인
       if (result && Array.isArray(result)) {
         setFilteredData(result);  // 정상적인 데이터만 업데이트

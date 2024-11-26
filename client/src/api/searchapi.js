@@ -7,11 +7,12 @@ const apiClient = axios.create({
 
 const searchapi = async (drinkName) => {
   try {
-    const response = await apiClient.get(`/api/post/search?drinkName=${encodeURIComponent(drinkName)}`);
+    const response = await apiClient.get(`/api/post/search?drinkName=${drinkName}`);
 
     // 성공 응답 처리
     if (response.data.code === "200") {
-      return response.data.data.postDtos; // 검색 결과 반환
+      console.log(response)
+      return response.data.data.searchResult.content; // 검색 결과 반환
     } else {
       throw new Error(response.data.message || "전통주 검색 실패");
     }
