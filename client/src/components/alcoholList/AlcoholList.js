@@ -14,9 +14,9 @@ const AlcoholList = ({ category, filters }) => {
   const fetchData = useCallback(async () => {
     if (!category) return;
     try {
-      const data = await alcoholListApi(category, page, filters);
+      const data = await alcoholListApi(category, page - 1, filters);
       setAlcoholList(data.content || []);
-      setTotalPages(data.totalPages - 1 || 1);
+      setTotalPages(data.totalPages || 1);
     } catch (error) {
       // console.log("리스트 데이터 로딩 중 오류:", error.message);
     }
