@@ -2,7 +2,7 @@ import "./Header.css";
 import logoutApi from "../../api/logoutApi.js";
 import styled from "styled-components";
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const HeaderContainer = styled.header`
   color: ${({ $textColor }) => $textColor || "rgb(236, 232, 228)"};
@@ -15,32 +15,35 @@ const StyledButton = styled.button`
 `;
 
 const Header = ({ textColor: propTextColor, bgcolor }) => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!localStorage.getItem("accessToken")
   );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
 
   // 로그인 상태 확인
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    console.log("Access Token from localStorage:", token); // 확인 로그
     setIsLoggedIn(!!token); // 토큰이 있으면 true, 없으면 false
   }, []);
 
   // 로그아웃 핸들러
   const handleLogout = async () => {
+    setIsLoading(true); // 로딩 시작
     const token = localStorage.getItem("refreshToken");
-    console.log(!!token ? "refreshToken 있음" : "refreshToken 없음"); // 확인용 상태 메시지 출력
     try {
       const response = await logoutApi(token); // API 호출
-      console.log(response.message); // "Successfully log out" 출력
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       setIsLoggedIn(false);
+      navigate("/");
     } catch (error) {
       alert("로그아웃에 실패했습니다.");
+    } finally {
+      setIsLoading(false); // 로딩 종료
     }
   };
 
@@ -79,6 +82,12 @@ const Header = ({ textColor: propTextColor, bgcolor }) => {
       $textColor={textColor}
       bgcolor={bgcolor}
     >
+      {/* 로딩 상태 표시 */}
+      {isLoading && (
+        <div className="loading-overlay">
+          <div className="loading-spinner"></div>
+        </div>
+      )}
       <div className="logo-section">
         <Link to="/">
           <img src="/images/Holjjak-logo.png" alt="Logo" className="logo-img" />

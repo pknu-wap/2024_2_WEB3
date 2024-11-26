@@ -10,7 +10,6 @@ const AlcoholList = ({ category, filters, onResetFilters }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
   const [imageLoadStates, setImageLoadStates] = useState({}); // 이미지 로드 상태
-  const [errorMessage, setErrorMessage] = useState(""); // 에러 메시지
   const [loadedStates, setLoadedStates] = useState({}); // 이미지 유지
   const [searchParams, setSearchParams] = useSearchParams(); // URL 쿼리 관리
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
