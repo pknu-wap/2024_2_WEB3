@@ -42,7 +42,7 @@ public class PostService {
                 PostDto postDto = new PostDto();
                 postDto.setDrinkName(post.getDrinkName());
                 postDto.setPreferenceLevel(post.getPreferenceLevel());
-                postDto.setPostImage(post.getPostImage());
+                postDto.setPostImage("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + post.getPostImage());
                 postDto.setType(post.getType());
                 postDto.setArea(post.getArea());
                 postDto.setRating(post.getRating());

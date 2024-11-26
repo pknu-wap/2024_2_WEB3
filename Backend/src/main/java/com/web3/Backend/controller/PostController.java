@@ -1,5 +1,7 @@
 package com.web3.Backend.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.web3.Backend.domain.Comment;
 import com.web3.Backend.dto.CustomUserDetails;
 import com.web3.Backend.dto.RatingDto;
@@ -20,6 +22,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
+
 @RestController
 @RequestMapping("/api")
 public class PostController {
@@ -31,12 +34,17 @@ public class PostController {
     public ResponseEntity<Response> getPostInfo(@PathVariable int postId) {
         PostDto postDto = postService.getPostById(postId);
 
-        Map<String, Object> data = new HashMap<>();
+        // ObjectMapper로 JSON 데이터를 동적으로 가공
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode filteredData = mapper.valueToTree(postDto);
 
-        data.put("postDto", postDto);
+        // postId 필드 제거
+        filteredData.remove("postId");
 
+        // ObjectNode를 Map<String, Object>로 변환
+        Map<String, Object> responseData = mapper.convertValue(filteredData, Map.class);
 
-        Response response = new Response("200", "게시물 정보 조회 성공", data);
+        Response response = new Response("200", "게시물 정보 조회 성공", responseData);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
