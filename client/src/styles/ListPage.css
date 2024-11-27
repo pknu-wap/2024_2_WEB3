@@ -1,0 +1,27 @@
+.ListPage {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: rgb(242, 238, 231);
+  z-index: 0;
+}
+
+.list-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%; /* 화면 너비를 채움 */
+  z-index: -1; /* 다른 요소 뒤로 보냄 */
+  margin: 0;
+  padding: 0;
+}
+
+.list-footer-img {
+  width: 100%; /* 이미지를 화면 너비에 맞춤 */
+  opacity: 0.8; /* 이미지가 투명하게 보이도록 설정 */
+}
+
+.Footer {
+  position: relative; /* 푸터를 이미지 위에 올림 */
+  z-index: 1; /* 푸터는 이미지 위에 있어야 하므로 z-index를 높게 설정 */
+}
