@@ -70,7 +70,15 @@ const SignUpContent = () => {
       }}
     >
       <Header textColor="#574f4b" />
-      <div className="signup-container">
+      <div
+        className="signup-container"
+        style={{
+          backgroundImage: "url('/images/signbg.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="signup-left"></div>
         <div className="signup-right">
           <div className="signup-form">

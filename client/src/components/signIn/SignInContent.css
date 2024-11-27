@@ -2,9 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  height: 80vh;
-  margin-top: 61px;
+  background-color: #F2EEE7;
+  height: 100%; /* 변경 */
+  min-height: 100vh; /* 최소 높이를 화면 높이로 설정 */
+  margin-top: 0;
+  margin-bottom: 0; /* 변경 */
 }
 
 .signin-container {
@@ -12,7 +14,10 @@
   width: 80%;
   max-width: 800px;
   height: 400px;
-  background-color: #f5f5f5;
+  height: auto;
+  aspect-ratio: 1.525;
+  max-height: 525px;
+  background-color: #f2eee7;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -20,7 +25,6 @@
 
 .signin-left {
   width: 40%;
-  background-color: #ffffff;
 }
 
 .signin-right {
@@ -28,6 +32,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #f4f3ef;
 }
 
 .signin-form {
@@ -50,7 +55,11 @@
 }
 
 .signin-input::placeholder {
-  color: black;
+  color: #685959;
+  font-size: 14px;
+  font-weight: 400;
+  padding-left: 20px;
+  font-family: "Pretendard";
 }
 
 .signin-button {
@@ -81,4 +90,37 @@
 .signin-signup-button a {
   color: inherit;
   text-decoration: none;
+}
+
+/* 로딩 오버레이 */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* 반투명 검은 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* 가장 앞쪽에 표시 */
+}
+
+/* 로딩 애니메이션 */
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3; /* 회색 배경 */
+  border-top: 5px solid #947b64; /* 파란색 */
+  border-radius: 50%;
+  animation: spin 1s linear infinite; /* 회전 애니메이션 */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

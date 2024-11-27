@@ -50,7 +50,7 @@ const DetailAlcoholPage = () => {
   }
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <Header />
       <Wrapper>
         <Content>
@@ -69,7 +69,9 @@ const DetailAlcoholPage = () => {
               </DetailItem>
               <DetailItem>
                 <DetailLabel>알코올 도수</DetailLabel>
-                <DetailValue>{alcohol.preferenceLevel || alcohol.alcoholLevel}도</DetailValue>
+                <DetailValue>
+                  {alcohol.preferenceLevel || alcohol.alcoholLevel}도
+                </DetailValue>
               </DetailItem>
               <DetailItem>
                 <DetailLabel>용량</DetailLabel>
@@ -95,7 +97,12 @@ const DetailAlcoholPage = () => {
           </RightContent>
         </Content>
       </Wrapper>
-      <Footer />
+      <FooterWrapper>
+        <Footer />
+        <FooterImg>
+          <img src="/images/bg2.png" alt="footer-img" />
+        </FooterImg>
+      </FooterWrapper>
     </div>
   );
 };
@@ -112,6 +119,30 @@ const LoadingWrapper = styled.div`
   background-color: #f9f5ef;
 `;
 
+const FooterImg = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0.8;
+
+  & img {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+`;
+
+const FooterWrapper = styled.div`
+  position: relative;
+  z-index: 1;
+  background-color: #fff;
+  padding: 20px;
+`;
+
 const LoadingText = styled.p`
   font-size: 24px;
   font-weight: bold;
@@ -119,7 +150,8 @@ const LoadingText = styled.p`
   animation: blink 1.5s infinite;
 
   @keyframes blink {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
     }
     50% {
@@ -131,14 +163,14 @@ const LoadingText = styled.p`
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  height: 130vh;
   display: flex;
   flex-direction: column;
   background-color: #f9f5ef;
 `;
 
 const Content = styled.div`
-  margin-top: 62px;
+  margin-top: 0px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -146,40 +178,46 @@ const Content = styled.div`
 `;
 
 const LeftContent = styled.div`
-  background-color: #fff;
   padding-top: 200px;
   width: 42%;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 3;
 `;
 
 const ProductImage = styled.img`
   max-width: 300px;
   height: auto;
   object-fit: contain;
+  position: absolute;
+  top: 200px;
 `;
 
 const RightContent = styled.div`
   background-color: #f2eee7;
   width: 58%;
   display: flex;
+  height: 130vh;
   flex-direction: column;
   padding: 200px 77px 20px 20px;
 `;
 
 const Title = styled.h1`
+  z-index: 3;
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 20px;
   color: #333;
-  background-color: #d9d9d9;
+  background-color: #d4cdc1;
   border-radius: 28px;
   padding: 5px 20px;
 `;
 
 const Details = styled.div`
   margin-bottom: 20px;
+  z-index: 3;
 `;
 
 const DetailItem = styled.div`
@@ -217,6 +255,7 @@ const AnjuWrapper = styled.div`
   gap: 20px;
   margin: 20px 0;
   align-items: center;
+  flex-direction: column;
 `;
 
 const AnjuItem = styled.div`
