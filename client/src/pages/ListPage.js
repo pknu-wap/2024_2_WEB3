@@ -1,6 +1,5 @@
-import { CATEGORY } from "../constants";
-import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import React, { useEffect, useState, useCallback } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import AlcoholList from "../components/alcoholList/AlcoholList";
 import Header from "../components/common/Header";
@@ -9,8 +8,6 @@ import Footer from "../components/common/Footer";
 import Navigation from "../components/navSearchBar/Navigation";
 import Filters from "../components/filters/Filters";
 import "../styles/ListPage.css";
-
-import alcoholListApi from "../api/alcoholListApi";
 
 // SearchBar의 스타일 확장
 const ListSearchBar = styled(SearchBar)`
@@ -22,22 +19,31 @@ const ListPage = () => {
   const [filters, setFilters] = useState({ preferenceLevel: "", areas: [] });
   const [currentCategory, setCurrentCategory] = useState(category);
 
+  // 필터 초기화 함수 (useCallback으로 메모이제이션)
+  const resetFilters = useCallback(() => {
+    setFilters({ preferenceLevel: "", areas: [] });
+  }, []);
+
   useEffect(() => {
-    // 카테고리 변경 시 필터 초기화 및 API 호출
+    // 카테고리 변경 시 필터 초기화
     if (category !== currentCategory) {
-      setFilters({ alcoholLevel: "", regions: [] }); // 필터 초기화
+      resetFilters(); // 필터 초기화
       setCurrentCategory(category); // 현재 카테고리 업데이트
     }
-  }, [category, currentCategory, filters]);
+  }, [category, currentCategory, resetFilters]);
 
   return (
     <div className="ListPage">
-      <Header bgColor="#F2EEE7" />
+      <MemoizedHeader bgColor="#F2EEE7" />
       <ListSearchBar />
-      <Navigation />
+      <MemoizedNavigation />
       <Filters onFilterChange={setFilters} category={category} />
-      <AlcoholList category={category} filters={filters} />
-      <Footer className="footer1" />
+      <AlcoholList
+        category={category}
+        filters={filters}
+        onResetFilters={resetFilters}
+      />
+      <MemoizedFooter className="footer1" />
       <div className="list-footer">
         <img
           src="/images/listPage/list-footer.png"
@@ -48,5 +54,10 @@ const ListPage = () => {
     </div>
   );
 };
+
+// Memoize components to prevent unnecessary re-renders
+const MemoizedHeader = React.memo(Header);
+const MemoizedFooter = React.memo(Footer);
+const MemoizedNavigation = React.memo(Navigation);
 
 export default ListPage;

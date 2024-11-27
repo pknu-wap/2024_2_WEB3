@@ -19,9 +19,6 @@ const alcoholListApi = async (category, page, filters = {}) => {
     queryParams.toString() ? `?${queryParams.toString()}` : ""
   }`;
 
-  console.log("filters 값:", filters);
-  // console.log("생성된 URL:", url);
-
   try {
     const response = await apiClient.get(url);
     // console.log("서버 응답 메시지:", response.data.message);
@@ -29,8 +26,7 @@ const alcoholListApi = async (category, page, filters = {}) => {
   } catch (error) {
     // 서버 응답이 있을 경우 처리
     if (error.response && error.response.data && error.response.data.message) {
-      console.log(`서버 에러 메시지: ${error.response.data.message}`);
-      alert(error.response.data.message);
+      // console.log(`서버 에러 메시지: ${error.response.data.message}`);
     } else {
       // 서버 응답이 없거나 다른 종류의 에러일 경우 기본 처리
       console.log(`API 요청 실패: ${error.message}`);

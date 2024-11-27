@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
-// import "./SearchBar.css";
+import "./SearchBar.css";
 
 // SearchBar 기본 스타일 정의
 const StyledSearchBar = styled.div`

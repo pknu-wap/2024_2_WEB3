@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import "./Filters.css";
 
 const Filters = ({ onFilterChange, category }) => {
@@ -6,6 +7,7 @@ const Filters = ({ onFilterChange, category }) => {
   const [selectedRegions, setSelectedRegions] = useState([]); // 지역 필터
   const [open, setOpen] = useState(false); // 필터 열기, 닫기 상태
   const filterRef = useRef(null); // 필터 드롭다운의 DOM 참조
+  const [searchParams, setSearchParams] = useSearchParams();
 
   // 도수 및 지역 옵션
   const alcoholOptions = ["0~5%", "5~10%", "10~15%", "15~50%"];
@@ -88,6 +90,20 @@ const Filters = ({ onFilterChange, category }) => {
       onFilterChange(filters);
     }
     setOpen(false); // 완료 시 드롭다운 닫기
+
+    // 유효한 필터 값만 URL에 추가
+    const updatedParams = {};
+    if (filters.preferenceLevel) {
+      updatedParams.preferenceLevel = filters.preferenceLevel;
+    }
+    if (filters.areas && filters.areas.length > 0) {
+      updatedParams.areas = filters.areas.join(",");
+    }
+
+    setSearchParams({
+      preferenceLevel: filters.preferenceLevel,
+      areas: filters.areas.join(","),
+    });
   };
 
   return (
