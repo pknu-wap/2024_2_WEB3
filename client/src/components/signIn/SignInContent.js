@@ -44,6 +44,7 @@ const SignInContent = () => {
           <div className="loading-spinner"></div>
         </div>
       )}
+
       <div
         className="signin-container"
         style={{
@@ -53,6 +54,7 @@ const SignInContent = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
+
         <div className="signin-left"></div>
         <div className="signin-right">
           <div className="signin-form">

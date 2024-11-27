@@ -101,6 +101,11 @@
   outline: none; /* 포커스 시 테두리도 제거 */
   background-color: #f6f6f6;
   text-align: right;
+  font-size: 16px; /* 텍스트 입력 크기 */
+}
+
+.percentage {
+  font-size: 16px !important; /* 입력 텍스트와 동일한 크기 */
 }
 
 .preference-score span:first-child {
@@ -114,7 +119,13 @@
 
 /* 담은 술 섹션 */
 .favorite-alcohol h4 {
+  margin-bottom: 10px;
+}
+
+.add-btn{
+  border: none;
   margin-bottom: 30px;
+  cursor: pointer;
 }
 
 .alcohol-grid {
@@ -137,11 +148,12 @@
   color: #888;
 }
 
-.alcohol-item.add-more {
+/* .alcohol-item.add-more {
   background-color: #d0d0d0;
   font-weight: bold;
   cursor: pointer;
 }
+*/
 
 .alcohol-item.empty {
   background-color: #f0f0f0;
@@ -164,4 +176,10 @@
 
 .profile-info h2 {
   margin: 0; /* 기본 마진 제거 */
+}
+
+.nickname-error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
 }
