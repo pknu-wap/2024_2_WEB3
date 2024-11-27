@@ -1,10 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./mypage.css"; // CSS 파일을 불러옵니다
 import Header from "../components/common/Header";
-import Footer from "../components/common/Footer";
-import Navigation from "../components/navSearchBar/Navigation";
 import { useNavigate } from "react-router-dom";
-import { getUserInfo, getUserBookmarks, updateUserInfo, updateUserPreference, updateUserProfileImage } from "../api/mypageapi"; // API 함수 import
+import {
+  getUserInfo,
+  getUserBookmarks,
+  updateUserInfo,
+  updateUserPreference,
+  updateUserProfileImage,
+} from "../api/mypageapi"; // API 함수 import
+import "./mypage.css";
 
 function Mypage() {
   const [isEditing, setIsEditing] = useState(false); // 편집 모드 상태
@@ -12,6 +16,7 @@ function Mypage() {
   const [nicknameError, setNicknameError] = useState(""); // 닉네임 오류 메시지 상태
   const [preferenceScore, setPreferenceScore] = useState(""); // 선호도수 상태
   const [profileImage, setProfileImage] = useState("default-avatar.png"); // 프로필 이미지 상태
+  const [bookmarks, setBookmarks] = useState([]);
   const fileInputRef = useRef(null); // 파일 입력을 위한 ref 생성
   const navigate = useNavigate();
 
@@ -19,16 +24,32 @@ function Mypage() {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const userInfo = await getUserInfo();
-        setNickname(userInfo.nickname);
-        setPreferenceScore(userInfo.preference || "");
-        setProfileImage(userInfo.profileImage || "default-avatar.png");
+        const response = await getUserInfo();
+        const { userDto } = response;
+
+        setNickname(userDto.userId); // userId = 사용자가 입력한 닉네임!! (not userName!)
+        setPreferenceScore(userDto.preference || "");
+        setProfileImage(userDto.profileImage || "default-avatar.png");
       } catch (error) {
-        console.error("사용자 정보 조회 중 오류 발생:", error.message);
+        console.log("사용자 정보 조회 중 오류 발생:", error.message);
       }
     };
 
     fetchUserInfo();
+  }, []);
+
+  // 북마크 정보
+  useEffect(() => {
+    const fetchBookmarks = async () => {
+      try {
+        const data = await getUserBookmarks();
+        setBookmarks(data); // 북마크 데이터를 상태에 저장
+      } catch (error) {
+        // console.log("북마크 정보 조회 중 오류 발생:", error.message);
+      }
+    };
+
+    fetchBookmarks();
   }, []);
 
   const handleEditClick = () => {
@@ -36,24 +57,51 @@ function Mypage() {
     setNicknameError(""); // 편집 모드 들어갈 때 오류 메시지 초기화
   };
 
+  // const handleSaveClick = async () => {
+  //   setIsEditing(false); // 편집 모드 해제
+
+  //   try {
+  //     // 닉네임 수정
+  //     if (nickname !== "") {
+  //       await updateUserInfo(nickname);
+  //     }
+  //     // 선호 도수 설정
+  //     if (preferenceScore !== "") {
+  //       await updateUserPreference(preferenceScore);
+  //     }
+  //     // 프로필 사진 수정
+  //     if (profileImage !== "default-avatar.png") {
+  //       await updateUserProfileImage(profileImage);
+  //     }
+  //   } catch (error) {
+  //     console.error("수정 중 오류 발생:", error.message);
+  //   }
+  // };
+
   const handleSaveClick = async () => {
     setIsEditing(false); // 편집 모드 해제
 
+    const promises = [];
+
     try {
-      // 닉네임 수정
+      // 병렬 API 호출
       if (nickname !== "") {
-        await updateUserInfo(nickname);
+        promises.push(updateUserInfo(nickname));
       }
-      // 선호 도수 설정
       if (preferenceScore !== "") {
-        await updateUserPreference(preferenceScore);
+        promises.push(updateUserPreference(preferenceScore));
       }
-      // 프로필 사진 수정
       if (profileImage !== "default-avatar.png") {
-        await updateUserProfileImage(profileImage);
+        promises.push(updateUserProfileImage(profileImage));
       }
+
+      // 모든 수정 요청 완료 대기
+      await Promise.all(promises);
+      console.log("모든 수정이 성공적으로 완료되었습니다.");
     } catch (error) {
       console.error("수정 중 오류 발생:", error.message);
+      // 사용자에게 에러 알림
+      alert("수정 중 오류가 발생했습니다. 다시 시도해주세요.");
     }
   };
 
@@ -75,14 +123,31 @@ function Mypage() {
     }
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0]; // 선택된 파일
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0]; // 선택된 파일
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setProfileImage(reader.result); // 파일을 읽고 이미지로 설정
+  //     };
+  //     reader.readAsDataURL(file); // 파일을 데이터 URL로 읽기
+  //   }
+  // };
+
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImage(reader.result); // 파일을 읽고 이미지로 설정
-      };
-      reader.readAsDataURL(file); // 파일을 데이터 URL로 읽기
+      const formData = new FormData();
+      formData.append("profileImage", file); // 명세서에 따른 필드 이름
+
+      try {
+        const updatedProfile = await updateUserProfileImage(formData);
+        setProfileImage(updatedProfile.profileImageUrl); // 상태 업데이트
+        console.log("프로필 사진 URL:", updatedProfile.profileImageUrl);
+      } catch (error) {
+        console.error("프로필 사진 업데이트 중 오류:", error.message);
+        alert("프로필 사진을 변경하는 데 실패했습니다.");
+      }
     }
   };
 
@@ -105,7 +170,7 @@ function Mypage() {
   return (
     <div className="profile-page">
       <Header textColor="#574f4b" />
-      
+
       <div className="profile-left">
         <div className="profile-picture">
           <img src={profileImage} alt="" className="profile-img" />
@@ -119,7 +184,9 @@ function Mypage() {
                 onFocus={handleNicknameFocus} // 클릭 시 빈 칸으로 설정
                 className="nickname-input"
               />
-              {nicknameError && <p className="nickname-error">{nicknameError}</p>}
+              {nicknameError && (
+                <p className="nickname-error">{nicknameError}</p>
+              )}
               <div className="button-container">
                 <button className="edit-btn" onClick={openFileDialog}>
                   사진 변경
@@ -176,15 +243,18 @@ function Mypage() {
               </button>
             </div>
             <div className="alcohol-grid">
-              <div className="alcohol-item empty"></div>
-              <div className="alcohol-item empty"></div>
-              <div className="alcohol-item empty"></div>
-              <div className="alcohol-item empty"></div>
-              {/* 두 번째 줄 */}
-              <div className="alcohol-item empty"></div>
-              <div className="alcohol-item empty"></div>
-              <div className="alcohol-item empty"></div>
-              <div className="alcohol-item empty"></div>
+              {bookmarks.length > 0 ? (
+                bookmarks.map((bookmark) => (
+                  <div className="alcohol-item" key={bookmark.postId}>
+                    <img
+                      src={bookmark.postImage}
+                      alt={`Post ${bookmark.postId}`}
+                    />
+                  </div>
+                ))
+              ) : (
+                <p>북마크가 없습니다.</p>
+              )}
             </div>
           </div>
         </div>
@@ -199,6 +269,5 @@ function Mypage() {
     </div>
   );
 }
-
 
 export default Mypage;
