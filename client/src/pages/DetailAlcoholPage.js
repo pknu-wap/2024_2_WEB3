@@ -44,7 +44,7 @@ const DetailAlcoholPage = () => {
   if (loading) {
     return (
       <LoadingWrapper>
-        <LoadingText>로딩 중입니다...</LoadingText>
+        <Logo src="/images/Holjjak-logo.png" alt="Loading Logo" />
       </LoadingWrapper>
     );
   }
@@ -110,6 +110,22 @@ const DetailAlcoholPage = () => {
 export default DetailAlcoholPage;
 
 // Styled Components
+
+const Logo = styled.img`
+  width: 80px;
+  height: 80px;
+  animation: blink 1.5s infinite;
+
+  @keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+`;
+
 const LoadingWrapper = styled.div`
   display: flex;
   justify-content: center;
