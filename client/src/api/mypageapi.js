@@ -5,10 +5,22 @@ const apiClient = axios.create({
   baseURL: process.env.REACT_APP_API_ROUTE, // .env에서 설정한 baseURL 사용
 });
 
+// 인증 토큰 추가 (요청 인터셉터 활용)
+apiClient.interceptors.request.use((config) => {
+    const token = localStorage.getItem("refreshToken"); // 토큰을 로컬 스토리지에서 가져옴
+    console.log(!!token)
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`; // 인증 헤더 추가
+    }
+    return config;
+  }, (error) => {
+    return Promise.reject(error);
+  });
+
 // 1. 내 정보 확인
 const getUserInfo = async () => {
   try {
-    const response = await apiClient.get("/api/mypage/info");
+    const response = await apiClient.get("api/mypage/info");
     if (response.data.code === "200") {
       return response.data.data;  // 내 정보 반환
     } else {
@@ -23,7 +35,7 @@ const getUserInfo = async () => {
 // 2. 북마크 확인
 const getUserBookmarks = async () => {
   try {
-    const response = await apiClient.get("/api/mypage/bookmarks");
+    const response = await apiClient.get("api/mypage/bookmarks");
     if (response.data.code === "200") {
       return response.data.data;  // 북마크 반환
     } else {
@@ -38,7 +50,7 @@ const getUserBookmarks = async () => {
 // 3. 이름 수정
 const updateUserInfo = async (name) => {
   try {
-    const response = await apiClient.post("/api/mypage/updateInfo", {
+    const response = await apiClient.post("api/mypage/updateInfo", {
       name,
     });
     if (response.data.code === "200") {
@@ -55,7 +67,7 @@ const updateUserInfo = async (name) => {
 // 4. 선호 도수 설정
 const updateUserPreference = async (preference) => {
   try {
-    const response = await apiClient.post("/api/mypage/updatePreference", {
+    const response = await apiClient.post("api/mypage/updatePreference", {
       preference,
     });
     if (response.data.code === "200") {
@@ -72,7 +84,7 @@ const updateUserPreference = async (preference) => {
 // 5. 프로필 사진 수정
 const updateUserProfileImage = async (formData) => {
   try {
-    const response = await apiClient.post("/api/mypage/updateProfileImage", formData, {
+    const response = await apiClient.post("api/mypage/updateProfileImage", formData, {
       headers: {
         "Content-Type": "multipart/form-data",  // 이미지 업로드를 위한 헤더 설정
       },

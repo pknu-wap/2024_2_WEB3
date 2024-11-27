@@ -3,16 +3,14 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import AlcoholList from "../components/alcoholList/AlcoholList";
 import Header from "../components/common/Header";
-import SearchBar from "../components/navSearchBar/SearchBar";
+
 import Footer from "../components/common/Footer";
 import Navigation from "../components/navSearchBar/Navigation";
 import Filters from "../components/filters/Filters";
+import SearchPage from "../components/search/search"
+
 import "../styles/ListPage.css";
 
-// SearchBar의 스타일 확장
-const ListSearchBar = styled(SearchBar)`
-  padding-top: 7%;
-`;
 
 const ListPage = () => {
   const { category } = useParams(); // URL에서 category 가져오기
@@ -35,7 +33,7 @@ const ListPage = () => {
   return (
     <div className="ListPage">
       <MemoizedHeader bgColor="#F2EEE7" />
-      <ListSearchBar />
+      <SearchPage />
       <MemoizedNavigation />
       <Filters onFilterChange={setFilters} category={category} />
       <AlcoholList

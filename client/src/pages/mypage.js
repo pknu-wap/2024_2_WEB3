@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./mypage.css"; // CSS 파일을 불러옵니다
 import Header from "../components/common/Header";
+import Footer from "../components/common/Footer";
+import Navigation from "../components/navSearchBar/Navigation";
 import { useNavigate } from "react-router-dom";
 import { getUserInfo, getUserBookmarks, updateUserInfo, updateUserPreference, updateUserProfileImage } from "../api/mypageapi"; // API 함수 import
 
@@ -97,7 +99,7 @@ function Mypage() {
   };
 
   const handleAddAlcoholClick = () => {
-    navigate("/cheongtakju");
+    navigate("/list/all");
   };
 
   return (
@@ -189,5 +191,6 @@ function Mypage() {
     </div>
   );
 }
+
 
 export default Mypage;
