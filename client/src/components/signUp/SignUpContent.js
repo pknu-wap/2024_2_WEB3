@@ -19,14 +19,27 @@ const SignUpContent = () => {
 
   const validateForm = () => {
     const newErrors = {
-      // idError: id.includes("@") ? "" : "@ 가 포함되어야 합니다.",
+      idError: /^[a-zA-Z0-9]{2,10}@[a-zA-Z0-9]{2,20}$/.test(id)
+        ? ""
+        : "아이디는 2~10자의 영문자 또는 숫자와 '@' 기호, 그리고 뒤에 2~20자의 영문자 또는 숫자가 포함되어야 합니다.",
       pwError: pw.length >= 8 ? "" : "8자리 이상 입력해주세요.",
       pwCheckError: pw === pwCheck ? "" : "비밀번호와 일치하지 않습니다.",
+      nicknameError:
+        nickname.length >= 2 &&
+        nickname.length <= 10 &&
+        /^[가-힣a-zA-Z]+$/.test(nickname)
+          ? ""
+          : "닉네임은 2~10자이며 숫자를 제외한 한글과 영문 문자만 가능합니다.",
     };
     setErrors(newErrors);
 
     // 모든 입력이 올바를 때만 true 반환
-    return !newErrors.idError && !newErrors.pwError && !newErrors.pwCheckError;
+    return (
+      !newErrors.idError &&
+      !newErrors.pwError &&
+      !newErrors.pwCheckError &&
+      !newErrors.nicknameError
+    );
   };
 
   const handleSubmit = async () => {
@@ -117,6 +130,9 @@ const SignUpContent = () => {
               className="signup-input"
               onChange={(e) => setNickname(e.target.value)}
             />
+            {errors.nicknameError && (
+              <div className="error-text">{errors.nicknameError}</div>
+            )}
 
             <div className="signup-button" onClick={handleSubmit}>
               회원가입 완료
