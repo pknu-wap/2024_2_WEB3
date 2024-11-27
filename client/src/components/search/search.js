@@ -11,7 +11,7 @@ function SearchPage() {
 
   const handleSearch = () => {
     if (searchQuery.trim() === "") {
-      setError("검색어를 입력해주세요."); // 검색어가 비어있으면 에러 처리
+      setError(""); // 검색어가 비어있으면 에러 처리
       return;
     }
     setError(null);

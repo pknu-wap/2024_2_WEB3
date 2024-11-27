@@ -22,6 +22,7 @@ const getUserInfo = async () => {
   try {
     const response = await apiClient.get("api/mypage/info");
     if (response.data.code === "200") {
+      console.log(response.data.data)
       return response.data.data;  // 내 정보 반환
     } else {
       throw new Error(response.data.message || "내 정보 조회 실패");
