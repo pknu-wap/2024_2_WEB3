@@ -7,7 +7,7 @@ const apiClient = axios.create({
 
 // 인증 토큰 추가 (요청 인터셉터 활용)
 apiClient.interceptors.request.use((config) => {
-    const token = localStorage.getItem("refreshToken"); // 토큰을 로컬 스토리지에서 가져옴
+    const token = localStorage.getItem("accessToken"); // 토큰을 로컬 스토리지에서 가져옴
     console.log(!!token)
     if (token) {
       config.headers.Authorization = `Bearer ${token}`; // 인증 헤더 추가

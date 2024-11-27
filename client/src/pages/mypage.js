@@ -105,6 +105,7 @@ function Mypage() {
   return (
     <div className="profile-page">
       <Header textColor="#574f4b" />
+      
       <div className="profile-left">
         <div className="profile-picture">
           <img src={profileImage} alt="" className="profile-img" />
@@ -187,6 +188,13 @@ function Mypage() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="main-footer">
+        <img
+          src="images/mainpage/main-footer.png"
+          className="main-footer-img"
+          alt="main-footer-img"
+        />
       </div>
     </div>
   );
