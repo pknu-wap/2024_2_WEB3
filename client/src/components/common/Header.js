@@ -85,7 +85,11 @@ const Header = ({ textColor: propTextColor, bgcolor }) => {
       {/* 로딩 상태 표시 */}
       {isLoading && (
         <div className="loading-overlay">
-          <div className="loading-spinner"></div>
+          <img
+            src="/images/Holjjak-logo.png"
+            alt="leading-logo"
+            className="loading-logo"
+          />
         </div>
       )}
       <div className="logo-section">
