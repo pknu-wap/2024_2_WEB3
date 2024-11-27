@@ -89,7 +89,12 @@ const AlcoholList = ({ category, filters, onResetFilters }) => {
       {/* 로딩 상태 표시 */}
       {isLoading && (
         <div className="loading-overlay">
-          <div className="loading-spinner"></div>
+          {/* <div className="loading-spinner"></div> */}
+          <img
+            src="/images/Holjjak-logo.png"
+            alt="로딩 로고"
+            className="loading-logo"
+          />
         </div>
       )}
 
