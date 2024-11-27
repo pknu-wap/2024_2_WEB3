@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./search.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function SearchPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,11 +35,10 @@ function SearchPage() {
         onKeyDown={handleKeyPress}
         className="search-input"
       />
-      <img
-        src="/images/search-icon.png"
-        alt="search icon"
-        onClick={handleSearch}
+     <FontAwesomeIcon
+        icon={faSearch}
         className="search-icon"
+        onClick={handleSearch}
       />
       {error && <p>{error}</p>}
     </div>
