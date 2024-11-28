@@ -2,25 +2,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  height: 80vh;
-  margin-top: 61px;
+  background-color: #F2EEE7;
+  height: 100vh; /* 화면 전체 높이 */
+  padding-top: 61px; /* 상단 여백 확보 */
+  box-sizing: border-box; /* 패딩을 높이 계산에 포함 */
 }
+
 
 .signup-container {
   display: flex;
   width: 80%;
   max-width: 800px;
-  height: 400px;
-  background-color: #f5f5f5;
+  height: auto;
+  aspect-ratio: 1.525;
+  max-height: 525px;
+  background-color: #f2eee7;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  margin-top: -60px;
 }
+
 
 .signup-left {
   width: 40%;
-  background-color: #ffffff;
 }
 
 .signup-right {
@@ -28,6 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #f4f3ef;
 }
 
 .signup-form {
@@ -43,15 +49,21 @@
   padding: 8px;
   border-radius: 25px;
   font-size: 16px;
-  color: black;
+  font-family: "pretendard";
+  color: #685959;
   background-color: #fff;
-  font-weight: 700;
+  font-weight: 500;
   width: 100%;
   border: none;
+  outline: none;
 }
 
 .signup-input::placeholder {
-  color: black;
+  color: #685959;
+  font-size: 14px;
+  font-weight: 400;
+  padding-left: 20px;
+  font-family: "Pretendard";
 }
 
 .error-text {
@@ -73,6 +85,7 @@
   display: inline-flex;
   justify-content: center;
   font-weight: 700;
+  color: #685959;
 }
 
 .signup-button:hover {

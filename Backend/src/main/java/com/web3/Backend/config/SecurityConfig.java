@@ -79,6 +79,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/post/info/**").permitAll()
                         .requestMatchers("/api/post/cheongtakju/**").permitAll()
                         .requestMatchers("/api/post/fruitWine/**").permitAll()
+                        .requestMatchers("/api/post/all/**").permitAll()
                         .requestMatchers("/api/post/search").permitAll()
                         .requestMatchers("/auth/reissue").permitAll()
                         .requestMatchers("/auth/signup","/auth/login","/auth/logout","/error").permitAll()
@@ -103,6 +104,7 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://holjjak.netlify.app"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization","refresh","Content-Type"));
+        configuration.setExposedHeaders(Arrays.asList("Authorization", "refresh")); // 클라이언트가 읽을 수 있는 응답 헤더
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

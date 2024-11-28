@@ -162,6 +162,7 @@ function Mypage() {
         <div className="preference-section">
           <h3>내 취향</h3>
           <div className="preference-details">
+            
             <div className="preference-score">
               <span>선호 도수</span>
               <input
@@ -199,6 +200,7 @@ function Mypage() {
         />
       </div>
     </div>
+
   );
 }
 
