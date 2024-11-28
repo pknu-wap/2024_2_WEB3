@@ -5,6 +5,8 @@ import Footer from "../components/common/Footer";
 import Navigation from "../components/navSearchBar/Navigation";
 import { useNavigate } from "react-router-dom";
 import { getUserInfo, getUserBookmarks, updateUserInfo, updateUserPreference, updateUserProfileImage } from "../api/mypageapi"; // API 함수 import
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 function Mypage() {
   const [isEditing, setIsEditing] = useState(false); // 편집 모드 상태
@@ -170,11 +172,11 @@ function Mypage() {
               />
               {nicknameError && <p className="nickname-error">{nicknameError}</p>}
               <div className="button-container">
-                <button className="edit-btn" onClick={openFileDialog}>
+                <button className="edit-btn1" onClick={openFileDialog}>
                   사진 변경
                 </button>
-                <button className="edit-btn" onClick={handleDeleteClick}>
-                  삭제
+                <button className="edit-btn2" onClick={handleDeleteClick}>
+                   사진 삭제
                 </button>
               </div>
               <input
@@ -192,7 +194,7 @@ function Mypage() {
           ) : (
             <>
               <h2>{nickname}</h2>
-              <button className="edit-btn" onClick={handleEditClick}>
+              <button className="edit-btn0" onClick={handleEditClick}>
                 프로필 수정
               </button>
             </>
@@ -202,7 +204,10 @@ function Mypage() {
 
       <div className="profile-right">
         <div className="preference-section">
-          <h3>내 취향</h3>
+          <h3> 
+          <FontAwesomeIcon icon={faHeart} color="#d9d9d9" style={{ marginRight: '8px' }} />
+          내 취향
+          </h3>
           <div className="preference-details">
             
             <div className="preference-score">
@@ -220,16 +225,16 @@ function Mypage() {
             </div>
 
             <div className="favorite-alcohol">
-  <h4>담은 술</h4>
-  <div className="alcohol-grid">
-    {[...Array(8)].map((_, index) => (
-      <div key={index} className="alcohol-item-container">
-        <div className="alcohol-item empty"></div>
-        <button className="add-btn" onClick={handleAddAlcoholClick}>+</button>
-      </div>
-    ))}
-  </div>
-</div>
+              <h4>담은 술</h4>
+              <div className="alcohol-grid">
+              {[...Array(8)].map((_, index) => (
+              <div key={index} className="alcohol-item-container">
+              <div className="alcohol-item empty"></div>
+               <button className="add-btn" onClick={handleAddAlcoholClick}>+</button>
+                </div>
+                 ))}
+              </div>
+            </div>
 
           </div>
         </div>
