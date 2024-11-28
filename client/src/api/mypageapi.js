@@ -49,7 +49,6 @@ const getUserBookmarks = async () => {
 };
 
 // 3. 이름 수정
-
 const updateUserInfo = async ({ token, userId, nickname }) => {
   try {
       const response = await apiClient.post("/api/mypage/updateInfo", {
@@ -67,10 +66,6 @@ const updateUserInfo = async ({ token, userId, nickname }) => {
       throw error;
   }
 };
-
-
-
-
 
 // 4. 선호 도수 설정
 const updateUserPreference = async ({ preferenceLevel }) => {
