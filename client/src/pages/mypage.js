@@ -8,7 +8,7 @@ import { getUserInfo, getUserBookmarks, updateUserInfo, updateUserPreference, up
 
 function Mypage() {
   const [isEditing, setIsEditing] = useState(false); // 편집 모드 상태
-  const [nickname, setNickname] = useState("Nickname"); // 닉네임 상태
+  const [nickname, setNickname] = useState(""); // 닉네임 상태
   const [nicknameError, setNicknameError] = useState(""); // 닉네임 오류 메시지 상태
   const [preferenceScore, setPreferenceScore] = useState(""); // 선호도수 상태
   const [profileImage, setProfileImage] = useState("/images/uploads/profileImage1.png"); // 프로필 이미지 상태
