@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./search.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function SearchPage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [data, setData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-
-  // 데이터 가져오기
-  useEffect(() => {
-    axios
-      .get("/data/drinks.json")  // JSON 파일의 경로로 대체
-      .then(response => setData(response.data))
-      .catch(error => console.error("Error fetching data:", error));
-  }, []);
+  const [searchQuery, setSearchQuery] = useState(""); //searchQuery 사용자 입력 검색어 저장
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSearch = () => {
-    const results = data.filter(item =>
-      item.drinkName && item.drinkName.toLowerCase().includes(searchQuery.toLowerCase())
-    );    
-    setFilteredData(results);
+    if (searchQuery.trim() === "") {
+      setError(""); // 검색어가 비어있으면 에러 처리
+      return;
+    }
+    setError(null);
+    // 검색 결과 페이지로 이동, 쿼리 파라미터에 검색어 전달
+    navigate(`/results?query=${encodeURIComponent(searchQuery)}`);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
@@ -29,19 +32,15 @@ function SearchPage() {
         placeholder="원하는 술을 검색해 보세요!"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
+        onKeyDown={handleKeyPress}
         className="search-input"
       />
-      <img 
-        src="/images/search-icon.png" // 돋보기 아이콘 이미지 경로로 변경
-        alt="search icon"
-        onClick={handleSearch} // 돋보기 클릭 시 데이터 필터링 결과 출력
+     <FontAwesomeIcon
+        icon={faSearch}
         className="search-icon"
+        onClick={handleSearch}
       />
-      <ul>
-        {filteredData.map(item => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
+      {error && <p>{error}</p>}
     </div>
   );
 }

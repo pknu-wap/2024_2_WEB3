@@ -3,6 +3,7 @@ import logoutApi from "../../api/logoutApi.js";
 import styled from "styled-components";
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const HeaderContainer = styled.header`
   color: ${({ $textColor }) => $textColor || "rgb(236, 232, 228)"};
@@ -33,19 +34,50 @@ const Header = ({ textColor: propTextColor, bgcolor }) => {
   // 로그아웃 핸들러
   const handleLogout = async () => {
     setIsLoading(true); // 로딩 시작
-    const token = localStorage.getItem("refreshToken");
+    const refreshToken = localStorage.getItem("refreshToken");
     try {
-      const response = await logoutApi(token); // API 호출
+      await logoutApi(refreshToken); // API 호출
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       setIsLoggedIn(false);
       navigate("/");
     } catch (error) {
-      alert("로그아웃에 실패했습니다.");
+      alert(error.message);
     } finally {
       setIsLoading(false); // 로딩 종료
     }
   };
+
+  // 토큰 만료 시간 체크 및 자동 로그아웃 설정
+  const checkTokenExpiry = () => {
+    const token = localStorage.getItem("accessToken");
+    if (!token) return;
+
+    try {
+      const decodedToken = jwtDecode(token); // 토큰 만료 시간 디코딩
+      const currentTime = Date.now() / 1000; // 현재 시간 (초 단위)
+      const exp = decodedToken.exp;
+
+      // 만료 시간 확인용
+      const expDate = new Date(decodedToken.exp * 1000); // 밀리초 단위로 변환
+      console.log("만료 시간 (로컬 시간):", expDate.toLocaleString());
+      if (exp < currentTime) {
+        handleLogout(); // 이미 만료된 경우 로그아웃
+      } else {
+        const remainingTime = (exp - currentTime) * 1000; // 남은 시간 계산 (ms 단위)
+        setTimeout(handleLogout, remainingTime); // 남은 시간 후 로그아웃 예약
+      }
+    } catch (error) {
+      console.error("Invalid token:", error);
+      handleLogout(); // 토큰 오류 시도 로그아웃
+    }
+  };
+
+  // 컴포넌트가 마운트될 때 토큰 상태 확인
+  useEffect(() => {
+    checkTokenExpiry();
+    setIsLoggedIn(!!localStorage.getItem("accessToken")); // 로그인 상태 설정
+  }, []);
 
   // 경로에 따라 Header text 색상 설정
   const getTextColor = () => {
