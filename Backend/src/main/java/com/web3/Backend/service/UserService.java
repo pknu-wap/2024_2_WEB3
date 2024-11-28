@@ -84,7 +84,7 @@ public class UserService {
         return UserDto.builder()
                 .userId(user.getUserId())
                 .userName(user.getUserName())
-                .profileImageUrl(user.getProfileImageUrl())
+                .profileImageUrl("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + user.getProfileImageUrl())
                 .preferenceLevel(user.getPreferenceLevel())
                 .build();
     }
