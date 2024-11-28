@@ -5,7 +5,7 @@ import styled from "styled-components";
 import SearchBar from "../navSearchBar/SearchBar";
 import "./MainContents.css";
 import Navigation from "../navSearchBar/Navigation";
-
+import SearchPage from "../search/search"
 // SearchBar의 스타일 확장
 const MainSearchBar = styled(SearchBar)`
   width: 100%;
@@ -19,7 +19,7 @@ const MainContents = () => {
         <img src="images/mainpage/main-banner.png" className="banner-img" />
       </div>
 
-      <MainSearchBar />
+      <SearchPage />
       <Navigation />
 
       {/* 카테고리 섹션 */}
