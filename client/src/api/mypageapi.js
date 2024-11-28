@@ -51,7 +51,7 @@ const getUserBookmarks = async () => {
 // 3. 이름 수정
 const updateUserInfo = async ({ token, userId, nickname }) => {
   try {
-      const response = await apiClient.post("/api/mypage/updateInfo", {
+      const response = await apiClient.post("api/mypage/updateInfo", {
           headers: { Authorization: `Bearer ${token}` },
           body: { userId, nickname }  // userId와 nickname을 함께 전달
       });
