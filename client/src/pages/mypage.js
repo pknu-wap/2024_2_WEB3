@@ -50,8 +50,9 @@ function Mypage() {
         await updateUserInfo({ userId: nickname }); 
       }
       if (preferenceScore !== "") {
-        await updateUserPreference({preferenceLevel: preferenceScore});
+        await updateUserPreference({ preferenceLevel: parseFloat(preferenceScore) }); // 숫자(double)로 변환
       }
+      
       if (profileImage !== "default-avatar.png" && profileImage.startsWith("data:")) {
         const formData = new FormData();
         formData.append("file", profileImage);
