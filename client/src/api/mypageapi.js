@@ -49,20 +49,25 @@ const getUserBookmarks = async () => {
 };
 
 // 3. 이름 수정
-const updateUserInfo = async ({ userId }) => {
+
+const updateUserInfo = async ({ token, userId, nickname }) => {
   try {
-    const response = await apiClient.post("api/mypage/updateInfo", { userId }); // 수정
-    if (response.data.code === "200") {
-      console.log("이름 수정 성공:", response.data.data);
-      return response.data.data; // 성공적으로 수정된 데이터 반환
-    } else {
-      throw new Error(response.data.message || "이름 수정 실패");
-    }
+      const response = await apiClient.post("/api/mypage/updateInfo", {
+          headers: { Authorization: `Bearer ${token}` },
+          body: { userId, nickname }  // userId와 nickname을 함께 전달
+      });
+      if (response.data.code === "200") {
+          console.log("닉네임 수정 성공:", response.data.data);
+          return response.data.data;
+      } else {
+          throw new Error(response.data.message || "닉네임 수정 실패");
+      }
   } catch (error) {
-    console.error("이름 수정 중 오류 발생:", error.message);
-    throw error;
+      console.error("닉네임 수정 중 오류 발생:", error.message);
+      throw error;
   }
 };
+
 
 
 
@@ -89,11 +94,13 @@ const updateUserProfileImage = async (formData) => {
   try {
     const response = await apiClient.post("api/mypage/updateProfileImage", formData, {
       headers: {
-        "Content-Type": "multipart/form-data",  // 이미지 업로드를 위한 헤더 설정
+        "Content-Type": "multipart/form-data",
       },
+      withCredentials: true, // CORS가 설정된 서버와 쿠키를 공유할 경우 필요
     });
     if (response.data.code === "200") {
-      return response.data.data;  // 프로필 사진 수정 결과 반환
+      console.log("프로필 사진 수정 성공:", response.data.data);
+      return response.data.data; // 성공적으로 수정된 데이터 반환
     } else {
       throw new Error(response.data.message || "프로필 사진 수정 실패");
     }
