@@ -1,23 +1,19 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AlcoholList from "../components/alcoholList/AlcoholList";
 import Header from "../components/common/Header";
-import SearchBar from "../components/navSearchBar/SearchBar";
 import Footer from "../components/common/Footer";
 import Navigation from "../components/navSearchBar/Navigation";
 import Filters from "../components/filters/Filters";
 import "../styles/ListPage.css";
 
-// SearchBar의 스타일 확장
-const ListSearchBar = styled(SearchBar)`
-  padding-top: 7%;
-`;
-
 const ListPage = () => {
   const { category } = useParams(); // URL에서 category 가져오기
   const [filters, setFilters] = useState({ preferenceLevel: "", areas: [] });
   const [currentCategory, setCurrentCategory] = useState(category);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   // 필터 초기화 함수 (useCallback으로 메모이제이션)
   const resetFilters = useCallback(() => {
@@ -32,17 +28,36 @@ const ListPage = () => {
     }
   }, [category, currentCategory, resetFilters]);
 
+  const handleSearch = (query) => {
+    setSearchQuery(query); // 검색어를 상태로 저장
+  };
+
   return (
     <div className="ListPage">
       <MemoizedHeader bgColor="#F2EEE7" />
-      <ListSearchBar />
+      
+      {/* SearchBar 컴포넌트 추가 */}
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="원하는 술을 검색해 보세요!"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-input"
+        />
+      </div>
+
       <MemoizedNavigation />
       <Filters onFilterChange={setFilters} category={category} />
+      
+      {/* AlcoholList에서 검색어를 필터링하여 전달 */}
       <AlcoholList
         category={category}
         filters={filters}
+        searchQuery={searchQuery} // 검색어를 전달
         onResetFilters={resetFilters}
       />
+
       <MemoizedFooter className="footer1" />
       <div className="list-footer">
         <img

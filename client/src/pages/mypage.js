@@ -1,44 +1,84 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./mypage.css"; // CSS 파일을 불러옵니다
 import Header from "../components/common/Header";
+import Footer from "../components/common/Footer";
+import Navigation from "../components/navSearchBar/Navigation";
 import { useNavigate } from "react-router-dom";
+import { getUserInfo, getUserBookmarks, updateUserInfo, updateUserPreference, updateUserProfileImage } from "../api/mypageapi"; // API 함수 import
 
 function Mypage() {
   const [isEditing, setIsEditing] = useState(false); // 편집 모드 상태
-  const [nickname, setNickname] = useState("Nickname"); // 닉네임 상태
+  const [nickname, setNickname] = useState(""); // 닉네임 상태
   const [nicknameError, setNicknameError] = useState(""); // 닉네임 오류 메시지 상태
   const [preferenceScore, setPreferenceScore] = useState(""); // 선호도수 상태
-  const [profileImage, setProfileImage] = useState("default-avatar.png"); // 프로필 이미지 상태
-
-
+  const [profileImage, setProfileImage] = useState("/images/uploads/profileImage1.png"); // 프로필 이미지 상태
   const fileInputRef = useRef(null); // 파일 입력을 위한 ref 생성
   const navigate = useNavigate();
+
+  // 페이지 로딩 시 사용자 정보 가져오기
+  const [userName, setUserName] = useState(""); // 로그인 ID(userName)
+
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const userInfo = await getUserInfo();
+        setNickname(userInfo.userDto.userId); // userId를 닉네임으로 사용
+        setUserName(userInfo.userDto.userName); // userName은 필요 시 저장
+        setPreferenceScore(userInfo.userDto.preferenceLevel ?? ""); // Nullish coalescing operator 사용
+        setProfileImage(userInfo.userDto.profileImage || "default-avatar.png");
+      } catch (error) {
+        console.error("사용자 정보 조회 중 오류 발생:", error.message);
+      }
+    };
+    
+  
+    fetchUserInfo();
+  }, []);
+  
 
   const handleEditClick = () => {
     setIsEditing(true); // 편집 모드로 변경
     setNicknameError(""); // 편집 모드 들어갈 때 오류 메시지 초기화
   };
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
     setIsEditing(false); // 편집 모드 해제
+  
+    try {
+      if (nickname !== "") {
+        await updateUserInfo({ userId: nickname }); 
+      }
+      if (preferenceScore !== "") {
+        await updateUserPreference({ preferenceLevel: parseFloat(preferenceScore) }); // 숫자(double)로 변환
+      }
+      
+      if (profileImage !== "default-avatar.png" && profileImage.startsWith("data:")) {
+        const formData = new FormData();
+        formData.append("file", profileImage);
+        await updateUserProfileImage(formData);
+      }
+    } catch (error) {
+      console.error("수정 중 오류 발생:", error.message);
+    }
   };
-
-  const handlePreferenceChange = (e) => {
-     // 입력된 값이 숫자만 포함된 값으로 업데이트
-  const value = e.target.value;
-
-  if (/^\d*$/.test(value)) {
-    setPreferenceScore(value); // 숫자만 입력된 경우 상태 업데이트
-  }
-};
+  
 
   const handleNicknameChange = (e) => {
-    const newNickname = e.target.value; // 닉네임 상태 업데이트
+    const newNickname = e.target.value;
     if (newNickname.length <= 10) {
       setNickname(newNickname); // 닉네임 상태 업데이트
       setNicknameError(""); // 오류 메시지 초기화
     } else {
       setNicknameError("글자수가 초과되었습니다"); // 글자수가 초과된 경우 오류 메시지 설정
+    }
+  };
+
+  const handlePreferenceChange = (e) => {
+    const value = e.target.value;
+
+    if (/^\d*$/.test(value)) {
+      setPreferenceScore(value); // 숫자만 입력된 경우 상태 업데이트
     }
   };
 
@@ -62,17 +102,17 @@ function Mypage() {
   };
 
   const handleNicknameFocus = () => {
-      setNickname(""); // 입력란 클릭 시 빈 칸으로 설정
+    setNickname(""); // 입력란 클릭 시 빈 칸으로 설정
   };
 
-  const handleAddAlcoholClick=()=>{
-    navigate("/cheongtakju");
+  const handleAddAlcoholClick = () => {
+    navigate("/list/all");
   };
-
 
   return (
     <div className="profile-page">
       <Header textColor="#574f4b" />
+      
       <div className="profile-left">
         <div className="profile-picture">
           <img src={profileImage} alt="" className="profile-img" />
@@ -86,7 +126,7 @@ function Mypage() {
                 onFocus={handleNicknameFocus} // 클릭 시 빈 칸으로 설정
                 className="nickname-input"
               />
-               {nicknameError && <p className="nickname-error">{nicknameError}</p>} {/* 오류 메시지 표시 */}
+              {nicknameError && <p className="nickname-error">{nicknameError}</p>}
               <div className="button-container">
                 <button className="edit-btn" onClick={openFileDialog}>
                   사진 변경
@@ -138,27 +178,31 @@ function Mypage() {
             </div>
 
             <div className="favorite-alcohol">
-              <h4>담은 술</h4>
-              <button className="add-btn" onClick={handleAddAlcoholClick}>
-                추가
-              </button>
-              </div>
-              <div className="alcohol-grid">
-                <div className="alcohol-item empty"></div>
-                <div className="alcohol-item empty"></div>
-                <div className="alcohol-item empty"></div>
-                <div className="alcohol-item empty"></div>
-                {/* 두 번째 줄 */}
-                <div className="alcohol-item empty"></div>
-                <div className="alcohol-item empty"></div>
-                <div className="alcohol-item empty"></div>
-                <div className="alcohol-item empty"></div>
-              </div>
-            </div>
+  <h4>담은 술</h4>
+  <div className="alcohol-grid">
+    {[...Array(8)].map((_, index) => (
+      <div key={index} className="alcohol-item-container">
+        <div className="alcohol-item empty"></div>
+        <button className="add-btn" onClick={handleAddAlcoholClick}>+</button>
+      </div>
+    ))}
+  </div>
+</div>
+
           </div>
         </div>
       </div>
+      <div className="main-footer">
+        <img
+          src="images/mainpage/main-footer.png"
+          className="main-footer-img"
+          alt="main-footer-img"
+        />
+      </div>
+    </div>
+
   );
 }
+
 
 export default Mypage;

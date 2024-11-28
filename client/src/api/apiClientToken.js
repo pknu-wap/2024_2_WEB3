@@ -13,33 +13,18 @@ apiClientToken.interceptors.request.use((config) => {
   return config;
 });
 
-// 응답 인터셉터: 토큰 갱신 로직 추가
+// 응답 인터셉터: Access Token 만료 시 로그인 리디렉션 처리
 apiClientToken.interceptors.response.use(
   (response) => response, // 정상 응답은 그대로 전달
   async (error) => {
-    const originalRequest = error.config;
+    if (error.response.status === 401) {
+      console.warn("Access Token 만료 또는 인증 실패");
 
-    // Access Token 만료 시 Refresh Token으로 갱신
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+      alert("세션이 만료되었습니다. 다시 로그인해주세요.");
 
-      const refreshToken = localStorage.getItem("refreshToken");
-      if (refreshToken) {
-        try {
-          const { data } = await axios.post("/auth/refresh", {
-            refreshToken,
-          });
-
-          const newAccessToken = data.accessToken;
-          localStorage.setItem("accessToken", newAccessToken);
-          originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
-
-          return apiClientToken(originalRequest); // 원래 요청 재전송
-        } catch (refreshError) {
-          console.log("Token refresh failed:", refreshError);
-          // 필요 시 로그아웃 처리
-        }
-      }
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      window.location.href = "/signIn";
     }
 
     return Promise.reject(error);

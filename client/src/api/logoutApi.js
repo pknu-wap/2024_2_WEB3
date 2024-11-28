@@ -12,7 +12,7 @@ const logoutApi = async (refreshToken) => {
       }
     );
 
-    console.log("서버 응답 메시지:", response.data.message);
+    console.log("서버 응답 메시지:", response.data);
     return response.data; // 성공 시 응답 데이터 반환
   } catch (error) {
     console.log("로그아웃 API 에러:", error.name, "/", error.message);
