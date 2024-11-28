@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import alcoholListApi from "../../api/alcoholListApi";
 import "./AlcoholList.css";
 
-const AlcoholList = ({ category, filters, onResetFilters }) => {
+const AlcoholList = ({ category, filters, searchQuery, onResetFilters }) => {
   const [alcoholList, setAlcoholList] = useState([]);
   const [filteredAlcoholList, setFilteredAlcoholList] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
 
   const pagesPerGroup = 5;
 
@@ -53,11 +52,6 @@ const AlcoholList = ({ category, filters, onResetFilters }) => {
     handleSearch();
   }, [searchQuery, alcoholList]);
 
-  // 검색어 입력 필드 처리
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
   const getPageNumbers = () => {
     const currentGroup = Math.ceil(page / pagesPerGroup);
     const startPage = (currentGroup - 1) * pagesPerGroup + 1;
@@ -76,16 +70,6 @@ const AlcoholList = ({ category, filters, onResetFilters }) => {
           <div className="loading-spinner"></div>
         </div>
       )}
-
-      {/* 검색창 */}
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="검색..."
-          value={searchQuery}
-          onChange={handleSearchChange}
-        />
-      </div>
 
       {/* 전체 리스트 또는 검색 결과 */}
       <div className="alcohol-container">
@@ -140,4 +124,3 @@ const AlcoholList = ({ category, filters, onResetFilters }) => {
 };
 
 export default AlcoholList;
-
