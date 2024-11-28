@@ -44,10 +44,13 @@ function Mypage() {
     setNicknameError(""); // 편집 모드 들어갈 때 오류 메시지 초기화
   };
 
+
+
   const handleSaveClick = async () => {
     let nicknameUpdated = true;
     let preferenceUpdated = true;
-  
+    let profileImageUpdated = true;
+
     try {
       if (nickname !== "" && nickname !== previousNickname) {
         // 닉네임이 변경된 경우만 업데이트
@@ -79,14 +82,30 @@ function Mypage() {
       preferenceUpdated = false;
       console.error("선호도 수정 중 오류 발생:", error.message);
     }
+    
+
+    try {
+      if (profileImage && profileImage instanceof File) {
+        // profileImage가 File 객체인 경우에만
+        const formData = new FormData();
+        formData.append("file", profileImage); // 실제 파일 객체를 FormData에 추가
+        await updateUserProfileImage(formData); // 이미지 업데이트 API 호출
+        console.log("프로필 이미지가 성공적으로 저장되었습니다.");
+      }
+    } catch (error) {
+      profileImageUpdated = false;
+      console.error("프로필 이미지 수정 중 오류 발생:", error.message);
+    }
   
-    if (nicknameUpdated && preferenceUpdated) {
+    if (nicknameUpdated && preferenceUpdated && profileImageUpdated) {
       console.log("모든 변경사항이 성공적으로 저장되었습니다.");
       setIsEditing(false); // 편집 모드 해제
     } else {
       console.error("일부 수정에 실패했습니다. 다시 시도하세요.");
     }
   };
+
+
 
   const handleNicknameChange = (e) => {
     const newNickname = e.target.value;
@@ -109,17 +128,18 @@ function Mypage() {
     }
   };
   
-
   const handleImageChange = (e) => {
     const file = e.target.files[0]; // 선택된 파일
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setProfileImage(reader.result); // 파일을 읽고 이미지로 설정
+        setProfileImage(reader.result); // Base64 형식의 이미지 데이터로 상태 업데이트
       };
-      reader.readAsDataURL(file); // 파일을 데이터 URL로 읽기
+      reader.readAsDataURL(file); // 파일을 Base64로 읽기
     }
   };
+  
+
 
   const handleDeleteClick = () => {
     setProfileImage("default-avatar.png"); // 기본 프로필 이미지로 설정
