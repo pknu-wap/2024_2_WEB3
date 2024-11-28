@@ -44,7 +44,7 @@ const AlcoholList = ({ category, filters, onResetFilters }) => {
 
   // 페이지 번호 초기화 (카테고리 변경 시)
   useEffect(() => {
-    setPage(1); // 카테고리가 변경되면 페이지를 1로 초기화
+    setPage(1);
   }, [category]);
 
   // 모달 "확인" 버튼 클릭 시 초기화
