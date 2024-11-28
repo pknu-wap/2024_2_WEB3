@@ -41,7 +41,11 @@ const SignInContent = () => {
       {/* 로딩 상태 표시 */}
       {isLoading && (
         <div className="loading-overlay">
-          <div className="loading-spinner"></div>
+          <img
+            src="/images/Holjjak-logo.png"
+            alt="leading-logo"
+            className="loading-logo"
+          />
         </div>
       )}
 
@@ -54,7 +58,6 @@ const SignInContent = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
-
         <div className="signin-left"></div>
         <div className="signin-right">
           <div className="signin-form">

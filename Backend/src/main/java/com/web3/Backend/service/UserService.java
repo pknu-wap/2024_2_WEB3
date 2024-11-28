@@ -35,7 +35,7 @@ public class UserService {
                 return UserDto.builder()
                         .userId(user.getUserId())
                         .userName(user.getUserName())
-                        .profileImageUrl(user.getProfileImageUrl())
+                        .profileImageUrl("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + user.getProfileImageUrl())
                         .preferenceLevel(user.getPreferenceLevel())
                         .build();
             } else {
@@ -59,7 +59,8 @@ public class UserService {
 
             return bookmarks.stream().map(bookmark -> {
                 Post post = bookmark.getPost();
-                return new PostPreviewDto(post.getPostId(), post.getPostImage());
+                String absoluteImageUrl = "https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + post.getPostImage();
+                return new PostPreviewDto(post.getPostId(), absoluteImageUrl);
             }).collect(Collectors.toList());
 
         } catch (Exception e) {
@@ -84,7 +85,7 @@ public class UserService {
         return UserDto.builder()
                 .userId(user.getUserId())
                 .userName(user.getUserName())
-                .profileImageUrl(user.getProfileImageUrl())
+                .profileImageUrl("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + user.getProfileImageUrl())
                 .preferenceLevel(user.getPreferenceLevel())
                 .build();
     }
@@ -112,7 +113,7 @@ public class UserService {
         String savedImageUrl = fileStorageService.storeFile(profileImage);
 
         // 사용자 프로필 이미지 URL 업데이트
-        user.setProfileImageUrl(savedImageUrl);
+        user.setProfileImageUrl("https://foreign-papagena-wap2024-2-web3-0d04a01a.koyeb.app" + savedImageUrl);
         userRepository.save(user);
 
         return savedImageUrl;
