@@ -47,7 +47,7 @@ function Mypage() {
   
     try {
       if (nickname !== "") {
-        await updateUserInfo({ userName: nickname }); // userName으로 수정 요청
+        await updateUserInfo({ userId: nickname }); 
       }
       if (preferenceScore !== "") {
         await updateUserPreference({preferenceLevel: preferenceScore});
