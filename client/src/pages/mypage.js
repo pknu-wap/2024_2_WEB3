@@ -177,22 +177,17 @@ function Mypage() {
             </div>
 
             <div className="favorite-alcohol">
-              <h4>담은 술</h4>
-              <button className="add-btn" onClick={handleAddAlcoholClick}>
-                추가
-              </button>
-            </div>
-            <div className="alcohol-grid">
-              <div className="alcohol-item empty"></div>
-              <div className="alcohol-item empty"></div>
-              <div className="alcohol-item empty"></div>
-              <div className="alcohol-item empty"></div>
-              {/* 두 번째 줄 */}
-              <div className="alcohol-item empty"></div>
-              <div className="alcohol-item empty"></div>
-              <div className="alcohol-item empty"></div>
-              <div className="alcohol-item empty"></div>
-            </div>
+  <h4>담은 술</h4>
+  <div className="alcohol-grid">
+    {[...Array(8)].map((_, index) => (
+      <div key={index} className="alcohol-item-container">
+        <div className="alcohol-item empty"></div>
+        <button className="add-btn" onClick={handleAddAlcoholClick}>+</button>
+      </div>
+    ))}
+  </div>
+</div>
+
           </div>
         </div>
       </div>

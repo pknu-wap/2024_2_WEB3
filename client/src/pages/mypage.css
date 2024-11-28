@@ -18,7 +18,7 @@
   background-color: #ffffff;
   margin-left: 10%;
   border-radius: 10px;
-  margin-bottom: 15%;
+  margin-bottom: 10%;
 }
 
 .profile-picture {
@@ -74,7 +74,7 @@
 .profile-right {
   width: 65%;
   padding-right: 10%;
-  padding-bottom: 15%;
+  padding-bottom: 10%;
 }
 
 .preference-section {
@@ -129,10 +129,21 @@
   margin-bottom: 10px;
 }
 
-.add-btn{
+.add-btn {
+  position: absolute;
+  top: 5px; /* 위쪽에서의 위치 */
+  right: 5px; /* 오른쪽에서의 위치 */
+  background-color: #f1f1f1;
   border: none;
-  margin-bottom: 30px;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 16px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
 }
 
 .alcohol-grid {
@@ -205,4 +216,12 @@
   width: 100%; /* 이미지를 화면 너비에 맞춤 */
   margin: 0;
   padding: 0;
+}
+
+.add-btn:hover {
+  background-color: #ddd;
+}
+
+.alcohol-item-container {
+  position: relative; /* 버튼 위치를 item에 상대적으로 지정 */
 }
