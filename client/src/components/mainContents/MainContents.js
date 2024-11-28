@@ -6,11 +6,7 @@ import SearchBar from "../navSearchBar/SearchBar";
 import "./MainContents.css";
 import Navigation from "../navSearchBar/Navigation";
 import SearchPage from "../search/search"
-// SearchBar의 스타일 확장
-const MainSearchBar = styled(SearchBar)`
-  width: 100%;
-  margin-bottom: 10px;
-`;
+
 
 const MainContents = () => {
   return (
