@@ -97,11 +97,11 @@ const updateUserProfileImage = async (formData) => {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-      withCredentials: true, // CORS가 설정된 서버와 쿠키를 공유할 경우 필요
+      withCredentials: true,
     });
     if (response.data.code === "200") {
       console.log("프로필 사진 수정 성공:", response.data.data);
-      return response.data.data; // 성공적으로 수정된 데이터 반환
+      return response.data.data.profileImage; // 서버에서 새로 업데이트된 이미지 URL 반환
     } else {
       throw new Error(response.data.message || "프로필 사진 수정 실패");
     }
@@ -110,6 +110,7 @@ const updateUserProfileImage = async (formData) => {
     throw error;
   }
 };
+
 
 // API 함수들을 export
 export { getUserInfo, getUserBookmarks, updateUserInfo, updateUserPreference, updateUserProfileImage };

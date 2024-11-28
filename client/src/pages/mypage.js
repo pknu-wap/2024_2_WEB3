@@ -50,46 +50,39 @@ function Mypage() {
     let nicknameUpdated = true;
     let preferenceUpdated = true;
     let profileImageUpdated = true;
-
+  
     try {
       if (nickname !== "" && nickname !== previousNickname) {
-        // 닉네임이 변경된 경우만 업데이트
         const updatedInfo = await updateUserInfo({
           userId: String(nickname),
         });
         setNickname(updatedInfo.userId);
-        setPreviousNickname(updatedInfo.userId); // 이전 닉네임도 업데이트
-        // 변경사항이 성공적으로 저장되었다는 메시지 표시
-        console.log("모든 변경사항이 성공적으로 저장되었습니다.");
-      } else {
-        // 닉네임이 변경되지 않았더라도 메시지 표시
+        setPreviousNickname(updatedInfo.userId);
         console.log("모든 변경사항이 성공적으로 저장되었습니다.");
       }
     } catch (error) {
       nicknameUpdated = false;
       console.error("닉네임 수정 중 오류 발생:", error.message);
     }
-    
+  
     try {
       if (preferenceScore !== "") {
-        // 선호도수 업데이트 시도
         const updatedPreference = await updateUserPreference({
           preferenceLevel: parseFloat(preferenceScore),
         });
-        setPreferenceScore(updatedPreference.preferenceLevel); // 상태 업데이트
+        setPreferenceScore(updatedPreference.preferenceLevel);
       }
     } catch (error) {
       preferenceUpdated = false;
       console.error("선호도 수정 중 오류 발생:", error.message);
     }
-    
-
+  
     try {
       if (profileImage && profileImage instanceof File) {
-        // profileImage가 File 객체인 경우에만
         const formData = new FormData();
-        formData.append("file", profileImage); // 실제 파일 객체를 FormData에 추가
-        await updateUserProfileImage(formData); // 이미지 업데이트 API 호출
+        formData.append("file", profileImage);
+        const updatedProfileImage = await updateUserProfileImage(formData);
+        setProfileImage(updatedProfileImage); // 서버에서 반환된 이미지를 반영
         console.log("프로필 이미지가 성공적으로 저장되었습니다.");
       }
     } catch (error) {
@@ -99,13 +92,12 @@ function Mypage() {
   
     if (nicknameUpdated && preferenceUpdated && profileImageUpdated) {
       console.log("모든 변경사항이 성공적으로 저장되었습니다.");
-      setIsEditing(false); // 편집 모드 해제
+      setIsEditing(false);
     } else {
       console.error("일부 수정에 실패했습니다. 다시 시도하세요.");
     }
   };
-
-
+  
 
   const handleNicknameChange = (e) => {
     const newNickname = e.target.value;
@@ -138,6 +130,8 @@ function Mypage() {
       reader.readAsDataURL(file); // 파일을 Base64로 읽기
     }
   };
+  
+  
   
 
 
