@@ -10,6 +10,7 @@ const SearchResult = ({ category, filters }) => {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const query = queryParams.get("query");
+    
     if (query) {
       setSearchQuery(query); // 검색어 상태 업데이트
     }
