@@ -60,7 +60,6 @@ const Header = ({ textColor: propTextColor, bgcolor }) => {
 
       // 만료 시간 확인용
       const expDate = new Date(decodedToken.exp * 1000); // 밀리초 단위로 변환
-      console.log("만료 시간 (로컬 시간):", expDate.toLocaleString());
       if (exp < currentTime) {
         handleLogout(); // 이미 만료된 경우 로그아웃
       } else {

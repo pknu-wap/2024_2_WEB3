@@ -1,11 +1,8 @@
 import { Link } from "react-router-dom";
 import { CATEGORY } from "../../constants";
 import React from "react";
-import styled from "styled-components";
-import SearchBar from "../navSearchBar/SearchBar";
 import "./MainContents.css";
 import Navigation from "../navSearchBar/Navigation";
-import SearchPage from "../search/search"
 
 
 const MainContents = () => {
@@ -15,7 +12,6 @@ const MainContents = () => {
         <img src="images/mainpage/main-banner.png" className="banner-img" />
       </div>
 
-      <SearchPage />
       <Navigation />
 
       {/* 카테고리 섹션 */}

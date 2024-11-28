@@ -39,7 +39,7 @@ function Navigation({ textColor }) {
           }`}
           textColor={textColor}
         >
-          청주/탁주
+          청주 / 탁주
         </StyledLink>
       </div>
 
