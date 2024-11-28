@@ -102,7 +102,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://holjjak.netlify.app"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization","refresh","Content-Type"));
         configuration.setExposedHeaders(Arrays.asList("Authorization", "refresh","access")); // 클라이언트가 읽을 수 있는 응답 헤더
         configuration.setAllowCredentials(true);
