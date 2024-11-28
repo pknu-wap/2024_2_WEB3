@@ -51,7 +51,7 @@ const getUserBookmarks = async () => {
 // 3. 이름 수정
 const updateUserInfo = async ({ token, userId, nickname }) => {
   try {
-      const response = await apiClient.post("api/mypage/updateInfo", {
+      const response = await apiClient.patch("api/mypage/updateInfo", {
           headers: { Authorization: `Bearer ${token}` },
           body: { userId, nickname }  // userId와 nickname을 함께 전달
       });
@@ -70,7 +70,7 @@ const updateUserInfo = async ({ token, userId, nickname }) => {
 // 4. 선호 도수 설정
 const updateUserPreference = async ({ preferenceLevel }) => {
   try {
-    const response = await apiClient.post("api/mypage/updatePreference", { preferenceLevel }); // 수정 없음
+    const response = await apiClient.patch("api/mypage/updatePreference", { preferenceLevel }); // 수정 없음
     if (response.data.code === "200") {
       console.log("선호 도수 수정 성공:", response.data.data);
       return response.data.data; // 성공적으로 수정된 데이터 반환
@@ -87,7 +87,7 @@ const updateUserPreference = async ({ preferenceLevel }) => {
 // 5. 프로필 사진 수정
 const updateUserProfileImage = async (formData) => {
   try {
-    const response = await apiClient.post("api/mypage/updateProfileImage", formData, {
+    const response = await apiClient.patch("api/mypage/updateProfileImage", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
