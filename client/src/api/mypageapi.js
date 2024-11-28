@@ -17,7 +17,7 @@ apiClient.interceptors.request.use((config) => {
     return Promise.reject(error);
   });
 
-// 1. 내 정보 확인
+// 내 정보 확인
 const getUserInfo = async () => {
   try {
     const response = await apiClient.get("api/mypage/info");
@@ -33,7 +33,7 @@ const getUserInfo = async () => {
   }
 };
 
-// 2. 북마크 확인
+// 북마크 확인
 const getUserBookmarks = async () => {
   try {
     const response = await apiClient.get("api/mypage/bookmarks");
@@ -48,7 +48,7 @@ const getUserBookmarks = async () => {
   }
 };
 
-// 3. 이름 수정
+// 이름 수정
 const updateUserInfo = async ({ token, userId, nickname }) => {
   try {
     const response = await apiClient.patch("api/mypage/updateInfo", {
@@ -69,32 +69,28 @@ const updateUserInfo = async ({ token, userId, nickname }) => {
   }
 };
 
-// 4. 선호 도수 설정
-const updateUserPreference = async ({ token, preferenceLevel }) => {
+// 선호 도수 설정
+const updateUserPreference = async ({ token, preferenceLevel, preferenceScore }) => {
   try {
-    // PATCH 요청 보내기
     const response = await apiClient.patch("api/mypage/updatePreference", { 
-      preferenceLevel  // preferenceLevel만 요청 본문에 포함
-    }, {
-      headers: { Authorization: `Bearer ${token}` }  // Authorization 헤더 포함
-    });
-   
-    // 응답 코드가 200일 경우 성공 처리
+      preferenceLevel, preferenceScore
+    }, { headers: { Authorization: `Bearer ${token}` } 
+  } );
+
     if (response.data.code === "200") {
       console.log("선호 도수 설정 성공:", response.data.data);
-      return response.data.data;  // 수정된 데이터 반환
+      return response.data.data; // 수정된 데이터 반환
     } else {
       throw new Error(response.data.message || "선호 도수 설정 실패");
     }
   } catch (error) {
     console.error("선호 도수 수정 중 오류 발생:", error.message);
-    throw error;  // 에러 재전파
+    throw error;
   }
 };
 
 
-
-// 5. 프로필 사진 수정
+// 프로필 사진 수정
 const updateUserProfileImage = async (formData) => {
   try {
     const response = await apiClient.patch("api/mypage/updateProfileImage", formData, {

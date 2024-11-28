@@ -17,7 +17,9 @@ function Mypage() {
 
   // 페이지 로딩 시 사용자 정보 가져오기
   const [userName, setUserName] = useState(""); // 로그인 ID(userName)
-
+  
+  // 이전 닉네임 상태 추가
+  const [previousNickname, setPreviousNickname] = useState(""); 
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -27,11 +29,11 @@ function Mypage() {
         setUserName(userInfo.userDto.userName); // userName은 필요 시 저장
         setPreferenceScore(userInfo.userDto.preferenceLevel ?? ""); // Nullish coalescing operator 사용
         setProfileImage(userInfo.userDto.profileImage || "default-avatar.png");
+        setPreviousNickname(userInfo.userDto.userId); // 이전 닉네임 설정
       } catch (error) {
         console.error("사용자 정보 조회 중 오류 발생:", error.message);
       }
     };
-    
   
     fetchUserInfo();
   }, []);
@@ -43,26 +45,48 @@ function Mypage() {
   };
 
   const handleSaveClick = async () => {
-    setIsEditing(false); // 편집 모드 해제
+    let nicknameUpdated = true;
+    let preferenceUpdated = true;
   
     try {
-      if (nickname !== "") {
-        await updateUserInfo({ userId: nickname }); 
-      }
-      if (preferenceScore !== "") {
-        await updateUserPreference({ preferenceLevel: parseFloat(preferenceScore) }); // 숫자(double)로 변환
-      }
-      
-      if (profileImage !== "default-avatar.png" && profileImage.startsWith("data:")) {
-        const formData = new FormData();
-        formData.append("file", profileImage);
-        await updateUserProfileImage(formData);
+      if (nickname !== "" && nickname !== previousNickname) {
+        // 닉네임이 변경된 경우만 업데이트
+        const updatedInfo = await updateUserInfo({
+          userId: String(nickname),
+        });
+        setNickname(updatedInfo.userId);
+        setPreviousNickname(updatedInfo.userId); // 이전 닉네임도 업데이트
+        // 변경사항이 성공적으로 저장되었다는 메시지 표시
+        console.log("모든 변경사항이 성공적으로 저장되었습니다.");
+      } else {
+        // 닉네임이 변경되지 않았더라도 메시지 표시
+        console.log("모든 변경사항이 성공적으로 저장되었습니다.");
       }
     } catch (error) {
-      console.error("수정 중 오류 발생:", error.message);
+      nicknameUpdated = false;
+      console.error("닉네임 수정 중 오류 발생:", error.message);
+    }
+    
+    try {
+      if (preferenceScore !== "") {
+        // 선호도수 업데이트 시도
+        const updatedPreference = await updateUserPreference({
+          preferenceLevel: parseFloat(preferenceScore),
+        });
+        setPreferenceScore(updatedPreference.preferenceLevel); // 상태 업데이트
+      }
+    } catch (error) {
+      preferenceUpdated = false;
+      console.error("선호도 수정 중 오류 발생:", error.message);
+    }
+  
+    if (nicknameUpdated && preferenceUpdated) {
+      console.log("모든 변경사항이 성공적으로 저장되었습니다.");
+      setIsEditing(false); // 편집 모드 해제
+    } else {
+      console.error("일부 수정에 실패했습니다. 다시 시도하세요.");
     }
   };
-  
 
   const handleNicknameChange = (e) => {
     const newNickname = e.target.value;
@@ -76,11 +100,15 @@ function Mypage() {
 
   const handlePreferenceChange = (e) => {
     const value = e.target.value;
-
+  
+    // 입력값이 숫자인지 확인
     if (/^\d*$/.test(value)) {
-      setPreferenceScore(value); // 숫자만 입력된 경우 상태 업데이트
+      setPreferenceScore(value); // 상태 업데이트
+    } else {
+      console.error("숫자만 입력할 수 있습니다."); // 오류 메시지 추가
     }
   };
+  
 
   const handleImageChange = (e) => {
     const file = e.target.files[0]; // 선택된 파일
@@ -200,9 +228,7 @@ function Mypage() {
         />
       </div>
     </div>
-
   );
 }
-
 
 export default Mypage;
