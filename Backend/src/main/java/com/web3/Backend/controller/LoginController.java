@@ -52,17 +52,17 @@ public class LoginController {
 
         RefreshEntity existingRefreshToken = refreshRepository.findByUsername(username);
 
-        String accessToken = jwtUtil.createJwt("access", username, 600000L, userId);
+        String accessToken = jwtUtil.createJwt("access", username, 14400000L, userId);
         String refreshToken;
 
         if(existingRefreshToken != null) {
             //기존 refresh token이 있다면, 만료되었는지 확인
             if(jwtUtil.isExpired(existingRefreshToken.getRefresh())){
                 //refresh token이 만료되었으면
-                refreshToken= jwtUtil.createJwt("refresh",username,8640000L, userId);
+                refreshToken= jwtUtil.createJwt("refresh",username,86400000L, userId);
                 //기존의 만료된 refresh token을 삭제하고 새로 저장
                 refreshRepository.delete(existingRefreshToken);
-                addRefreshEntity(username,refreshToken,8640000L);
+                addRefreshEntity(username,refreshToken,86400000L);
             }else{
                 //refresh toekn이 만료되지 않았으면 기존의 refresh token을 사용
                 refreshToken = existingRefreshToken.getRefresh();
