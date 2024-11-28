@@ -65,7 +65,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
             int userId = customUserDetails.getUser().getId();  // CustomUserDetails에서 userId를 가져옴
             // Access Token과 Refresh Token 생성
-            String accessToken = jwtUtil.createJwt("access", username, 600000L, userId);
+            String accessToken = jwtUtil.createJwt("access", username, 14400000L, userId);
             String refreshToken = jwtUtil.createJwt("refresh", username, 86400000L, userId);
             log.info("Access Token: {}", accessToken);
             log.info("Refresh Token: {}", refreshToken);
