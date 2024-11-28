@@ -51,10 +51,12 @@ const getUserBookmarks = async () => {
 // 3. 이름 수정
 const updateUserInfo = async ({ token, userId, nickname }) => {
   try {
-      const response = await apiClient.patch("api/mypage/updateInfo", {
-          headers: { Authorization: `Bearer ${token}` },
-          body: { userId, nickname }  // userId와 nickname을 함께 전달
-      });
+    const response = await apiClient.patch("api/mypage/updateInfo", {
+      userId, nickname  // headers는 axios의 config로 처리
+    }, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    
       if (response.data.code === "200") {
           console.log("닉네임 수정 성공:", response.data.data);
           return response.data.data;
@@ -68,20 +70,28 @@ const updateUserInfo = async ({ token, userId, nickname }) => {
 };
 
 // 4. 선호 도수 설정
-const updateUserPreference = async ({ preferenceLevel }) => {
+const updateUserPreference = async ({ token, preferenceLevel }) => {
   try {
-    const response = await apiClient.patch("api/mypage/updatePreference", { preferenceLevel }); // 수정 없음
+    // PATCH 요청 보내기
+    const response = await apiClient.patch("api/mypage/updatePreference", { 
+      preferenceLevel  // preferenceLevel만 요청 본문에 포함
+    }, {
+      headers: { Authorization: `Bearer ${token}` }  // Authorization 헤더 포함
+    });
+   
+    // 응답 코드가 200일 경우 성공 처리
     if (response.data.code === "200") {
-      console.log("선호 도수 수정 성공:", response.data.data);
-      return response.data.data; // 성공적으로 수정된 데이터 반환
+      console.log("선호 도수 설정 성공:", response.data.data);
+      return response.data.data;  // 수정된 데이터 반환
     } else {
-      throw new Error(response.data.message || "선호 도수 수정 실패");
+      throw new Error(response.data.message || "선호 도수 설정 실패");
     }
   } catch (error) {
     console.error("선호 도수 수정 중 오류 발생:", error.message);
-    throw error;
+    throw error;  // 에러 재전파
   }
 };
+
 
 
 // 5. 프로필 사진 수정
