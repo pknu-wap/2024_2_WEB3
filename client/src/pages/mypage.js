@@ -19,7 +19,7 @@ function Mypage() {
 
   // 페이지 로딩 시 사용자 정보 가져오기
   const [userName, setUserName] = useState(""); // 로그인 ID(userName)
-  
+
   // 이전 닉네임 상태 추가
   const [previousNickname, setPreviousNickname] = useState(""); 
 
@@ -249,5 +249,6 @@ function Mypage() {
     </div>
   );
 }
+
 
 export default Mypage;
