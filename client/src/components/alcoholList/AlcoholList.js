@@ -4,23 +4,45 @@ import alcoholListApi from "../../api/alcoholListApi";
 import "./AlcoholList.css";
 
 const AlcoholList = ({ category, filters, searchQuery, onResetFilters }) => {
-  const [alcoholList, setAlcoholList] = useState([]);
-  const [filteredAlcoholList, setFilteredAlcoholList] = useState([]);
+  const [alcoholList, setAlcoholList] = useState([]); // 전체 데이터
+  const [filteredAlcoholList, setFilteredAlcoholList] = useState([]); // 필터링된 데이터
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const itemsPerPage = 10; // 한 페이지에 표시할 아이템 수
 
-  const pagesPerGroup = 5;
+  const getPageNumbers = () => {
+    const pagesPerGroup = 5; // 그룹당 표시할 페이지 수
+    const totalPages = getTotalPages();
+    const currentGroup = Math.ceil(page / pagesPerGroup); // 현재 페이지 그룹
+    const startPage = (currentGroup - 1) * pagesPerGroup + 1;
+    const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
+  
+    return Array.from(
+      { length: endPage - startPage + 1 },
+      (_, i) => startPage + i
+    );
+  };
 
-  // 데이터를 불러오는 함수
-  const fetchData = async () => {
+  // 전체 데이터 가져오기
+  const fetchAllData = async () => {
     if (!category) return;
     setIsLoading(true);
+
     try {
-      const data = await alcoholListApi(category, page - 1, filters);
-      setAlcoholList(data.content || []);
-      setTotalPages(data.totalPages || 1);
-      setFilteredAlcoholList(data.content || []); // 전체 데이터를 filteredAlcoholList에 저장
+      let allData = [];
+      let currentPage = 0;
+      let totalPages = 1;
+
+      // 모든 페이지 데이터 가져오기
+      do {
+        const data = await alcoholListApi(category, currentPage, filters);
+        allData = [...allData, ...data.content];
+        totalPages = data.totalPages;
+        currentPage++;
+      } while (currentPage < totalPages);
+
+      setAlcoholList(allData); // 전체 데이터를 저장
+      setFilteredAlcoholList(allData); // 초기에는 전체 데이터를 필터링 데이터로 설정
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -28,46 +50,42 @@ const AlcoholList = ({ category, filters, searchQuery, onResetFilters }) => {
     }
   };
 
-  // 검색어 필터링 함수
+  // 검색어 필터링
   const handleSearch = () => {
     if (searchQuery) {
-      // 검색어가 있을 때 해당하는 항목만 필터링
       const filtered = alcoholList.filter((item) =>
         item.drinkName.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredAlcoholList(filtered);
+      setPage(1); // 검색 결과가 바뀌면 첫 페이지로 이동
     } else {
-      // 검색어가 없을 때는 전체 리스트를 보여줌
       setFilteredAlcoholList(alcoholList);
     }
   };
 
-  // 페이지 변경 시 데이터 호출
-  useEffect(() => {
-    fetchData();
-  }, [category, page, filters]);
+  // 페이지네이션 데이터 가져오기
+  const getPaginatedData = () => {
+    const startIndex = (page - 1) * itemsPerPage;
+    return filteredAlcoholList.slice(startIndex, startIndex + itemsPerPage);
+  };
 
-  // 검색어가 변경될 때마다 검색 함수 호출
+  // 페이지 번호 계산
+  const getTotalPages = () => Math.ceil(filteredAlcoholList.length / itemsPerPage);
+
+  // 데이터 로드 및 검색 처리
+  useEffect(() => {
+    fetchAllData();
+  }, [category, filters]);
+
   useEffect(() => {
     handleSearch();
   }, [searchQuery, alcoholList]);
-
-  const getPageNumbers = () => {
-    const currentGroup = Math.ceil(page / pagesPerGroup);
-    const startPage = (currentGroup - 1) * pagesPerGroup + 1;
-    const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
-    return Array.from(
-      { length: endPage - startPage + 1 },
-      (_, i) => startPage + i
-    );
-  };
 
   return (
     <div className="AlcoholList">
       {/* 로딩 상태 표시 */}
       {isLoading && (
         <div className="loading-overlay">
-          {/* <div className="loading-spinner"></div> */}
           <img
             src="/images/Holjjak-logo.png"
             alt="로딩 로고"
@@ -76,10 +94,10 @@ const AlcoholList = ({ category, filters, searchQuery, onResetFilters }) => {
         </div>
       )}
 
-      {/* 전체 리스트 또는 검색 결과 */}
+      {/* 검색 결과 또는 전체 리스트 */}
       <div className="alcohol-container">
-        {filteredAlcoholList.length > 0 ? (
-          filteredAlcoholList.map((item) => (
+        {getPaginatedData().length > 0 ? (
+          getPaginatedData().map((item) => (
             <div key={item.postId} className="alcohol-item-wrap">
               <Link to={`/alcohol/${item.postId}`} className="link-img-tag">
                 <img
@@ -100,30 +118,38 @@ const AlcoholList = ({ category, filters, searchQuery, onResetFilters }) => {
 
       {/* 페이지네이션 */}
       <div className="pagination">
-        <button
-          className="page-btn"
-          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-          disabled={page === 1}
-        >
-          {"<"}
-        </button>
-        {getPageNumbers().map((pageNum) => (
-          <button
-            key={pageNum}
-            onClick={() => setPage(pageNum)}
-            className={page === pageNum ? "active-page" : ""}
-          >
-            {pageNum}
-          </button>
-        ))}
-        <button
-          className="page-btn"
-          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-          disabled={page === totalPages}
-        >
-          {">"}
-        </button>
-      </div>
+
+  {/* 이전 페이지 버튼 */}
+  <button
+    className="page-btn"
+    onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+    disabled={page === 1}
+  >
+    {"<"}
+  </button>
+
+  {/* 페이지 번호 */}
+  {getPageNumbers().map((pageNum) => (
+    <button
+      key={pageNum}
+      onClick={() => setPage(pageNum)}
+      className={page === pageNum ? "active-page" : ""}
+    >
+      {pageNum}
+    </button>
+  ))}
+
+  {/* 다음 페이지 버튼 */}
+  <button
+    className="page-btn"
+    onClick={() => setPage((prev) => Math.min(prev + 1, getTotalPages()))}
+    disabled={page === getTotalPages()}
+  >
+    {">"}
+  </button>
+
+</div>
+
     </div>
   );
 };

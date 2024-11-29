@@ -5,6 +5,8 @@ import Footer from "../components/common/Footer";
 import Navigation from "../components/navSearchBar/Navigation";
 import { useNavigate } from "react-router-dom";
 import { getUserInfo, getUserBookmarks, updateUserInfo, updateUserPreference, updateUserProfileImage } from "../api/mypageapi"; // API 함수 import
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 function Mypage() {
   const [isEditing, setIsEditing] = useState(false); // 편집 모드 상태
@@ -18,6 +20,8 @@ function Mypage() {
   // 페이지 로딩 시 사용자 정보 가져오기
   const [userName, setUserName] = useState(""); // 로그인 ID(userName)
 
+  // 이전 닉네임 상태 추가
+  const [previousNickname, setPreviousNickname] = useState(""); 
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -27,11 +31,11 @@ function Mypage() {
         setUserName(userInfo.userDto.userName); // userName은 필요 시 저장
         setPreferenceScore(userInfo.userDto.preferenceLevel ?? ""); // Nullish coalescing operator 사용
         setProfileImage(userInfo.userDto.profileImage || "default-avatar.png");
+        setPreviousNickname(userInfo.userDto.userId); // 이전 닉네임 설정
       } catch (error) {
         console.error("사용자 정보 조회 중 오류 발생:", error.message);
       }
     };
-    
   
     fetchUserInfo();
   }, []);
@@ -42,24 +46,57 @@ function Mypage() {
     setNicknameError(""); // 편집 모드 들어갈 때 오류 메시지 초기화
   };
 
+
+
   const handleSaveClick = async () => {
-    setIsEditing(false); // 편집 모드 해제
+    let nicknameUpdated = true;
+    let preferenceUpdated = true;
+    let profileImageUpdated = true;
   
     try {
-      if (nickname !== "") {
-        await updateUserInfo({ userId: nickname }); 
-      }
-      if (preferenceScore !== "") {
-        await updateUserPreference({ preferenceLevel: parseFloat(preferenceScore) }); // 숫자(double)로 변환
-      }
-      
-      if (profileImage !== "default-avatar.png" && profileImage.startsWith("data:")) {
-        const formData = new FormData();
-        formData.append("file", profileImage);
-        await updateUserProfileImage(formData);
+      if (nickname !== "" && nickname !== previousNickname) {
+        const updatedInfo = await updateUserInfo({
+          userId: String(nickname),
+        });
+        setNickname(updatedInfo.userId);
+        setPreviousNickname(updatedInfo.userId);
+        console.log("모든 변경사항이 성공적으로 저장되었습니다.");
       }
     } catch (error) {
-      console.error("수정 중 오류 발생:", error.message);
+      nicknameUpdated = false;
+      console.error("닉네임 수정 중 오류 발생:", error.message);
+    }
+  
+    try {
+      if (preferenceScore !== "") {
+        const updatedPreference = await updateUserPreference({
+          preferenceLevel: parseFloat(preferenceScore),
+        });
+        setPreferenceScore(updatedPreference.preferenceLevel);
+      }
+    } catch (error) {
+      preferenceUpdated = false;
+      console.error("선호도 수정 중 오류 발생:", error.message);
+    }
+  
+    try {
+      if (profileImage && profileImage instanceof File) {
+        const formData = new FormData();
+        formData.append("file", profileImage);
+        const updatedProfileImage = await updateUserProfileImage(formData);
+        setProfileImage(updatedProfileImage); // 서버에서 반환된 이미지를 반영
+        console.log("프로필 이미지가 성공적으로 저장되었습니다.");
+      }
+    } catch (error) {
+      profileImageUpdated = false;
+      console.error("프로필 이미지 수정 중 오류 발생:", error.message);
+    }
+  
+    if (nicknameUpdated && preferenceUpdated && profileImageUpdated) {
+      console.log("모든 변경사항이 성공적으로 저장되었습니다.");
+      setIsEditing(false);
+    } else {
+      console.error("일부 수정에 실패했습니다. 다시 시도하세요.");
     }
   };
   
@@ -76,25 +113,32 @@ function Mypage() {
 
   const handlePreferenceChange = (e) => {
     const value = e.target.value;
-
+  
+    // 입력값이 숫자인지 확인
     if (/^\d*$/.test(value)) {
-      setPreferenceScore(value); // 숫자만 입력된 경우 상태 업데이트
+      setPreferenceScore(value); // 상태 업데이트
+    } else {
+      console.error("숫자만 입력할 수 있습니다."); // 오류 메시지 추가
     }
   };
-
+  
   const handleImageChange = (e) => {
     const file = e.target.files[0]; // 선택된 파일
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setProfileImage(reader.result); // 파일을 읽고 이미지로 설정
+        setProfileImage(reader.result); // Base64 형식의 이미지 데이터로 상태 업데이트
       };
-      reader.readAsDataURL(file); // 파일을 데이터 URL로 읽기
+      reader.readAsDataURL(file); // 파일을 Base64로 읽기
     }
   };
+  
+  
+  
+
 
   const handleDeleteClick = () => {
-    setProfileImage("default-avatar.png"); // 기본 프로필 이미지로 설정
+    setProfileImage("/images/Holjjak-logo.png"); // 기본 프로필 이미지로 설정
   };
 
   const openFileDialog = () => {
@@ -128,11 +172,11 @@ function Mypage() {
               />
               {nicknameError && <p className="nickname-error">{nicknameError}</p>}
               <div className="button-container">
-                <button className="edit-btn" onClick={openFileDialog}>
+                <button className="edit-btn1" onClick={openFileDialog}>
                   사진 변경
                 </button>
-                <button className="edit-btn" onClick={handleDeleteClick}>
-                  삭제
+                <button className="edit-btn2" onClick={handleDeleteClick}>
+                   사진 삭제
                 </button>
               </div>
               <input
@@ -150,7 +194,7 @@ function Mypage() {
           ) : (
             <>
               <h2>{nickname}</h2>
-              <button className="edit-btn" onClick={handleEditClick}>
+              <button className="edit-btn0" onClick={handleEditClick}>
                 프로필 수정
               </button>
             </>
@@ -160,7 +204,10 @@ function Mypage() {
 
       <div className="profile-right">
         <div className="preference-section">
-          <h3>내 취향</h3>
+          <h3> 
+          <FontAwesomeIcon icon={faHeart} color="#d9d9d9" style={{ marginRight: '8px' }} />
+          내 취향
+          </h3>
           <div className="preference-details">
             
             <div className="preference-score">
@@ -178,16 +225,16 @@ function Mypage() {
             </div>
 
             <div className="favorite-alcohol">
-  <h4>담은 술</h4>
-  <div className="alcohol-grid">
-    {[...Array(8)].map((_, index) => (
-      <div key={index} className="alcohol-item-container">
-        <div className="alcohol-item empty"></div>
-        <button className="add-btn" onClick={handleAddAlcoholClick}>+</button>
-      </div>
-    ))}
-  </div>
-</div>
+              <h4>담은 술</h4>
+              <div className="alcohol-grid">
+              {[...Array(8)].map((_, index) => (
+              <div key={index} className="alcohol-item-container">
+              <div className="alcohol-item empty"></div>
+               <button className="add-btn" onClick={handleAddAlcoholClick}>+</button>
+                </div>
+                 ))}
+              </div>
+            </div>
 
           </div>
         </div>
@@ -200,7 +247,6 @@ function Mypage() {
         />
       </div>
     </div>
-
   );
 }
 
