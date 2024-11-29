@@ -138,7 +138,7 @@ function Mypage() {
 
 
   const handleDeleteClick = () => {
-    setProfileImage("default-avatar.png"); // 기본 프로필 이미지로 설정
+    setProfileImage("/images/Holjjak-logo.png"); // 기본 프로필 이미지로 설정
   };
 
   const openFileDialog = () => {
