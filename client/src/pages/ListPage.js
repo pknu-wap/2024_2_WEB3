@@ -6,6 +6,7 @@ import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
 import Navigation from "../components/navSearchBar/Navigation";
 import Filters from "../components/filters/Filters";
+import SearchBar from "../components/navSearchBar/SearchBar";
 import "../styles/ListPage.css";
 
 const ListPage = () => {
@@ -35,9 +36,10 @@ const ListPage = () => {
   return (
     <div className="ListPage">
       <MemoizedHeader bgColor="#F2EEE7" />
-      
+
+      <SearchBar />
       {/* SearchBar 컴포넌트 추가 */}
-      <div className="search-container">
+      {/* <div className="search-container">
         <input
           type="text"
           placeholder="원하는 술을 검색해 보세요!"
@@ -45,11 +47,11 @@ const ListPage = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           className="search-input"
         />
-      </div>
+      </div> */}
 
       <MemoizedNavigation />
       <Filters onFilterChange={setFilters} category={category} />
-      
+
       {/* AlcoholList에서 검색어를 필터링하여 전달 */}
       <AlcoholList
         category={category}

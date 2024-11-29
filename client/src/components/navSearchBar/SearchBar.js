@@ -9,6 +9,7 @@ const StyledSearchBar = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
+  margin-top: 8%;
 
   input {
     font-family: "Pretendard", sans-serif;
