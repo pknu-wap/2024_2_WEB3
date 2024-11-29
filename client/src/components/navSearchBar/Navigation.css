@@ -1,0 +1,36 @@
+nav {
+  /* border: 2px solid red; */
+  display: flex; /* Flexbox로 가로 배치 */
+  justify-content: center;
+  align-items: center; /* 세로 중앙 정렬 */
+  margin-top: 2%;
+}
+
+nav div {
+  margin: 0 10px;
+  white-space: nowrap;
+}
+
+.nav-line {
+  color: #d9d9d9;
+}
+
+nav .link {
+  text-decoration: none;
+  color: #94866f;
+  transition: 0.2s;
+  font-size: 15px;
+}
+
+nav .link:hover {
+  cursor: pointer;
+  /* font-weight: 500; */
+  transition: 0.2s;
+  /* opacity: 0.5; */
+}
+
+.link.active {
+  font-weight: 500;
+  /* font-size: 16px; */
+  color: #746855;
+}
