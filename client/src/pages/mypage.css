@@ -11,14 +11,14 @@
 /* 좌측 프로필 섹션 */
 .profile-left {
   padding: 60px;
-  width: 30%;
+  width: 25%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #ffffff;
   margin-left: 10%;
-  border-radius: 10px;
-  margin-bottom: 10%;
+  border-radius: 15px 0 0 15px;
+  margin-bottom: 15%;
 }
 
 .profile-picture {
@@ -43,9 +43,29 @@
   align-items: center;
 }
 
-.edit-btn {
+.edit-btn0 {
   margin-top: 10px;
-  padding: 8px 16px;
+  padding: 6px 6px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.edit-btn1 {
+  margin-top: 10px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.edit-btn2 {
+  margin-top: 10px;
   background-color: white;
   color: black;
   border: none;
@@ -72,16 +92,16 @@
 
 /* 우측 취향 섹션 */
 .profile-right {
-  width: 65%;
+  width: 70%;
   padding-right: 10%;
-  padding-bottom: 10%;
+  padding-bottom: 15%;
 }
+
 
 .preference-section {
   background-color: #f9f9f9;
   padding: 50px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0 15px 15px 0; /* 오른쪽 위, 오른쪽 아래만 둥글게 */
 }
 
 .preference-section h3 {
@@ -131,19 +151,39 @@
 
 .add-btn {
   position: absolute;
-  top: 5px; /* 위쪽에서의 위치 */
-  right: 5px; /* 오른쪽에서의 위치 */
-  background-color: #f1f1f1;
+  top: 50%; /* 컨테이너의 중앙에 위치 */
+  left: 50%;
+  transform: translate(-50%, -50%); /* 정확히 중앙에 배치 */
+  background-color: white;
   border: none;
   border-radius: 50%;
   padding: 5px;
-  font-size: 16px;
+  font-size: 50px;
   cursor: pointer;
+  width: 50px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
+  color: #d9d9d9;
+}
+
+/* 창 크기가 768px 이하일 때 */
+@media (max-width: 768px) {
+  .add-btn {
+    font-size: 20px; /* 글자 크기 축소 */
+    width: 35px;     /* 버튼 크기 축소 */
+    height: 35px;    /* 버튼 크기 축소 */
+  }
+}
+
+/* 창 크기가 480px 이하일 때 */
+@media (max-width: 480px) {
+  .add-btn {
+    font-size: 18px; /* 글자 크기 축소 */
+    width: 30px;     /* 버튼 크기 축소 */
+    height: 30px;    /* 버튼 크기 축소 */
+  }
 }
 
 .alcohol-grid {
@@ -174,7 +214,9 @@
 */
 
 .alcohol-item.empty {
-  background-color: #f0f0f0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent; /* 추가 버튼만 보이도록 설정 */
 }
 
 /* 닉네임 변경 */
@@ -184,12 +226,15 @@
   align-items: center; /* 세로 중앙 정렬 */
 }
 
+/* 닉네임 입력 필드 스타일 */
 .nickname-input {
-  font-size: 18px; /* 글자 크기 설정 */
-  padding: 5px; /* 여백 설정 */
-  border: none;
-  width: 100%; /* 전체 너비 사용, 여백을 고려 */
-  text-align: center; /* 아래 여백 설정 */
+  border: none; /* 기본 테두리 제거 */
+  border-bottom: 2px solid #000; /* 밑줄 추가 */
+  padding: 5px;
+  font-size: 16px;
+  outline: none; /* 포커스 시 테두리도 제거 */
+  background-color: transparent; /* 배경색 투명 */
+  text-align: center; /* 텍스트 중앙 정렬 */
 }
 
 .profile-info h2 {
@@ -223,5 +268,11 @@
 }
 
 .alcohol-item-container {
-  position: relative; /* 버튼 위치를 item에 상대적으로 지정 */
+  position: relative; /* 추가 버튼 위치를 위한 상대 위치 설정 */
+  width: 100%;
+  height: 145px; /* 각 아이템 높이 */
+  display: flex; /* 추가 버튼 가운데 정렬을 위한 설정 */
+  justify-content: center;
+  align-items: center;
+  background-color: #d9d9d9; /* 빈 상태 배경색 */
 }

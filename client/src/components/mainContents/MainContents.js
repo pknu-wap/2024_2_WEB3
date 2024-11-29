@@ -15,7 +15,7 @@ const MainContents = () => {
         <img src="images/mainpage/main-banner.png" className="banner-img" />
       </div>
 
-      <SearchPage />
+
       <Navigation />
 
       {/* 카테고리 섹션 */}
