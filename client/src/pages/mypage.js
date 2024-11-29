@@ -113,6 +113,7 @@ function Mypage() {
 
   const handlePreferenceChange = (e) => {
     const value = e.target.value;
+
   
     // 입력값이 숫자인지 확인
     if (/^\d*$/.test(value)) {
@@ -122,6 +123,7 @@ function Mypage() {
     }
   };
   
+
   const handleImageChange = (e) => {
     const file = e.target.files[0]; // 선택된 파일
     if (file) {
@@ -235,6 +237,7 @@ function Mypage() {
                  ))}
               </div>
             </div>
+
 
           </div>
         </div>

@@ -111,6 +111,5 @@ const updateUserProfileImage = async (formData) => {
   }
 };
 
-
 // API 함수들을 export
 export { getUserInfo, getUserBookmarks, updateUserInfo, updateUserPreference, updateUserProfileImage };
